@@ -1,0 +1,12 @@
+table{
+  width: 100%;
+ text-align: center;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+form{
+  display: flex;
+  justify-content: center;
+
+}
