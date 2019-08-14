@@ -8,6 +8,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { BookService} from './services/book.service';
+import {FormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +17,8 @@ import { BookService} from './services/book.service';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [BookService],
   bootstrap: [AppComponent]

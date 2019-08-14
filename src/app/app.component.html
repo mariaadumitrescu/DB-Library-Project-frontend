@@ -1,15 +1,9 @@
-<form class="form" action="" method="get">
-  <input type="text" name="search">
-  <button type="Submit" name="Search">Search</button>
-  <select value="Select category">
-    <option value="id">Id</option>
-    <option value="isbn">Isbn</option>
-    <option value="title">Titlu</option>
-    <option value="author">Autor</option>
-  </select>
+<form class="form-group" action="http://localhost:8080/searchBook" method="get">
+  <input type="text" name="query" [(ngModel)]="value">
+  <button class="btn btn-primary" type="Submit" name="Search" (click)="onBtnClick()">Search</button>
 </form>
-
-<table class="table table-dark">
+<div class="table-container">
+<table class="table">
   <thead class="thead-dark">
   <tr >
     <th scope="col">Id</th>
@@ -34,4 +28,5 @@
 
   </tbody>
 </table>
+</div>
 <router-outlet></router-outlet>

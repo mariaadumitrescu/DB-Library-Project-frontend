@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from './models/book';
 import {BookService} from './services/book.service';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +11,8 @@ import {Observable} from 'rxjs';
 export class AppComponent implements  OnInit {
   title = 'my-first-angular-app';
   books: Book[];
+  filteredBooks: Book[];
+  value: string;
 
     constructor(private bookService: BookService) { }
 
@@ -21,7 +22,10 @@ export class AppComponent implements  OnInit {
 
   ngOnInit(): void {
      this.getBooks();
-     console.log(this.books);
+  }
+
+  onBtnClick() {
+      this.bookService.getFilteredBooks(this.value).subscribe(filteredBooks => this.books = filteredBooks);
   }
 }
 

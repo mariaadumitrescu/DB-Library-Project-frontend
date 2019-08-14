@@ -25,9 +25,16 @@ export class BookService {
   //   };
   }
 
-  getBooks(): Book[] {
+  getBooks() {
     console.log(this.books);
     return this.books;
   }
 
+  getFilteredBooks(value: string) {
+    return this.http.get('http://localhost:8080/searchBook', {
+      params: {
+        query: value,
+      }
+    }) as Observable<Book[]>;
+  }
 }
