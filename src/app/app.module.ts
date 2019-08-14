@@ -8,10 +8,22 @@ import { HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { BookService} from './services/book.service';
+import { UserService} from './services/user.service';
 import {FormsModule} from '@angular/forms';
+
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { GridBooksComponent } from './pages/grid-books/grid-books.component';
+import {User} from './models/user';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminPageComponent,
+    RegisterPageComponent,
+    DashboardPageComponent,
+    GridBooksComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +32,8 @@ import {FormsModule} from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [BookService],
+  providers: [BookService,
+              UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
