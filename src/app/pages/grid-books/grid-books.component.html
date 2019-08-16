@@ -12,7 +12,7 @@
 <pagination-controls (pageChange)="pageChanged($event)" ></pagination-controls>
 
 
-<div *ngFor="let book of books | grdFilter: {title: value, genre: value, author: value} | paginate: { itemsPerPage: 2, currentPage: p}">
+<div *ngFor="let book of books | grdFilter: {title: value, genre: value, author: value} | paginate: { itemsPerPage: 1, currentPage: p}">
   <div>
     {{book.title}}
   </div>
