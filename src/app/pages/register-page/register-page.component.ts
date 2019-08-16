@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register-page',
@@ -15,12 +16,22 @@ export class RegisterPageComponent implements OnInit {
   userPassword: string;
   userMatchingPassword: string;
   userEmail: string;
+  private ownerForm: FormGroup;
+  private validateemail: FormControl;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
 
+  validate(){
+    console.log("validate is working");
+    this.validateemail = new FormControl(this.userEmail,[Validators.required, Validators.email]);
+
+    this.ownerForm = new FormGroup({
+      userEmail: new FormControl('', [Validators.required, Validators.email])
+    });
+  }
   onBtnRegisterClick() {
 
     const user = {firstName: this.userFirstName,
@@ -31,6 +42,5 @@ export class RegisterPageComponent implements OnInit {
     };
     console.log(user);
     this.userService.addNewUser(user);
-
   }
 }
