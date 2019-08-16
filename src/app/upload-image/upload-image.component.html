@@ -1,0 +1,12 @@
+<h3>Image Uploading Module</h3>
+<span class="btn btn-dark btn-file" id="btnUpload">{{btnValue}}
+  <input type="file"  accept="image/x-png,image/gif,image/jpeg" (change)="onFileChanged($event)">
+</span>
+<input type="button" class="btn btn-dark" (click)="onUpload()" value="upload" id="upload" [disabled]="!flag">
+<img [src]="imgURL" height="38" *ngIf="imgURL">
+<hr/>
+
+
+
+
+

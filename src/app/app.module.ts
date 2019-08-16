@@ -15,6 +15,10 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { GridBooksComponent } from './pages/grid-books/grid-books.component';
+import {UploadImageService} from './services/uploadImage.service';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+import {GrdFilterPipe} from './grd-fiter.pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 import {User} from './models/user';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 
@@ -25,6 +29,9 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     RegisterPageComponent,
     DashboardPageComponent,
     GridBooksComponent,
+    UploadImageComponent,
+    GrdFilterPipe,
+    GridBooksComponent,
     LoginPageComponent
   ],
   imports: [
@@ -33,10 +40,13 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [BookService,
-              UserService],
+              UserService,
+    UploadImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

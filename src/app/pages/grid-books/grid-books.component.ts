@@ -10,6 +10,7 @@ import {BookService} from '../../services/book.service';
 export class GridBooksComponent implements OnInit {
   books: Book[];
   value: string;
+  private p: any;
 
   constructor(private bookService: BookService) {
   }
@@ -24,5 +25,9 @@ export class GridBooksComponent implements OnInit {
 
   onBtnClick() {
     this.bookService.getFilteredBooks(this.value).subscribe(filteredBooks => this.books = filteredBooks);
+  }
+
+  pageChanged(event){
+    this.p = event;
   }
 }
