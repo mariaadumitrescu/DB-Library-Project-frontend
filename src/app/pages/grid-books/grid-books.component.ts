@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Book} from '../../models/book';
 import {BookService} from '../../services/book.service';
+import {PaginatedBooks} from '../../models/paginatedBooks';
 
 @Component({
   selector: 'app-grid-books',
@@ -8,6 +9,8 @@ import {BookService} from '../../services/book.service';
   styleUrls: ['./grid-books.component.css']
 })
 export class GridBooksComponent implements OnInit {
+
+  paginatedBooks: PaginatedBooks;
   books: Book[];
   value: string;
   private p: any;
@@ -16,18 +19,21 @@ export class GridBooksComponent implements OnInit {
   }
 
   getBooks() {
-    this.bookService.getBooksFromApi().subscribe(books => this.books = books);
+    this.bookService.getPaginatedBooks("id","DESC","0","10").subscribe(p => {
+      this.paginatedBooks = p;
+      this.books = this.paginatedBooks.content;
+    });
   }
 
   ngOnInit(): void {
     this.getBooks();
   }
 
-  onBtnClick() {
-    this.bookService.getFilteredBooks(this.value).subscribe(filteredBooks => this.books = filteredBooks);
-  }
-
   pageChanged(event){
     this.p = event;
+    this.bookService.getPaginatedBooks("id","DESC",this.paginatedBooks.number.toString(),"10").subscribe(p => {
+      this.paginatedBooks = p;
+      this.books = this.paginatedBooks.content;
+    });
   }
 }

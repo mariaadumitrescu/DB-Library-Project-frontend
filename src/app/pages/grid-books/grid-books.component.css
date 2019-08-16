@@ -1,25 +1,33 @@
-table{
-  width: 100%;
-  text-align: center;
-  padding-left: 50px;
-  padding-right: 50px;
+.active-pink-4 input[type=text]:focus:not([readonly]) {
+  border: 1px solid #f48fb1;
+  box-shadow: 0 0 0 1px #f48fb1;
+}
+.active-pink-3 input[type=text] {
+  border: 1px solid #f48fb1;
+  box-shadow: 0 0 0 1px #f48fb1;
+}
+.active-purple-4 input[type=text]:focus:not([readonly]) {
+  border: 1px solid #ce93d8;
+  box-shadow: 0 0 0 1px #ce93d8;
+}
+.active-purple-3 input[type=text] {
+  border: 1px solid #ce93d8;
+  box-shadow: 0 0 0 1px #ce93d8;
+}
+.active-cyan-4 input[type=text]:focus:not([readonly]) {
+  border: 1px solid #4dd0e1;
+  box-shadow: 0 0 0 1px #4dd0e1;
+}
+.active-cyan-3 input[type=text] {
+  border: 1px solid #4dd0e1;
+  box-shadow: 0 0 0 1px #4dd0e1;
 }
 
-form{
-  display: flex;
-  justify-content: center;
-  padding-top: 100px;
+.ngx-pagination a, .ngx-pagination button {
+  cursor: pointer;
+  background-color: red;
 }
 
-button{
-  margin-left: 20px;
-}
-
-input{
-  margin-right: 20px;
-}
-
-.table-container{
-  padding-right: 100px;
-  padding-left: 100px;
+pagination-controls /deep/  .current {
+  background-color: red;
 }
