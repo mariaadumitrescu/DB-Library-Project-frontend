@@ -1,0 +1,43 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register">
+  <div class="row">
+    <div class="col-md-3 register-left">
+      <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+      <h3>Welcome</h3>
+           <input type="submit" name="" value="Login"/><br/>
+    </div>
+    <div class="col-md-9 register-right">
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <h3 class="register-heading">Apply as a Employee</h3>
+          <div class="row register-form">
+            <div class="col-md">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="userFirstName" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="userLastName" />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="userPassword" />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control"  placeholder="Confirm Password" [(ngModel)]="userMatchingPassword"/>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Your Email" [(ngModel)]="userEmail" />
+              </div>
+              <input type="submit" class="btnRegister" name="Submit"  value="Register" (click)="onBtnRegisterClick()"/>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
