@@ -15,7 +15,10 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { GridBooksComponent } from './pages/grid-books/grid-books.component';
-import {User} from './models/user';
+import {UploadImageService} from './services/uploadImage.service';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+import {GrdFilterPipe} from './grd-fiter.pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -23,17 +26,21 @@ import {User} from './models/user';
     AdminPageComponent,
     RegisterPageComponent,
     DashboardPageComponent,
-    GridBooksComponent
+    GridBooksComponent,
+    UploadImageComponent,
+    GrdFilterPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [BookService,
-              UserService],
+              UserService,
+    UploadImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -37,4 +37,18 @@ export class BookService {
       }
     }) as Observable<Book[]>;
   }
+
+  addBook(book: Book) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://localhost:8080/add', book, {
+      observe: "body",
+      params: undefined,
+      reportProgress: false,
+      responseType: "json",
+      withCredentials: false})
+      .subscribe(res => {
+
+      })
+  }
 }
