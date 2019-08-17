@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../../models/book';
 import {BookService} from '../../services/book.service';
-import {PaginatedBooks} from '../../models/paginatedBooks';
+import {PaginatedListHolderBook} from '../../models/paginatedListHolderBook';
 
 @Component({
   selector: 'app-grid-books',
@@ -10,40 +10,58 @@ import {PaginatedBooks} from '../../models/paginatedBooks';
 })
 export class GridBooksComponent implements OnInit {
 
-  paginatedBooks: PaginatedBooks;
+  paginatedBooks: PaginatedListHolderBook;
+  searchedPaginatedBooks: PaginatedListHolderBook;
   books: Book[];
   searchedBooks: Book[];
   value: string;
   private p: any;
+  private q: any;
+  private flagSearch: boolean;
 
   constructor(private bookService: BookService) {
   }
 
-  getBooks() {
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '9',this.value).subscribe(p => {
-
+  initListOfBooks() {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '2', '').subscribe(p => {
       this.paginatedBooks = p;
-      this.books = this.paginatedBooks.content;
+      this.books = this.paginatedBooks.pageList;
+    });
+
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', '').subscribe(q => {
+      this.searchedPaginatedBooks = q;
+      this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
   }
 
 
   ngOnInit(): void {
-    this.value = '';
-    this.getBooks();
+    this.initListOfBooks();
   }
 
-  pageChanged(event) {
+  pageGridChanged(event) {
     this.p = event;
-    this.bookService.getPaginatedBooks('id', 'ASC', this.paginatedBooks.number.toString(), '9',this.value).subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', (this.p-1).toString(), '2', '').subscribe(p => {
       this.paginatedBooks = p;
-      this.books = this.paginatedBooks.content;
+      this.books = this.paginatedBooks.pageList;
     });
   }
 
-  searchBooks() {
-    this.bookService.getBooksFromApi(this.value).subscribe(b => {
-      this.searchedBooks = b;
+  inputSearchChanged() {
+    this.flagSearch = false;
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', this.value).subscribe(q => {
+      this.searchedPaginatedBooks = q;
+      this.searchedBooks = this.searchedPaginatedBooks.pageList;
+      this.flagSearch = true;
+    });
+
+  }
+
+  pageSearchChanged(event) {
+    this.q = event;
+    this.bookService.getPaginatedBooks('id', 'ASC', (this.q-1).toString(), '5', this.value).subscribe(q => {
+      this.searchedPaginatedBooks = q;
+      this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
   }
 }

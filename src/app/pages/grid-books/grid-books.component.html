@@ -1,30 +1,37 @@
 <div class="active-purple-4 active-cyan-3 mb-4">
-  <input  [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search" (ngModelChange)="searchBooks()">
+  <input [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search"
+         (ngModelChange)="inputSearchChanged()">
 </div>
-<table class="table-dark"  *ngIf="value">
-  <tr *ngFor="let book of searchedBooks | slice:0:10| grdFilter: {title: value, genre: value, author: value}" >
-    <td style="width: 10%;">{{book.title}}</td>
-  </tr>
-</table>
+<div *ngIf=" value != '' && value && flagSearch && searchedPaginatedBooks.nrOfElements > 0">
+  <table class="table-dark">
+    <tr
+      *ngFor="let book of searchedBooks | paginate: { id: 'searchPagination', itemsPerPage: 5, currentPage: q, totalItems: searchedPaginatedBooks.nrOfElements}">
+      <td style="width: 10%;">{{book.title}}</td>
+    </tr>
+    <pagination-controls id="searchPagination" (pageChange)="pageSearchChanged($event)"></pagination-controls>
+  </table>
+</div>
 
 <app-upload-image></app-upload-image>
 
-<pagination-controls (pageChange)="pageChanged($event)" ></pagination-controls>
+<pagination-controls id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
 
+<div *ngIf="paginatedBooks">
+  <div
+    *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 2, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
 
-<div *ngFor="let book of books | paginate: { itemsPerPage: 2, currentPage: p}">
+    <!--  | grdFilter: {title: value, genre: value, author: value}-->
 
-<!--  | grdFilter: {title: value, genre: value, author: value}-->
-
-  <div>
-    {{book.title}}
+    <div>
+      {{book.title}}
+    </div>
+    <div *ngIf="book.img, else nonImg">
+      <img [src]="'data:image/jpeg;base64,'+book.img.pic" height="200">
+    </div>
+    <ng-template #nonImg>
+      <img src="https://abeon-hosting.com/images/default-png-9.png" height="200">
+    </ng-template>
   </div>
-  <div *ngIf="book.img, else nonImg">
-    <img [src]="'data:image/jpeg;base64,'+book.img.pic" height="200">
-  </div>
-  <ng-template #nonImg>
-    <img src="https://abeon-hosting.com/images/default-png-9.png" height="200">
-  </ng-template>
 </div>
 
 

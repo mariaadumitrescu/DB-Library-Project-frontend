@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Book} from '../models/book';
 import {Observable} from 'rxjs';
-import {angularLifecycleMethodKeys} from 'codelyzer/util/utils';
-import {PaginatedBooks} from '../models/paginatedBooks';
+import {PaginatedListHolderBook} from '../models/paginatedListHolderBook';
 
 
 @Injectable()
@@ -29,7 +28,7 @@ export class BookService {
         size: size,
         query: query
       }
-    }) as Observable<PaginatedBooks>;
+    }) as Observable<PaginatedListHolderBook>;
   }
 
   addBook(book: Book) {
