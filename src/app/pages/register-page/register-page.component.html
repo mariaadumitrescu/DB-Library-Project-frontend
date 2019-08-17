@@ -17,10 +17,11 @@
           <div class="row register-form">
             <div class="col-md">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="userFirstName" />
+                <input type="text" class="form-control" placeholder="First Name" (focus)="validate()"
+                       [(ngModel)]="userFirstName" [style.border-color]="validateemail.invalid ? 'red':'blue'"/>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="userLastName" />
+                <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="userLastName"/>
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" placeholder="Password" [(ngModel)]="userPassword" />

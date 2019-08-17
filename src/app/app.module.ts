@@ -7,9 +7,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 
-import {BookService} from './services/book.service';
-import {UserService} from './services/user.service';
-import {FormsModule} from '@angular/forms';
+import { BookService} from './services/book.service';
+import { UserService} from './services/user.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
@@ -19,7 +19,11 @@ import {UploadImageService} from './services/uploadImage.service';
 import {UploadImageComponent} from './upload-image/upload-image.component';
 import {GrdFilterPipe} from './grd-fiter.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
+
 import {ImageUploadModule} from 'ng2-imageupload';
+
+import {User} from './models/user';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import {ImageUploadModule} from 'ng2-imageupload';
     GridBooksComponent,
     UploadImageComponent,
     GrdFilterPipe,
+    GridBooksComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +45,8 @@ import {ImageUploadModule} from 'ng2-imageupload';
     FormsModule,
     NgxPaginationModule,
     ImageUploadModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [BookService,
     UserService,
