@@ -12,5 +12,4 @@ export class UploadImageService {
   uploadImage(uploadData: FormData) {
     return  this.http.post('http://localhost:8080/uploadImage', uploadData) as Observable<Image>;
   }
-
 }
