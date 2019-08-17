@@ -12,24 +12,22 @@ export class BookService {
   // tslint:disable-next-line:prefer-const
   constructor(private http: HttpClient) { }
 
-   getBooksFromApi() {
-       return  this.http.get('http://localhost:8080/books') as Observable<Book[]>;
+   getBooksFromApi(query: string) {
+       return  this.http.get('http://localhost:8080/searchBook',{
+         params: {
+           query : query
+         }
+       }) as Observable<Book[]>;
   }
 
-  getBooks() {
-    console.log(this.books);
-    return this.books;
-  }
-
-  //http://localhost:8080/paginatedBooks?orderBy=id&direction=ASC&page=0&size=10
-
-  getPaginatedBooks(orderBy: string, direction: string, page: string, size: string) {
+  getPaginatedBooks(orderBy: string, direction: string, page: string, size: string, query: string) {
     return this.http.get('http://localhost:8080/paginatedBooks', {
       params: {
         orderBy: orderBy,
         direction: direction,
         page: page,
-        size: size
+        size: size,
+        query: query
       }
     }) as Observable<PaginatedBooks>;
   }

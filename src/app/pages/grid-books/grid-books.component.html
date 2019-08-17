@@ -1,8 +1,8 @@
 <div class="active-purple-4 active-cyan-3 mb-4">
-  <input  [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search">
+  <input  [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search" (ngModelChange)="searchBooks()">
 </div>
 <table class="table-dark"  *ngIf="value">
-  <tr *ngFor="let book of books | slice:0:5|  grdFilter: {title: value, genre: value, author: value}"  >
+  <tr *ngFor="let book of searchedBooks | slice:0:10| grdFilter: {title: value, genre: value, author: value}" >
     <td style="width: 10%;">{{book.title}}</td>
   </tr>
 </table>
@@ -12,7 +12,10 @@
 <pagination-controls (pageChange)="pageChanged($event)" ></pagination-controls>
 
 
-<div *ngFor="let book of books | grdFilter: {title: value, genre: value, author: value} | paginate: { itemsPerPage: 1, currentPage: p}">
+<div *ngFor="let book of books | paginate: { itemsPerPage: 2, currentPage: p}">
+
+<!--  | grdFilter: {title: value, genre: value, author: value}-->
+
   <div>
     {{book.title}}
   </div>
