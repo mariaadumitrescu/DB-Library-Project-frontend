@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Book} from '../models/book';
 import {Observable} from 'rxjs';
-import {PaginatedListHolderBook} from '../models/paginatedListHolderBook';
+import {ResponsePageList} from '../models/responsePageList';
 
 
 @Injectable()
@@ -28,7 +28,7 @@ export class BookService {
         size: size,
         query: query
       }
-    }) as Observable<PaginatedListHolderBook>;
+    }) as Observable<ResponsePageList>;
   }
 
   addBook(book: Book) {
