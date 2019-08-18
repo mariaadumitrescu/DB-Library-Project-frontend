@@ -22,8 +22,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 import {ImageUploadModule} from 'ng2-imageupload';
 
-import {User} from './models/user';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +33,6 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     UploadImageComponent,
     GrdFilterPipe,
     GridBooksComponent,
-    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +41,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     HttpClientModule,
     FormsModule,
     NgxPaginationModule,
-    ImageUploadModule
-    FormsModule,
+    ImageUploadModule,
     ReactiveFormsModule
   ],
   providers: [BookService,

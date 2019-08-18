@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../../models/book';
 import {BookService} from '../../services/book.service';
-import {PaginatedListHolderBook} from '../../models/paginatedListHolderBook';
+import {ResponsePageList} from '../../models/responsePageList';
 
 @Component({
   selector: 'app-grid-books',
@@ -10,8 +10,8 @@ import {PaginatedListHolderBook} from '../../models/paginatedListHolderBook';
 })
 export class GridBooksComponent implements OnInit {
 
-  paginatedBooks: PaginatedListHolderBook;
-  searchedPaginatedBooks: PaginatedListHolderBook;
+  paginatedBooks: ResponsePageList;
+  searchedPaginatedBooks: ResponsePageList;
   books: Book[];
   searchedBooks: Book[];
   value: string;
