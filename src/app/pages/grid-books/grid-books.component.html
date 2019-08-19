@@ -12,8 +12,6 @@
   </table>
 </div>
 
-<app-upload-image></app-upload-image>
-
 <pagination-controls id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
 
 <div *ngIf="paginatedBooks">
@@ -33,6 +31,10 @@
     </ng-template>
   </div>
 </div>
+<div *ngIf="formData">
+  {{formData}}
+</div>
+
 
 
 
