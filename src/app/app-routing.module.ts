@@ -4,6 +4,8 @@ import {RegisterPageComponent} from './pages/register-page/register-page.compone
 import {DashboardPageComponent} from './pages/dashboard-page/dashboard-page.component';
 import {GridBooksComponent} from './pages/grid-books/grid-books.component';
 import {UploadBookComponent} from './upload-book/upload-book.component';
+import { BooksComponent } from './pages/dashboard-page/books/books.component';
+import { BookService } from './services/book.service';
 
 
 const routes: Routes = [
@@ -11,11 +13,13 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'dashboard', component: DashboardPageComponent },
   { path: 'grid-books', component: GridBooksComponent },
+  { path: 'books', component: BooksComponent },
   {path: 'upload-book', component:UploadBookComponent}];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [BookService]
 })
 export class AppRoutingModule { }

@@ -11,7 +11,10 @@ export class BookService {
   // tslint:disable-next-line:prefer-const
   constructor(private http: HttpClient) { }
 
-   getBooksFromApi(query: string) {
+  getAllBooks(){
+    return  this.http.get('http://localhost:8080/books') as Observable<Book[]>;
+  }
+  getBooksFromApi(query: string) {
        return  this.http.get('http://localhost:8080/searchBook',{
          params: {
            query : query
