@@ -1,8 +1,4 @@
-import {Component} from '@angular/core';
-import {Book} from '../models/book';
-import {HttpClient} from '@angular/common/http';
-import {UploadImageService} from '../services/uploadImage.service';
-import {BookService} from '../services/book.service';
+import {Component, EventEmitter,Output} from '@angular/core';
 import {ImageResult, ResizeOptions} from 'ng2-imageupload';
 
 @Component({
@@ -12,43 +8,29 @@ import {ImageResult, ResizeOptions} from 'ng2-imageupload';
 })
 export class UploadImageComponent {
 
-  resizeOptions: ResizeOptions = {resizeMaxHeight: 1024, resizeMaxWidth: 1024};
-  selectedFile: any;
-  imgURL: any;
-  book: Book;
-  flag: boolean;
-  btnValue: string = 'Chose file';
+  @Output() emittedForm: EventEmitter<FormData> = new EventEmitter<FormData>();
 
-  constructor(private httpClient: HttpClient, private uploadImageService: UploadImageService, private bookService: BookService) {
-  }
+  private resizeOptions: ResizeOptions = {resizeMaxHeight: 1024, resizeMaxWidth: 1024};
+  private selectedFile: any;
+  private imgURL: string;
+  private flag: boolean;
+  private btnValue: string = 'Chose file';
+
+  constructor() {}
 
   selected(imageResult: ImageResult) {
-    fetch(imageResult.resized.dataURL).then(res => res.blob()).then(blob => this.selectedFile = blob);
-    this.imgURL = imageResult.resized.dataURL;
-    document.getElementById('btnUpload').className = 'btn btn-success btn-file';
-    this.flag = true;
-    this.btnValue = 'Replace file';
-  }
+    fetch(imageResult.resized.dataURL).then(res => res.blob()).then(blob => {
+      this.selectedFile = blob
+      this.imgURL = imageResult.resized.dataURL;
+      document.getElementById('btnUpload').className = 'btn btn-success btn-file';
+      this.flag = true;
+      this.btnValue = 'Replace file';
 
-  onUpload() {
+      const uploadData = new FormData();
+      uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+      this.emittedForm.emit(uploadData);
+      this.flag = false;
+    });
 
-    const uploadData = new FormData();
-    uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-
-    this.uploadImageService.uploadImage(uploadData).subscribe(
-      res => {
-        this.book = new Book();
-        this.book.title = 'Cartea neagra';
-        this.book.author = 'Sile';
-        this.book.genre = 'Actiune';
-        this.book.isbn = '8965589665556';
-        this.book.publishingHouse = 'House of Light';
-        this.book.year = 2015;
-        this.book.img = res;
-        this.bookService.addBook(this.book);
-        this.flag = false;
-      },
-      err => console.log('Error on saving: ' + err)
-    );
   }
 }

@@ -10,6 +10,8 @@ import {ResponsePageList} from '../../models/responsePageList';
 })
 export class GridBooksComponent implements OnInit {
 
+  formData: FormData;
+
   paginatedBooks: ResponsePageList;
   searchedPaginatedBooks: ResponsePageList;
   books: Book[];
@@ -63,5 +65,9 @@ export class GridBooksComponent implements OnInit {
       this.searchedPaginatedBooks = q;
       this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
+  }
+
+  receiveMessage(event) {
+    this.formData = event;
   }
 }

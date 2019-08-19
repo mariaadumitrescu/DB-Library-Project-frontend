@@ -21,6 +21,7 @@ import {GrdFilterPipe} from './grd-fiter.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import {ImageUploadModule} from 'ng2-imageupload';
+import { UploadBookComponent } from './upload-book/upload-book.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {ImageUploadModule} from 'ng2-imageupload';
     UploadImageComponent,
     GrdFilterPipe,
     GridBooksComponent,
+    UploadBookComponent,
   ],
   imports: [
     BrowserModule,
