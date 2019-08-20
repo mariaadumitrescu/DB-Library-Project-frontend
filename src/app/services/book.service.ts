@@ -9,6 +9,17 @@ import {ResponsePageList} from '../models/responsePageList';
 export class BookService {
 
   constructor(private http: HttpClient) { }
+  
+  getAllBooks(){
+    return  this.http.get('http://localhost:8080/books') as Observable<Book[]>;
+  }
+  getBooksFromApi(query: string) {
+       return  this.http.get('http://localhost:8080/searchBook',{
+         params: {
+           query : query
+         }
+       }) as Observable<Book[]>;
+  }
 
   getPaginatedBooks(orderBy: string, direction: string, page: string, size: string, query: string) {
     return this.http.get('http://localhost:8080/paginatedBooks', {

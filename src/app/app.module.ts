@@ -21,6 +21,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {ImageUploadModule} from 'ng2-imageupload';
 import { UploadBookComponent } from './upload-book/upload-book.component';
 import {HttpClientModule} from '@angular/common/http';
+import { BooksComponent } from './pages/dashboard-page/books/books.component';
+
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import {HttpClientModule} from '@angular/common/http';
     GrdFilterPipe,
     GridBooksComponent,
     UploadBookComponent,
+    BooksComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import {HttpClientModule} from '@angular/common/http';
     ImageUploadModule,
     ReactiveFormsModule,
     HttpClientModule
+    ReactiveFormsModule
   ],
   providers: [BookService,
     UserService,
