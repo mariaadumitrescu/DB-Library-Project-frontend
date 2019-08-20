@@ -7,17 +7,8 @@ import {ResponsePageList} from '../models/responsePageList';
 
 @Injectable()
 export class BookService {
-  books: Book[];
-  // tslint:disable-next-line:prefer-const
-  constructor(private http: HttpClient) { }
 
-   getBooksFromApi(query: string) {
-       return  this.http.get('http://localhost:8080/searchBook',{
-         params: {
-           query : query
-         }
-       }) as Observable<Book[]>;
-  }
+  constructor(private http: HttpClient) { }
 
   getPaginatedBooks(orderBy: string, direction: string, page: string, size: string, query: string) {
     return this.http.get('http://localhost:8080/paginatedBooks', {
@@ -34,14 +25,10 @@ export class BookService {
   addBook(book: Book) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.http.post('http://localhost:8080/add', book, {
-
+    return this.http.post('http://localhost:8080/add', book, {
       params: undefined,
       reportProgress: false,
       responseType: "json",
-      withCredentials: false})
-      .subscribe(res => {
-
-      })
+      withCredentials: false}) as Observable<any>;
   }
 }
