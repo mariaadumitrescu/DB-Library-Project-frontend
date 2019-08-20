@@ -4,7 +4,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 import {AppRoutingModule} from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 
 import { BookService} from './services/book.service';
@@ -16,13 +15,14 @@ import {RegisterPageComponent} from './pages/register-page/register-page.compone
 import {DashboardPageComponent} from './pages/dashboard-page/dashboard-page.component';
 import {GridBooksComponent} from './pages/grid-books/grid-books.component';
 import {UploadImageService} from './services/uploadImage.service';
-import {UploadImageComponent} from './upload-image/upload-image.component';
 import {GrdFilterPipe} from './grd-fiter.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import {ImageUploadModule} from 'ng2-imageupload';
 import { UploadBookComponent } from './upload-book/upload-book.component';
+import {HttpClientModule} from '@angular/common/http';
 import { BooksComponent } from './pages/dashboard-page/books/books.component';
+
 
 
 @NgModule({
@@ -32,7 +32,6 @@ import { BooksComponent } from './pages/dashboard-page/books/books.component';
     RegisterPageComponent,
     DashboardPageComponent,
     GridBooksComponent,
-    UploadImageComponent,
     GrdFilterPipe,
     GridBooksComponent,
     UploadBookComponent,
@@ -42,12 +41,12 @@ import { BooksComponent } from './pages/dashboard-page/books/books.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule,
     FormsModule,
     NgxPaginationModule,
     ImageUploadModule,
+    ReactiveFormsModule,
+    HttpClientModule
     ReactiveFormsModule
-
   ],
   providers: [BookService,
     UserService,

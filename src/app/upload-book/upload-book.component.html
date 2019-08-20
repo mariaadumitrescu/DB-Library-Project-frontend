@@ -1,2 +1,189 @@
-<app-upload-image (emittedForm)="receiveMessage($event)"></app-upload-image>
-<button class="btn btn-primary" (click)="uploadBook()">Create a new book</button>
+<div class="col-auto container shadow p-3 mb-5 bg-white rounded">
+  <div class="border roundedFrame">
+    <form name="form" (ngSubmit)="f.form.valid && uploadBook()" #f="ngForm" novalidate>
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <input
+              name="title"
+              type="text"
+              class="form-control"
+              required
+              aria-describedby="titleBookHelp"
+              placeholder="Enter title"
+              [(ngModel)]="title"
+              #bookTitle="ngModel"/>
+          </div>
+
+
+          <div class="form-group">
+            <div *ngIf="bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)" class="alert alert-danger">
+              <div *ngIf="bookTitle.errors.required">
+                Name is required.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-group">
+            <input
+              name="isbn"
+              type="text"
+              class="form-control"
+              required
+              aria-describedby="isbnBookHelp"
+              placeholder="Enter isbn"
+              [(ngModel)]="isbn"
+              #bookIsbn="ngModel"/>
+          </div>
+
+          <div class="form-group">
+            <div *ngIf="bookIsbn.invalid && (bookIsbn.dirty || bookIsbn.touched)" class="alert alert-danger">
+              <div *ngIf="bookIsbn.errors.required">
+                Isbn is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <input
+              name="author"
+              type="text"
+              class="form-control"
+              required
+              aria-describedby="authorBookHelp"
+              placeholder="Enter author"
+              [(ngModel)]="author"
+              #bookAuthor="ngModel"/>
+          </div>
+
+          <div class="form-group">
+            <div *ngIf="bookAuthor.invalid && (bookAuthor.dirty || bookAuthor.touched)" class="alert alert-danger">
+              <div *ngIf="bookAuthor.errors.required">
+                Author is required.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-group">
+            <input
+              name="publishingHouse"
+              type="text"
+              class="form-control"
+              required
+              aria-describedby="publishingHouseBookHelp"
+              placeholder="Enter publishing house"
+              [(ngModel)]="publishingHouse"
+              #bookPublishingHouse="ngModel"/>
+          </div>
+
+          <div class="form-group">
+            <div *ngIf="bookPublishingHouse.invalid && (bookPublishingHouse.dirty || bookPublishingHouse.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="bookPublishingHouse.errors.required">
+                Publishing house is required.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <input
+              autocomplete="false"
+              name="year"
+              type="number"
+              class="form-control"
+              required
+              aria-describedby="yearBookHelp"
+              placeholder="Enter year of publication"
+              [(ngModel)]="year"
+              #bookYear="ngModel"/>
+          </div>
+
+          <div class="form-group">
+            <div *ngIf="bookYear.invalid && (bookYear.dirty || bookYear.touched)" class="alert alert-danger">
+              <div *ngIf="bookYear.errors.required">
+                Year is required.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="form-group">
+            <input
+              name="genre"
+              type="text"
+              class="form-control"
+              required
+              aria-describedby="genreBookHelp"
+              placeholder="Enter genre"
+              [(ngModel)]="genre" #bookGenre="ngModel"/>
+          </div>
+
+          <div class="form-group">
+            <div *ngIf="bookGenre.invalid && (bookGenre.dirty || bookGenre.touched)" class="alert alert-danger">
+              <div *ngIf="bookGenre.errors.required">
+                Genre is required.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <span
+              class="btn btn-primary btn-file "
+              id="btnUpload"> {{btnValue}}
+              <input #fileInput
+                class="btn btn-primary "
+                id="bookImage"
+                type="file"
+                imageUpload
+                (imageSelected)="selected($event)"
+                [resizeOptions]="resizeOptions"
+                height="50px"/>
+              </span>
+            <img [src]="imgURL" height="38" *ngIf="imgURL">
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <button id="addBookButton"
+                  [disabled]="f.form.pristine || f.form.invalid || !formData"
+                  class="btn btn-primary"
+                  (click)="uploadBook()">Add book
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
