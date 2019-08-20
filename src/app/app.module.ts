@@ -45,7 +45,7 @@ import { BooksComponent } from './pages/dashboard-page/books/books.component';
     NgxPaginationModule,
     ImageUploadModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [BookService,
