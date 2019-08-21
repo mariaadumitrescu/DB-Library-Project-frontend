@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from 'src/app/services/book.service';
+import { BookService } from 'src/app/_services/book.service';
 import { Book } from 'src/app/models/book';
 
 @Component({
@@ -13,7 +13,7 @@ export class DashboardPageComponent implements OnInit {
   books: Book[];
   filteredBooks: Book[];
   constructor(private bookService:BookService) { }
-  
+
   onBtnClick() {
       this.bookService.getBooksFromApi(this.value).subscribe(filteredBooks => this.books = filteredBooks);
   }
