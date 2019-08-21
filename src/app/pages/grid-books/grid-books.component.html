@@ -19,16 +19,9 @@
     *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 2, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
 
     <!--  | grdFilter: {title: value, genre: value, author: value}-->
-
     <div>
-      {{book.title}}
+      <book-grid-icon [book] = "book"></book-grid-icon>
     </div>
-    <div *ngIf="book.img, else nonImg">
-      <img [src]="'data:image/jpeg;base64,'+book.img.pic" height="200">
-    </div>
-    <ng-template #nonImg>
-      <img src="https://abeon-hosting.com/images/default-png-9.png" height="200">
-    </ng-template>
   </div>
 </div>
 <div *ngIf="formData">
