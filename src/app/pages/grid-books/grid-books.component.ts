@@ -25,7 +25,7 @@ export class GridBooksComponent implements OnInit {
   }
 
   initListOfBooks() {
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '2', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
     });
@@ -43,7 +43,7 @@ export class GridBooksComponent implements OnInit {
 
   pageGridChanged(event) {
     this.p = event;
-    this.bookService.getPaginatedBooks('id', 'ASC', (this.p-1).toString(), '2', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', (this.p-1).toString(), '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
     });
