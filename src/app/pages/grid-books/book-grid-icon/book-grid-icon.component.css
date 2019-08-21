@@ -1,14 +1,16 @@
-
-body{
-    margin: 30px;
-	/* background: #ff7070;
-    color: #F3FCF0;
-    font-family: sans-serif;
-    text-align: center; */
+body {
+  margin: 50px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  background: #f2fbff;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
-
+.rating{
+  display: flex;
+  justify-content: space-around;
+  padding: 0 15% 0 15%;
+}
 .star-ratings-sprite {
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
   font-size: 0;
@@ -17,7 +19,7 @@ body{
   overflow: hidden;
   text-indent: -999em;
   width: 110px;
-  margin: 0 auto;
+  margin: 0;
 }
 .star-ratings-sprite-rating {
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
@@ -25,12 +27,6 @@ body{
   float: left;
   height: 21px;
   display: block;
-}
-body {
-  margin: 50px;
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  background: #f2fbff;
 }
 em {
   font-style: italic;
@@ -47,9 +43,8 @@ h2 {
 }
 /* entire container, keeps perspective */
 .flip-container {
-    margin-top: 3px; 
+    margin-top: 20px; 
     perspective: 1000px;
-    /*  */
 }
 /* flip the pane when hovered */
 .flip-container:hover .flipper, .flip-container.hover .flipper {
@@ -65,14 +60,12 @@ h2 {
 .flipper {
 	transition: 0.6s;
 	transform-style: preserve-3d;
-
 	position: relative;
 }
 
 /* hide back of pane during swap */
 .front, .back {
 	backface-visibility: hidden;
-
 	position: absolute;
 	top: 0;
 	left: 0;
