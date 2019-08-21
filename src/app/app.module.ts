@@ -22,6 +22,7 @@ import {ImageUploadModule} from 'ng2-imageupload';
 import { UploadBookComponent } from './upload-book/upload-book.component';
 import {HttpClientModule} from '@angular/common/http';
 import { BooksComponent } from './pages/dashboard-page/books/books.component';
+import { BookGridComponent } from './pages/grid-books/book-grid-icon/book-grid-icon.component';
 
 
 
@@ -35,7 +36,8 @@ import { BooksComponent } from './pages/dashboard-page/books/books.component';
     GrdFilterPipe,
     GridBooksComponent,
     UploadBookComponent,
-    BooksComponent
+    BooksComponent,
+    BookGridComponent
   ],
   imports: [
     BrowserModule,
