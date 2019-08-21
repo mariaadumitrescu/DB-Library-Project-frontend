@@ -1,7 +1,16 @@
 export class User {
-firstName: string;
-lastName: string;
-password: string;
-matchingPassword: string;
-email: string;
+  id: number;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  token?: string;
+
+
+  constructor(email: string, password: string, firstName: string, lastName: string) {
+    this.email = email;
+    this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 }
