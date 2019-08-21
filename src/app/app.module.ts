@@ -31,6 +31,7 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
     HomeComponent,
     LoginComponent,
     AdminDashboardBooksTableComponent,
+
 
   ],
   imports: [
