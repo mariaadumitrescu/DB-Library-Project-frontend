@@ -28,6 +28,7 @@ import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
+import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
 
 
 
@@ -46,6 +47,7 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
     HomeComponent,
     LoginComponent,
     AdminDashboardBooksTableComponent,
+    BookGridComponent,
 
 
   ],

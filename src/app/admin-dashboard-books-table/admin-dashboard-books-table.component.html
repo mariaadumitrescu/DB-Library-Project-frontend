@@ -1,0 +1,41 @@
+<div class="container shadow p-3 mb-5 bg-white rounded">
+  <div class="row">
+    <div class="col-sm">
+      <input [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search"
+             (ngModelChange)="inputSearchChanged()">
+    </div>
+    <div class="col-sm">
+      <button class="btn btn-primary mt-2">Add a book</button>
+    </div>
+  </div>
+  <div class="booksTableHeader row m-2 border shadow-sm bg-white rounded">
+    <div class="col-sm text-center badge-primary">Image</div>
+    <div class="col-sm text-center badge-primary">Title</div>
+    <div class="col-sm text-center badge-primary">Authors</div>
+    <div class="col-sm text-center badge-primary">
+      Edit / Delete
+    </div>
+  </div>
+
+  <div
+    *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 5, currentPage: p,totalItems: paginatedBooks.nrOfElements}"
+    class="row m-2 border shadow-sm bg-white rounded">
+    <div class="col-sm text-center">
+      <img [src]="'data:image/jpeg;base64,'+book.img.pic" height="40px" class="mt-2">
+    </div>
+    <div class="col-sm text-center my-auto">
+      {{book.title}}
+    </div>
+    <div class="col-sm text-center my-auto">
+      {{book.author}}
+    </div>
+    <div class="col-sm text-center ">
+      <button (click)="editBook(book)" class="btn btn-secondary m-2">Edit</button>
+      <button (click)="deleteBook(book)" class="btn btn-danger m-2">Delete</button>
+    </div>
+  </div>
+  <div class="col-sm">
+    <pagination-controls maxSize="5" responsive="true" id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
+  </div>
+</div>
+
