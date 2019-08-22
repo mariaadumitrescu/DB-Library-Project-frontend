@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Book } from 'src/app/models/book';
-import { BookService } from 'src/app/services/book.service';
+import {BookService} from '../../../services/book.service';
 
 @Component({
   selector: 'book-grid-icon',
@@ -11,9 +11,9 @@ export class BookGridComponent implements OnInit {
 
   @Input() book: Book;
 
-  constructor(private bookService: BookService) { 
+  constructor(private bookService: BookService) {
   }
-  
+
   ngOnInit(): void {
  }
 

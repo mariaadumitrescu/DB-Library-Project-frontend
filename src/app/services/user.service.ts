@@ -3,9 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import {environment} from '../../environments/environment.prod';
 import {Observable} from 'rxjs';
-import {Registration} from '../models/registration';
 import {Book} from '../models/book';
-import {User} from '../models/user';
+import {Registration} from '../models/registration';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -15,7 +14,7 @@ export class UserService {
     return this.http.get<Book[]>(`${environment.apiUrl}/books`);
   }
 
-  registerUser(registration: User){
+  registerUser(registration: Registration){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/register', registration, {

@@ -11,25 +11,24 @@
     <pagination-controls id="searchPagination" (pageChange)="pageSearchChanged($event)"></pagination-controls>
   </table>
 </div>
+<div class="container">
+  <pagination-controls id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
+  <div *ngIf="paginatedBooks" class="listOfBooks">
+    <div
+      *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
 
-<pagination-controls id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
-
-<div *ngIf="paginatedBooks" class = "listOfBooks">
-  <div
-    *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
-
-    <!--  | grdFilter: {title: value, genre: value, author: value}-->
-    <div>
-      <book-grid-icon [book] = "book"></book-grid-icon>
+      <!--  | grdFilter: {title: value, genre: value, author: value}-->
+      <div>
+        <book-grid-icon [book]="book"></book-grid-icon>
+      </div>
     </div>
   </div>
-</div>
-<div *ngIf="formData">
-  {{formData}}
-</div>
-<div class="container">
+  <div *ngIf="formData">
+    {{formData}}
+  </div>
   <app-upload-book></app-upload-book>
 </div>
+
 
 
 

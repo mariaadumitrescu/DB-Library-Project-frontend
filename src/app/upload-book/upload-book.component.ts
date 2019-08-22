@@ -1,6 +1,6 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {UploadImageService} from '../_services/uploadImage.service';
-import {BookService} from '../_services/book.service';
+import {UploadImageService} from '../services/uploadImage.service';
+import {BookService} from '../services/book.service';
 import {Book} from '../models/book';
 import {ImageResult, ResizeOptions} from 'ng2-imageupload';
 

@@ -6,15 +6,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
-import { BookService} from './_services/book.service';
-import { UserService} from './_services/user.service';
+import { BookService} from './services/book.service';
+import { UserService} from './services/user.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
 import {DashboardPageComponent} from './pages/dashboard-page/dashboard-page.component';
 import {GridBooksComponent} from './pages/grid-books/grid-books.component';
-import {UploadImageService} from './_services/uploadImage.service';
+import {UploadImageService} from './services/uploadImage.service';
 import {GrdFilterPipe} from './grd-fiter.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -23,7 +23,7 @@ import { UploadBookComponent } from './upload-book/upload-book.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BooksComponent } from './pages/dashboard-page/books/books.component';
 import { AdminDashboardBooksTableComponent } from './admin-dashboard-books-table/admin-dashboard-books-table.component';
-import {AuthenticationService} from './_services/autentication.service';
+import {AuthenticationService} from './services/autentication.service';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
@@ -48,6 +48,7 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     LoginComponent,
     AdminDashboardBooksTableComponent,
     BookGridComponent,
+    RegisterPageComponent,
 
 
   ],
