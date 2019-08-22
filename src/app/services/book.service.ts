@@ -9,8 +9,6 @@ import {AuthenticationService} from './autentication.service';
 @Injectable()
 export class BookService {
 
-  private headers = new Headers({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()});
-
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
   }
 

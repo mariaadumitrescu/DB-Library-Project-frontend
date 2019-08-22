@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../../models/book';
-import {BookService} from '../../_services/book.service';
+import {BookService} from '../../services/book.service';
 import {ResponsePageList} from '../../models/responsePageList';
 
 @Component({
@@ -25,12 +25,12 @@ export class GridBooksComponent implements OnInit {
   }
 
   initListOfBooks() {
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '4', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
     });
 
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', '').subscribe(q => {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(q => {
       this.searchedPaginatedBooks = q;
       this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
@@ -43,7 +43,7 @@ export class GridBooksComponent implements OnInit {
 
   pageGridChanged(event) {
     this.p = event;
-    this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '2', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '4', '').subscribe(p => {
 
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
@@ -52,7 +52,7 @@ export class GridBooksComponent implements OnInit {
 
   inputSearchChanged() {
     this.flagSearch = false;
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', this.value).subscribe(q => {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', this.value).subscribe(q => {
       this.searchedPaginatedBooks = q;
       this.searchedBooks = this.searchedPaginatedBooks.pageList;
       this.flagSearch = true;

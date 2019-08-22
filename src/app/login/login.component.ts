@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {AuthenticationService} from '../_services/autentication.service';
+import {AuthenticationService} from '../services/autentication.service';
 
 
-@Component({ templateUrl: 'login.component.html' })
+@Component({
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
@@ -57,5 +61,9 @@ export class LoginComponent implements OnInit {
           this.error = error;
           this.loading = false;
         });
+  }
+
+  sendToRegister() {
+    this.router.navigate(['/register']);
   }
 }

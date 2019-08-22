@@ -1,3 +1,5 @@
+import {AbstractControl} from '@angular/forms';
+
 export class Registration {
   firstName: string;
   lastName: string;

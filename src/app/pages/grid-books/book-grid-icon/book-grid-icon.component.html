@@ -7,11 +7,11 @@
               <div class="front">
                 <!-- front content -->
                 <div *ngIf="book.img, else nonImg">
-                  <img [src]="'data:image/jpeg;base64,'+book.img.pic" height="400">
+                  <img [src]="'data:image/jpeg;base64,'+book.img.pic" width="200">
                 </div>
                 <ng-template #nonImg>
                   <img src="https://abeon-hosting.com/images/default-png-9.png" height="400" width="200">
-                </ng-template> 
+                </ng-template>
               </div>
               <div class="back">
                 <!-- back content -->
@@ -25,14 +25,14 @@
           <h5 class = "bookAuthor">{{book.author}}</h5>
           <div class = "rating">
             <div class="star-ratings-sprite"><span style="width:70%" class="star-ratings-sprite-rating"></span></div>
-            <p>3.5</p>         
-            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>            
-          </div>          
+            <p>3.5</p>
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+          </div>
           <a href="#" class="btn btn-primary">Descopera cartea!</a>
 
         </div>
-      </div>      
-    </div> 
+      </div>
+    </div>
 </body>
 
 <!-- <div *ngIf="book.img, else nonImg">
