@@ -18,7 +18,7 @@
   </div>
 
   <div
-    *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 5, currentPage: p,totalItems: paginatedBooks.nrOfElements}"
+    *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}"
     class="row m-2 border shadow-sm bg-white rounded">
     <div class="col-sm text-center">
       <img [src]="'data:image/jpeg;base64,'+book.img.pic" height="40px" class="mt-2">
