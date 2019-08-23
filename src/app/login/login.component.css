@@ -51,7 +51,7 @@
 }
 .btnLogin{
   float: right;
-  margin-top: 10%;
+  margin-top: 5%;
   border: none;
   border-radius: 1.5rem;
   padding: 2%;
@@ -101,6 +101,7 @@
 }
 
 .invalid-feedback{
+  display: block;
   width: 60%;
   margin-left: 20%;
   margin-right: 20%;

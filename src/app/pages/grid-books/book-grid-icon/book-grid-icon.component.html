@@ -7,7 +7,7 @@
               <div class="front">
                 <!-- front content -->
                 <div *ngIf="book.img, else nonImg">
-                  <img [src]="'data:image/jpeg;base64,'+book.img.pic" width="200">
+                  <img [src]="'data:image/jpeg;base64,'+book.img.pic"  width="200">
                 </div>
                 <ng-template #nonImg>
                   <img src="https://abeon-hosting.com/images/default-png-9.png" height="400" width="200">
