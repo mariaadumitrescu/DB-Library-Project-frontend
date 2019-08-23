@@ -15,6 +15,8 @@ export class BookGridComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.book.averageStars);
+
  }
 
 

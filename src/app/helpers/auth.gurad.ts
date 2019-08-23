@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
       this.decoded = jwt_decode(token);
       const date = new Date(0).setUTCSeconds(this.decoded.exp);
       if (date.valueOf() > new Date().valueOf()) {
-        if (localStorage.getItem('isEnabled').valueOf() ==='true') {
+        if (localStorage.getItem('isEnabled') ==='true') {
           return true;
         }else {
           this.router.navigate(['/forbidden']);
