@@ -61,4 +61,10 @@ export class BookService {
       withCredentials: false
     }) as Observable<any>;
   }
+
+// @ts-ignore
+  getRating(book: Book) {
+
+  }
 }
+
