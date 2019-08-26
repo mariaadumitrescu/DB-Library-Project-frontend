@@ -15,7 +15,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   private books: Book[];
   private value: string;
   private p: any;
-  private q: any;
+  private nrOfElements: any;
   private flagSearch: boolean;
 
 
@@ -26,6 +26,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
+      this.nrOfElements = this.paginatedBooks.nrOfElements;
     });
   }
 
@@ -34,6 +35,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
+      this.nrOfElements = this.paginatedBooks.nrOfElements;
     });
   }
 
@@ -45,6 +47,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', this.value).subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
+      this.nrOfElements = this.paginatedBooks.nrOfElements;
     });
   }
 

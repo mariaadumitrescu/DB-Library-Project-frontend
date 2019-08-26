@@ -14,8 +14,10 @@ export class BookGridComponent implements OnInit {
   @Input() book: Book;
   constructor(private router : Router) { 
   }
-  ngOnInit(): void {   
-     
+
+  ngOnInit(): void {
+    console.log(this.book.averageStars);
+
  }
  gotoDynamic(id:string) {
   //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });

@@ -49,7 +49,7 @@ export class UploadBookComponent implements OnDestroy {
     if (this.formData) {
       this.imageObservable = this.imageUploadService.uploadImage(this.formData).subscribe(
         res => {
-          this.book = new Book(this.isbn, this.title, this.author, this.publishingHouse, this.year, this.genre, res);
+          this.book = new Book(this.isbn, this.title, this.author, this.publishingHouse, this.year, this.genre, res, 0);
           this.bookObservable = this.bookUploadService.addBook(this.book).subscribe(value => {
               this.formValues.resetForm();
               this.imgURL = null;
