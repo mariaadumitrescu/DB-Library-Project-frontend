@@ -29,7 +29,7 @@ import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
-
+import {BookPageComponent} from './pages/book-page/book-page.component';
 
 
 
@@ -49,8 +49,7 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     AdminDashboardBooksTableComponent,
     BookGridComponent,
     RegisterPageComponent,
-
-
+    BookPageComponent
   ],
   imports: [
     BrowserModule,
