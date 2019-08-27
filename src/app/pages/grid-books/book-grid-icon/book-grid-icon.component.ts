@@ -10,13 +10,13 @@ import {BookService} from '../../../services/book.service';
 export class BookGridComponent implements OnInit {
 
   @Input() book: Book;
+  averagePercent: number;
 
   constructor(private bookService: BookService) {
   }
 
   ngOnInit(): void {
     console.log(this.book.averageStars);
-
  }
 
 
