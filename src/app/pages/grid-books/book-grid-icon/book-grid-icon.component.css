@@ -55,7 +55,7 @@ h2 {
 
 .flip-container, .front, .back {
 	width: 320px;
-	height: 400px;
+	height: 200px;
 }
 
 /* flip speed goes here */

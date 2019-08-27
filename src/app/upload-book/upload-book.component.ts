@@ -64,7 +64,7 @@ export class UploadBookComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //this.imageObservable.unsubscribe();
-    //this.bookObservable.unsubscribe();
+    this.imageObservable.unsubscribe();
+    this.bookObservable.unsubscribe();
   }
 }
