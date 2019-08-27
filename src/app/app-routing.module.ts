@@ -8,6 +8,7 @@ import {RegisterPageComponent} from './pages/register-page/register-page.compone
 import {AdminDashboardBooksTableComponent} from './admin-dashboard-books-table/admin-dashboard-books-table.component';
 import {AuthGuard} from './helpers/auth.gurad';
 import {ForbiddenComponent} from './pages/forbidden/forbidden.component';
+import { BookPageComponent } from './pages/book-page/book-page.component';
 
 const routes: Routes = [
   { path: '', component: GridBooksComponent, canActivate: [AuthGuard] },

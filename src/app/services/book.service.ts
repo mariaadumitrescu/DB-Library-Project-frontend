@@ -70,7 +70,7 @@ export class BookService {
       params: {
         id: id
       }
-    }) as Observable<Book[]>;
+    }) as Observable<Book>;
   }
 
 // @ts-ignore
