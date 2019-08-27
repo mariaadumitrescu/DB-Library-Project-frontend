@@ -55,8 +55,6 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
     RegisterPageComponent,
     BookPageComponent,
     ForbiddenComponent,
-
-
   ],
   imports: [
     BrowserModule,
