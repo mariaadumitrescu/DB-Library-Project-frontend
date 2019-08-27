@@ -18,14 +18,13 @@
               <p>Aici va fi descrierea!</p>
             </div>
           </div>
-        </div>
     <!-- Detalii carte -->
       <div class="card-body">
         <h4 class = "bookTitle">{{book.title}}</h4>
         <h5 class = "bookAuthor">{{book.author}}</h5>
         <div class = "rating">
-          <div class="star-ratings-sprite"><span style="width:70%" class="star-ratings-sprite-rating"></span></div>
-          <p>3.5</p>
+          <div class="star-ratings-sprite"><span class="star-ratings-sprite-rating" [ngStyle]="{'width.%': book.averageStars/5 * 100}"></span></div>
+          <p>{{book.averageStars}}</p>
           <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         </div>
         <button class="btn btn-primary" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)" >Descopera cartea {{book.id}}!</button>
