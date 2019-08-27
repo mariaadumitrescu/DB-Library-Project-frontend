@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Book } from 'src/app/models/book';
 import {BookService} from '../../../services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'book-grid-icon',
@@ -12,12 +13,15 @@ export class BookGridComponent implements OnInit {
   @Input() book: Book;
   averagePercent: number;
 
-  constructor(private bookService: BookService) {
+  constructor(private router : Router) {
   }
 
   ngOnInit(): void {
     console.log(this.book.averageStars);
- }
-
-
+  }
+  
+  gotoDynamic(id:string) {
+  //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
+  this.router.navigate(['/book-page'], { queryParams: { bookId: id } });
+  }
 }

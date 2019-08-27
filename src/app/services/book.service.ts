@@ -61,6 +61,17 @@ export class BookService {
       withCredentials: false
     }) as Observable<any>;
   }
+  getBookById(id: string){
+    return this.http.get('http://localhost:8080/searchBookById', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params: {
+        id: id
+      }
+    }) as Observable<Book>;
+  }
 
 // @ts-ignore
   getRating(book: Book) {
