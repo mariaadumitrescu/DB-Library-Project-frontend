@@ -2,6 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Book } from 'src/app/models/book';
 import {BookService} from '../../../services/book.service';
 import { Router } from '@angular/router';
+import {AuthenticationService} from '../../../services/autentication.service';
+import * as jwt_decode from 'jwt-decode';
+import {UserService} from '../../../services/user.service';
+import {UserBook} from '../../../models/userBook';
+import {UserBookService} from '../../../services/userBook.service';
 
 @Component({
   selector: 'book-grid-icon',
@@ -12,16 +17,30 @@ export class BookGridComponent implements OnInit {
 
   @Input() book: Book;
   averagePercent: number;
+  decoded: any;
 
-  constructor(private router : Router) {
+  constructor(private userBookService: UserBookService, private userService: UserService, private router: Router, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
     console.log(this.book.averageStars);
   }
-  
-  gotoDynamic(id:string) {
-  //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
-  this.router.navigate(['/book-page'], { queryParams: { bookId: id } });
+
+  gotoDynamic(id: number) {
+    //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
+    this.router.navigate(['/book-page'], {queryParams: {bookId: id}});
+  }
+
+
+  async borrow() {
+    const token = this.authenticationService.getToken();
+    this.decoded = jwt_decode(token);
+    let currentUser = await this.userService.getUserByEmail(this.decoded.sub).toPromise();
+    console.log(currentUser);
+    await this.userBookService.addUserBook(currentUser, this.book, "2019-05-04").subscribe(
+      value => console.log(value)
+    );
+
+
   }
 }
