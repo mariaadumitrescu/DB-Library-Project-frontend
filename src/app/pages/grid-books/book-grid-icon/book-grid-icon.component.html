@@ -10,7 +10,7 @@
                 <img [src]="'data:image/jpeg;base64,'+book.img.pic" width="200">
               </div>
               <ng-template #nonImg>
-                <img src="https://abeon-hosting.com/images/default-png-9.png" height="400" width="200">
+                <img src="https://abeon-hosting.com/images/default-png-9.png" height="200" width="200">
               </ng-template>
             </div>
             <div class="back">
@@ -18,6 +18,7 @@
               <p>Aici va fi descrierea!</p>
             </div>
           </div>
+      </div>
     <!-- Detalii carte -->
       <div class="card-body">
         <h4 class = "bookTitle">{{book.title}}</h4>
@@ -28,7 +29,9 @@
           <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         </div>
         <button class="btn btn-primary" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)" >Descopera cartea {{book.id}}!</button>
+        <button class="btn btn-primary" (click)="borrow()" >Imprumuta cartea {{book.id}}!</button>
       </div>
     </div>
   </div>
 </body>
+

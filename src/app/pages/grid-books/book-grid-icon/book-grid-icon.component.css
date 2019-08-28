@@ -85,3 +85,7 @@ h2 {
 .back {
 	transform: rotateY(180deg);
 }
+
+.btn-primary{
+  margin-bottom: 20px;
+}
