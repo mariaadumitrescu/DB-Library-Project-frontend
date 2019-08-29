@@ -29,9 +29,11 @@ import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
+
+import { ParallaxDirective } from './parallax.directive';
+import { UserComponent } from './user/user.component';
 import {BookPageComponent} from './pages/book-page/book-page.component';
 import {ForbiddenComponent } from './pages/forbidden/forbidden.component';
-import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {UserBookService} from './services/userBook.service';
 
 
@@ -54,8 +56,10 @@ import {UserBookService} from './services/userBook.service';
     AdminDashboardBooksTableComponent,
     BookGridComponent,
     RegisterPageComponent,
+    ParallaxDirective,
+    UserComponent,
     BookPageComponent,
-    ForbiddenComponent,
+    ForbiddenComponent,.
   ],
   imports: [
     BrowserModule,

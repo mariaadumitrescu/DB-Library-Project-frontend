@@ -1,75 +1,3 @@
-
-
-.logo {
-  border-radius: 50%;
-}
-
-
-.style2 {
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url('https://66.media.tumblr.com/d9cc1c44d0221ef766346c8b2c2e67c5/tumblr_psb781KCTn1ud1429o1_1280.jpg');
-  position: fixed;
-  top: 0px; left: 0px; width: 100%; height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  margin-top: -0.0600037px;
-  transform: translate3d(0px, 0.0600037px, 0px)
-}
-
-
-.background {
-  background-image: url('https://66.media.tumblr.com/d9cc1c44d0221ef766346c8b2c2e67c5/tumblr_psb781KCTn1ud1429o1_1280.jpg');
-}
-
-.mbr-fullscreen {
-  display: flex;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-  align-items: center;
-  -webkit-align-items: center;
-  min-height: 100vh;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-section {
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-
-@font-face {
-  font-family: 'Abril Fatface';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Abril Fatface'), local('AbrilFatface-Regular'), url(https://fonts.gstatic.com/s/abrilfatface/v11/zOL64pLDlL1D99S8g8PtiKchq-lmjdLh.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Abril Fatface';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Abril Fatface'), local('AbrilFatface-Regular'), url(https://fonts.gstatic.com/s/abrilfatface/v11/zOL64pLDlL1D99S8g8PtiKchq-dmjQ.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-
-
-
-
-
-
-
-/* ************************************************************************************************************************* */
-
-
-
 /*!
  * Mobirise v4 theme (https://mobirise.com/)
  * Copyright 2017 Mobirise
@@ -113,10 +41,15 @@ body {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6,
-.display-1, .display-2, .display-3, .display-4 {
+.display-1, .display-2, .display-3, .display-4, .display-8 {
   line-height: 1;
   word-break: break-word;
   word-wrap: break-word;
+}
+
+
+.display-6 {
+  line-height: 23px;
 }
 
 b, strong {
@@ -141,6 +74,12 @@ textarea[type="hidden"] {
 
 body {
   position: relative;
+}
+
+section {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 section .mbr-background-video,
@@ -243,7 +182,7 @@ section .mbr-background-video-preview {
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  /*-webkit-align-items:*/
+  -webkit-align-items: start;
   -ms-flex-align: start;
   align-items: start;
 }
@@ -388,6 +327,18 @@ nav .mbr-section-btn {
   min-height: 100vh;
 }
 
+.mbr-fullscreen {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  min-height: 100vh;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
 
 /*! Map */
 .map {
@@ -409,127 +360,127 @@ nav .mbr-section-btn {
 }
 
 /*! Scroll to top arrow */
-/*.mbr-arrow-up {*/
-/*  bottom: 25px;*/
-/*  right: 90px;*/
-/*  position: fixed;*/
-/*  text-align: right;*/
-/*  z-index: 5000;*/
-/*  color: #ffffff;*/
-/*  font-size: 32px;*/
-/*  transform: rotate(180deg);*/
-/*  -webkit-transform: rotate(180deg);*/
-/*}*/
+.mbr-arrow-up {
+  bottom: 25px;
+  right: 90px;
+  position: fixed;
+  text-align: right;
+  z-index: 5000;
+  color: #ffffff;
+  font-size: 32px;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
 
-/*.mbr-arrow-up a {*/
-/*  background: rgba(0, 0, 0, 0.2);*/
-/*  border-radius: 3px;*/
-/*  color: #fff;*/
-/*  display: inline-block;*/
-/*  height: 60px;*/
-/*  width: 60px;*/
-/*  outline-style: none !important;*/
-/*  position: relative;*/
-/*  text-decoration: none;*/
-/*  transition: all .3s ease-in-out;*/
-/*  cursor: pointer;*/
-/*  text-align: center;*/
-/*}*/
+.mbr-arrow-up a {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  outline-style: none !important;
+  position: relative;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+}
 
-/*.mbr-arrow-up a:hover {*/
-/*  background-color: rgba(0, 0, 0, 0.4);*/
-/*}*/
+.mbr-arrow-up a:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
 
-/*.mbr-arrow-up a i {*/
-/*  line-height: 60px;*/
-/*}*/
+.mbr-arrow-up a i {
+  line-height: 60px;
+}
 
-/*.mbr-arrow-up-icon {*/
-/*  display: block;*/
-/*  color: #fff;*/
-/*}*/
+.mbr-arrow-up-icon {
+  display: block;
+  color: #fff;
+}
 
-/*.mbr-arrow-up-icon::before {*/
-/*  content: "\203a";*/
-/*  display: inline-block;*/
-/*  font-family: serif;*/
-/*  font-size: 32px;*/
-/*  line-height: 1;*/
-/*  font-style: normal;*/
-/*  position: relative;*/
-/*  top: 6px;*/
-/*  left: -4px;*/
-/*  -webkit-transform: rotate(-90deg);*/
-/*  transform: rotate(-90deg);*/
-/*}*/
+.mbr-arrow-up-icon::before {
+  content: "\203a";
+  display: inline-block;
+  font-family: serif;
+  font-size: 32px;
+  line-height: 1;
+  font-style: normal;
+  position: relative;
+  top: 6px;
+  left: -4px;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
 
-/*!*! Arrow Down *!*/
-/*.mbr-arrow {*/
-/*  position: absolute;*/
-/*  bottom: 45px;*/
-/*  left: 50%;*/
-/*  width: 60px;*/
-/*  height: 60px;*/
-/*  cursor: pointer;*/
-/*  background-color: rgba(80, 80, 80, 0.5);*/
-/*  border-radius: 50%;*/
-/*  -webkit-transform: translateX(-50%);*/
-/*  transform: translateX(-50%);*/
-/*}*/
+/*! Arrow Down */
+.mbr-arrow {
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  background-color: rgba(80, 80, 80, 0.5);
+  border-radius: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
 
-/*.mbr-arrow > a {*/
-/*  display: inline-block;*/
-/*  text-decoration: none;*/
-/*  outline-style: none;*/
-/*  -webkit-animation: arrowdown 1.7s ease-in-out infinite;*/
-/*  animation: arrowdown 1.7s ease-in-out infinite;*/
-/*}*/
+.mbr-arrow > a {
+  display: inline-block;
+  text-decoration: none;
+  outline-style: none;
+  -webkit-animation: arrowdown 1.7s ease-in-out infinite;
+  animation: arrowdown 1.7s ease-in-out infinite;
+}
 
-/*.mbr-arrow > a > i {*/
-/*  position: absolute;*/
-/*  top: -2px;*/
-/*  left: 15px;*/
-/*  font-size: 2rem;*/
-/*}*/
+.mbr-arrow > a > i {
+  position: absolute;
+  top: -2px;
+  left: 15px;
+  font-size: 2rem;
+}
 
-/*@keyframes arrowdown {*/
-/*  0% {*/
-/*    transform: translateY(0px);*/
-/*    -webkit-transform: translateY(0px);*/
-/*  }*/
-/*  50% {*/
-/*    transform: translateY(-5px);*/
-/*    -webkit-transform: translateY(-5px);*/
-/*  }*/
-/*  100% {*/
-/*    transform: translateY(0px);*/
-/*    -webkit-transform: translateY(0px);*/
-/*  }*/
-/*}*/
+@keyframes arrowdown {
+  0% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+}
 
-/*@-webkit-keyframes arrowdown {*/
-/*  0% {*/
-/*    transform: translateY(0px);*/
-/*    -webkit-transform: translateY(0px);*/
-/*  }*/
-/*  50% {*/
-/*    transform: translateY(-5px);*/
-/*    -webkit-transform: translateY(-5px);*/
-/*  }*/
-/*  100% {*/
-/*    transform: translateY(0px);*/
-/*    -webkit-transform: translateY(0px);*/
-/*  }*/
-/*}*/
+@-webkit-keyframes arrowdown {
+  0% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+}
 
-/*@media (max-width: 500px) {*/
-/*  .mbr-arrow-up {*/
-/*    left: 50%;*/
-/*    right: auto;*/
-/*    transform: translateX(-50%) rotate(180deg);*/
-/*    -webkit-transform: translateX(-50%) rotate(180deg);*/
-/*  }*/
-/*}*/
+@media (max-width: 500px) {
+  .mbr-arrow-up {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) rotate(180deg);
+    -webkit-transform: translateX(-50%) rotate(180deg);
+  }
+}
 
 /*Gradients animation*/
 @keyframes gradient-animation {
@@ -691,9 +642,9 @@ nav .mbr-section-btn {
   width: 100% !important;
 }
 
-/*.jq-selectbox__trigger-arrow {*/
-/*  transform: translateY(-50%);*/
-/*}*/
+.jq-selectbox__trigger-arrow {
+  transform: translateY(-50%);
+}
 
 .jq-selectbox li {
   padding: 1.07em .5em;
@@ -722,14 +673,10 @@ input[type="range"] {
   margin: auto;
 }
 .engine {
-  position: absolute;
-  text-indent: -2400px;
-  text-align: center;
-  padding: 0;
-  top: 0;
-  left: -2400px;
-}
-
-.xdx:hover{
-  color:#333333!important;
+	position: absolute;
+	text-indent: -2400px;
+	text-align: center;
+	padding: 0;
+	top: 0;
+	left: -2400px;
 }
