@@ -17,4 +17,13 @@ export class UploadImageService {
       }
     }) as Observable<Image>;
   }
+
+  removeImage(id: number){
+    return this.http.delete('http://localhost:8080/removeImage/' + id, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      }
+    });
+  }
 }

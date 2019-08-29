@@ -1,23 +1,30 @@
 import {Image} from './image';
+import {Author} from './author';
+import {Genre} from './genre';
+import {Rating} from './rating';
 
 export class Book {
   id: number;
   isbn: string;
   title: string;
-  author: string;
+  authors: Author[];
   publishingHouse: string;
   year: number;
-  genre: string;
+  genres: Genre[];
   img: Image;
+  ratings: Rating[];
 
 
-  constructor(isbn: string, title: string, author: string, publishingHouse: string, year: number, genre: string, img: Image) {
+  constructor(isbn: string, title: string, authors: Author[], publishingHouse: string, year: number, genre: Genre[], img: Image, ratings: Rating[]) {
     this.isbn = isbn;
     this.title = title;
-    this.author = author;
+    this.authors = authors;
     this.publishingHouse = publishingHouse;
     this.year = year;
-    this.genre = genre;
+    this.genres = genre;
     this.img = img;
+    this.ratings = ratings;
   }
+
+
 }

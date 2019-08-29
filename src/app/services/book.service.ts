@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Book} from '../models/book';
-import {Observable} from 'rxjs';
+import {interval, Observable} from 'rxjs';
 import {ResponsePageList} from '../models/responsePageList';
 import {AuthenticationService} from './autentication.service';
+import {startWith, switchMap} from 'rxjs/operators';
 
 
 @Injectable()
@@ -34,23 +35,20 @@ export class BookService {
   }
 
   getPaginatedBooks(orderBy: string, direction: string, page: string, size: string, query: string) {
-
-    return this.http.get('http://localhost:8080/paginatedBooks', {
-
-      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()},
-      params: {
-        orderBy: orderBy,
-        direction: direction,
-        page: page,
-        size: size,
-        query: query
-      }
-    }) as Observable<ResponsePageList>;
+      return this.http.get('http://localhost:8080/paginatedBooks', {
+            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()},
+            params: {
+              orderBy: orderBy,
+              direction: direction,
+              page: page,
+              size: size,
+              query: query
+            }
+          }) as Observable<ResponsePageList>;
   }
 
   addBook(book: Book) {
-
-    return this.http.post('http://localhost:8080/add', book, {
+    return this.http.post('http://localhost:8080/addBook', book, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
@@ -61,4 +59,14 @@ export class BookService {
       withCredentials: false
     }) as Observable<any>;
   }
+
+  removeBook(id: number) {
+    return this.http.delete('http://localhost:8080/remove/' + id, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      }
+    });
+  }
+
 }

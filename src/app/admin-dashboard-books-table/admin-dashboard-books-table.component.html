@@ -1,12 +1,17 @@
 <div class="container shadow p-3 mb-5 bg-white rounded">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm m-2">
       <input [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search"
              (ngModelChange)="inputSearchChanged()">
     </div>
-    <div class="col-sm">
-      <button class="btn btn-primary mt-2">Add a book</button>
+    <div class="col-auto text-center m-2 ">
+      <pagination-controls  maxSize="5" responsive="true" id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
     </div>
+    <div class="col-auto m-2 text-center">
+      <button id="showPanel" class="btn btn-primary mr-2" (click)="hideAndShow()">Show panel</button>
+      <button class="btn btn-primary" (click)="addFlag()">Add book</button>
+    </div>
+
   </div>
   <div class="booksTableHeader row m-2 border shadow-sm bg-white rounded">
     <div class="col-sm text-center badge-primary">Image</div>
@@ -27,15 +32,13 @@
       {{book.title}}
     </div>
     <div class="col-sm text-center my-auto">
-      {{book.author}}
+      <div *ngFor="let author of book.authors; let isLast=last" class="d-inline-flex" style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
     </div>
     <div class="col-sm text-center ">
       <button (click)="editBook(book)" class="btn btn-secondary m-2">Edit</button>
-      <button (click)="deleteBook(book)" class="btn btn-danger m-2">Delete</button>
+      <button (click)="deleteBookDialog(book)" class="btn btn-danger m-2">Delete</button>
     </div>
   </div>
-  <div class="col-sm">
-    <pagination-controls maxSize="5" responsive="true" id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
-  </div>
+  <app-upload-book *ngIf="addBookActivated" (added)="eventCaptured($event)" [editedBook]="book"></app-upload-book>
 </div>
 
