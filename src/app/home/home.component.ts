@@ -1,25 +1,34 @@
 import {Component, OnInit} from '@angular/core';
-import { first } from 'rxjs/operators';
-
-import {UserService} from '../services/user.service';
-import {Book} from '../models/book';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../services/autentication.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
-  loading = false;
-  users: Book[];
 
-  constructor(private userService: UserService) { }
+export class HomeComponent implements OnInit {
 
-  ngOnInit() {
-    this.loading = true;
-    this.userService.getAll().pipe(first()).subscribe(users => {
-      this.loading = false;
-      this.users = users;
-    });
+  constructor(private router: Router, private authenticationService: AuthenticationService) {
+
   }
+
+
+  sendToLogin() {
+    this.router.navigateByUrl('/login');
+  }
+
+  sendToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  ngOnInit(): void {
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser) {
+      this.router.navigate(['/grid-books']);
+
+    }
+  }
+
 }

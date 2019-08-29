@@ -25,7 +25,12 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/fonts/fonts.css",
+              "src/assets/theme/css/style.css",
+              "src/assets/parallax/jarallax.min.js",
+              "src/assets/mobirise/css/mbr-additional.css",
+              "src/assets/mobirise/css/library3-1080x1350.jpg"
             ],
             "scripts": []
           },
@@ -81,11 +86,16 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+
+              "src/assets",
+              "src/assets/images/sigla-library.jpeg"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/fonts/fonts.css",
+              "src/styles.css",
+              "src/assets/theme/css/style.css",
+              "src/assets/images/sigla-library.jpeg"
             ],
             "scripts": []
           }

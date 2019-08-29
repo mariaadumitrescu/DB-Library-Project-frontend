@@ -29,6 +29,8 @@ import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
+import { ParallaxDirective } from './parallax.directive';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -49,6 +51,8 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     AdminDashboardBooksTableComponent,
     BookGridComponent,
     RegisterPageComponent,
+    ParallaxDirective,
+    UserComponent,
 
 
   ],

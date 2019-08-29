@@ -6,7 +6,7 @@ import {AuthenticationService} from '../services/autentication.service';
 
 
 @Component({
-  selector: 'login',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -61,6 +61,8 @@ export class LoginComponent implements OnInit {
           this.error = error;
           this.loading = false;
         });
+
+
   }
 
   sendToRegister() {
