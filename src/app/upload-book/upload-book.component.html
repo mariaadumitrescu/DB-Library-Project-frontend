@@ -1,21 +1,13 @@
 <div class="col-auto container shadow p-3 mb-5 m-2 bg-white rounded">
   <div class="border roundedFrame">
     <form name="form" #f="ngForm" novalidate>
+
       <div class="row">
         <div class="col-sm">
           <div class="form-group">
-            <input
-              name="title"
-              type="text"
-              class="form-control"
-              required
-              aria-describedby="titleBookHelp"
-              placeholder="Enter title"
-              [(ngModel)]="title"
-              #bookTitle="ngModel"/>
+            <input name="title" type="text" class="form-control" required aria-describedby="titleBookHelp"
+                   placeholder="Title" [(ngModel)]="title" #bookTitle="ngModel"/>
           </div>
-
-
           <div class="form-group">
             <div *ngIf="bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)" class="alert alert-danger">
               <div *ngIf="bookTitle.errors.required">
@@ -27,15 +19,8 @@
 
         <div class="col-sm">
           <div class="form-group">
-            <input
-              name="isbn"
-              type="text"
-              class="form-control"
-              required
-              aria-describedby="isbnBookHelp"
-              placeholder="Enter isbn"
-              [(ngModel)]="isbn"
-              #bookIsbn="ngModel"/>
+            <input name="isbn" type="text" class="form-control" required aria-describedby="isbnBookHelp"
+                   placeholder="ISBN" [(ngModel)]="isbn" #bookIsbn="ngModel"/>
           </div>
 
           <div class="form-group">
@@ -50,15 +35,9 @@
 
         <div class="col-sm">
           <div class="form-group">
-            <input
-              name="publishingHouse"
-              type="text"
-              class="form-control"
-              required
-              aria-describedby="publishingHouseBookHelp"
-              placeholder="Enter publishing house"
-              [(ngModel)]="publishingHouse"
-              #bookPublishingHouse="ngModel"/>
+            <input name="publishingHouse" type="text" class="form-control" required
+                   aria-describedby="publishingHouseBookHelp" placeholder="Publishing house"
+                   [(ngModel)]="publishingHouse" #bookPublishingHouse="ngModel"/>
           </div>
           <div class="form-group">
             <div *ngIf="bookPublishingHouse.invalid && (bookPublishingHouse.dirty || bookPublishingHouse.touched)"
@@ -72,16 +51,9 @@
 
         <div class="col-sm">
           <div class="form-group">
-            <input
-              autocomplete="false"
-              name="year"
-              type="number"
-              class="form-control"
-              required
-              aria-describedby="yearBookHelp"
-              placeholder="Enter year of publication"
-              [(ngModel)]="year"
-              #bookYear="ngModel"/>
+            <input autocomplete="false" name="year" type="number" class="form-control" required
+                   aria-describedby="yearBookHelp" placeholder="Year" [(ngModel)]="year"
+                   #bookYear="ngModel"/>
           </div>
           <div class="form-group">
             <div *ngIf="bookYear.invalid && (bookYear.dirty || bookYear.touched)" class="alert alert-danger">
@@ -92,20 +64,29 @@
           </div>
         </div>
 
+        <div class="col-sm">
+          <div class="form-group">
+            <input autocomplete="false" name="stock" type="number" class="form-control" required
+                   aria-describedby="stockBookHelp" placeholder="Stock" [(ngModel)]="stock"
+                   #bookStock="ngModel"/>
+          </div>
+          <div class="form-group">
+            <div *ngIf="bookStock.invalid && (bookStock.dirty || bookStock.touched)" class="alert alert-danger">
+              <div *ngIf="bookStock.errors.required">
+                Stock is required.
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
 
       <div class="row">
         <div class="col-sm">
           <div class="form-group">
-            <input
-              id="author"
-              name="author"
-              type="text"
-              class="form-control"
-              aria-describedby="authorBookHelp"
-              placeholder="Enter author"
-              [(ngModel)]="author"
-              #bookAuthor="ngModel"/>
+            <input id="author" name="author" type="text" class="form-control" aria-describedby="authorBookHelp"
+                   placeholder="Authors" [(ngModel)]="author" #bookAuthor="ngModel"/>
           </div>
 
           <div class="form-group">
@@ -127,7 +108,6 @@
       </div>
       <div class="row">
         <div class="col-sm">
-
           <div class="text-dark" *ngFor="let author of tempAuthors;">
             <div class="form-group float-left">
               <div class="col-sm">
@@ -143,14 +123,9 @@
 
         <div class="col-sm">
           <div class="form-group">
-            <input
-              id="genre"
-              name="genre"
-              type="text"
-              class="form-control"
-              aria-describedby="genreBookHelp"
-              placeholder="Enter genre"
-              [(ngModel)]="genre" #bookGenre="ngModel"/>
+            <input id="genre" name="genre" type="text" class="form-control" aria-describedby="genreBookHelp"
+                   placeholder="Genres"
+                   [(ngModel)]="genre" #bookGenre="ngModel"/>
           </div>
 
           <div class="form-group">
@@ -185,37 +160,49 @@
         </div>
       </div>
 
+
+      <div class="row">
+
+        <div class="col-sm">
+          <div class="form-group">
+            <textarea id="description" name="description" type="text" class="form-control" required
+                   aria-describedby="descriptionBookHelp"
+                   placeholder="Description"
+                      [(ngModel)]="description" #bookDescription="ngModel"></textarea>
+          </div>
+
+          <div class="form-group">
+            <div *ngIf="bookDescription.invalid && (bookDescription.dirty || bookDescription.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="bookDescription.errors.required">
+                Description is required.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
       <div class="row">
         <div class="col-sm">
           <div class="form-group">
             <span
               class="btn btn-primary btn-file "
               id="btnUpload"> {{btnValue}}
-              <input #fileInput
-                     class="btn btn-primary "
-                     id="bookImage"
-                     type="file"
-                     imageUpload
-                     (imageSelected)="selected($event)"
-                     [resizeOptions]="resizeOptions"
-                     height="50px"/>
+              <input #fileInput class="btn btn-primary " id="bookImage" type="file" imageUpload
+                     (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" height="50px"/>
               </span>
             <img [src]="imgURL" height="38" *ngIf="imgURL">
           </div>
         </div>
 
         <div class="col-sm">
-          <button id="editBookButton"
-                  [disabled]="f.form.invalid || !this.selectedFile"
-                  class="btn btn-primary"
-                  (click)="editBook()"
-                  *ngIf="editedBook">Save
+          <button id="editBookButton" [disabled]="f.form.invalid || !this.selectedFile" class="btn btn-primary"
+                  (click)="editBook()" *ngIf="editedBook">Save
           </button>
-          <button id="addBookButton"
-                  [disabled]="f.form.invalid || !this.selectedFile"
-                  class="btn btn-primary"
-                  (click)="uploadBook()"
-                  *ngIf="!editedBook">Add
+          <button id="addBookButton" [disabled]="f.form.invalid || !this.selectedFile" class="btn btn-primary"
+                  (click)="uploadBook()" *ngIf="!editedBook">Add
           </button>
         </div>
 

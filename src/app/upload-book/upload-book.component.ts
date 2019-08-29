@@ -16,7 +16,6 @@ import {Image} from '../models/image';
 })
 export class UploadBookComponent implements OnChanges {
 
-
   @Output() added: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() editedBook: Book;
   private book: Book;
@@ -24,6 +23,9 @@ export class UploadBookComponent implements OnChanges {
   private isbn: string;
   private publishingHouse: string;
   private year: number;
+  private description: string;
+  private stock: number;
+  private averageStars: number;
   private uploadedImage: Image;
   private tempAuthors = new Set<string>();
   private tempGenres = new Set<string>();
@@ -41,66 +43,43 @@ export class UploadBookComponent implements OnChanges {
 
   constructor(
     private imageUploadService: UploadImageService,
-    private bookUploadService: BookService,
-    private authorService: AuthorService,
-    private genreService: GenreService) {
+    private bookUploadService: BookService) {
   }
 
   selected(imageResult: ImageResult) {
-    fetch(imageResult.resized.dataURL).then(res => res.blob()).then(blob => {
-      this.imageResult = imageResult;
+    fetch(imageResult.resized.dataURL).then(res => res.blob()).then(() => {
       let splitBlob = imageResult.resized.dataURL.split(',');
+      this.imageResult = imageResult;
       this.selectedFile = splitBlob[1];
       this.imgURL = imageResult.resized.dataURL;
       this.btnValue = 'Choose another image';
       this.imageWasSelected = true;
     });
-
   }
 
   async uploadBook() {
-      let existAuthors = [];
-      let existGenres = [];
-      let authorsForUpload = [];
-      let genresForUpload = [];
-      for (let author of this.tempAuthors) {
-        let exist = <any> await this.authorService.checkIfAuthorExist(author).toPromise();
-        if (exist) {
-          existAuthors.push(await this.authorService.getAuthorByName(author).toPromise());
-        } else {
-          authorsForUpload.push(new Author(author));
-        }
-      }
-      let uploadedAuthors = <any[]> await this.authorService.addAuthors(authorsForUpload).toPromise();
-      for (let genre of this.tempGenres) {
-        let exist = <any> await this.genreService.checkIfGenreExist(genre).toPromise();
-        if (exist) {
-          existGenres.push(await this.genreService.getGenreByName(genre).toPromise());
-        } else {
-          genresForUpload.push(new Genre(genre));
-        }
-      }
-      let uploadedGenres = <any[]> await this.genreService.addGenres(genresForUpload).toPromise();
-      if (this.imageWasSelected) {
-        this.uploadedImage = new Image(this.imageResult.file.name,this.imageResult.file.type,this.selectedFile);
-      }
-      this.book = new Book(this.isbn, this.title, [], this.publishingHouse, this.year, [], this.uploadedImage, []);
-      for (let i = 0; i < existAuthors.length; i++) {
-        this.book.authors.push(existAuthors[i]);
-      }
-      for (let i = 0; i < uploadedAuthors.length; i++) {
-        this.book.authors.push(uploadedAuthors[i]);
-      }
-      for (let i = 0; i < existGenres.length; i++) {
-        this.book.genres.push(existGenres[i]);
-      }
-      for (let i = 0; i < uploadedGenres.length; i++) {
-        this.book.genres.push(uploadedGenres[i]);
-      }
-      await this.bookUploadService.addBook(this.book).toPromise();
-      this.reset();
-      this.formValues.resetForm();
-      this.added.emit(true);
+    let authorsForUpload = [];
+    let genresForUpload = [];
+    for (let author of this.tempAuthors) {
+      authorsForUpload.push(new Author(author));
+    }
+    for (let genre of this.tempGenres) {
+      genresForUpload.push(new Genre(genre));
+    }
+    if (this.imageWasSelected) {
+      this.uploadedImage = new Image(this.imageResult.file.name, this.imageResult.file.type, this.selectedFile);
+    }
+    this.book = new Book(this.isbn, this.title, [], this.publishingHouse, this.year, [], this.uploadedImage, [], this.description, this.stock);
+    for (let i = 0; i < authorsForUpload.length; i++) {
+      this.book.authors.push(authorsForUpload[i]);
+    }
+    for (let i = 0; i < genresForUpload.length; i++) {
+      this.book.genres.push(genresForUpload[i]);
+    }
+    await this.bookUploadService.addBook(this.book).toPromise();
+    this.reset();
+    this.formValues.resetForm();
+    this.added.emit(true);
   }
 
   reset() {
@@ -115,6 +94,8 @@ export class UploadBookComponent implements OnChanges {
     this.tempGenres = new Set<string>();
     this.book = null;
     this.editedBook = null;
+    this.description = null;
+    this.stock = null;
   }
 
   addAuthor(event: any) {
@@ -138,7 +119,6 @@ export class UploadBookComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-
     if (this.editedBook) {
       this.tempAuthors = new Set<string>();
       this.tempGenres = new Set<string>();
@@ -148,17 +128,17 @@ export class UploadBookComponent implements OnChanges {
       this.imgURL = 'data:image/jpeg;base64,' + this.editedBook.img.pic;
       this.publishingHouse = this.editedBook.publishingHouse;
       this.year = this.editedBook.year;
+      this.description = this.editedBook.description;
+      this.stock = this.editedBook.stock;
+      this.averageStars = this.editedBook.averageStars;
       this.uploadedImage = this.editedBook.img;
       this.btnValue = 'Choose another image';
-
       for (let author of this.editedBook.authors) {
         this.tempAuthors.add(author.name);
       }
-
       for (let genre of this.editedBook.genres) {
         this.tempGenres.add(genre.name);
       }
-
     } else {
       this.tempAuthors = new Set<string>();
       this.tempGenres = new Set<string>();
@@ -168,59 +148,38 @@ export class UploadBookComponent implements OnChanges {
 
 
   async editBook() {
-    let existAuthors = [];
-    let existGenres = [];
     let authorsForUpload = [];
     let genresForUpload = [];
     for (let author of this.tempAuthors) {
-      let exist = <any> await this.authorService.checkIfAuthorExist(author).toPromise();
-      if (exist) {
-        existAuthors.push(await this.authorService.getAuthorByName(author).toPromise());
-      } else {
-        authorsForUpload.push(new Author(author));
-      }
+      authorsForUpload.push(new Author(author));
     }
-    let uploadedAuthors = <any[]> await this.authorService.addAuthors(authorsForUpload).toPromise();
     for (let genre of this.tempGenres) {
-      let exist = <any> await this.genreService.checkIfGenreExist(genre).toPromise();
-      if (exist) {
-        existGenres.push(await this.genreService.getGenreByName(genre).toPromise());
-      } else {
-        genresForUpload.push(new Genre(genre));
-      }
+      genresForUpload.push(new Genre(genre));
     }
-    let uploadedGenres = <any[]> await this.genreService.addGenres(genresForUpload).toPromise();
-
     if (this.imageWasSelected) {
-      this.uploadedImage = new Image(this.imageResult.file.name,this.imageResult.file.type,this.selectedFile);
+      this.uploadedImage = new Image(this.imageResult.file.name, this.imageResult.file.type, this.selectedFile);
     }
-
     this.book = this.editedBook;
     this.book.isbn = this.isbn;
     this.book.title = this.title;
     this.book.authors = [];
     this.book.publishingHouse = this.publishingHouse;
-    this.book.year = this.editedBook.year;
+    this.book.year = this.year;
+    this.book.description = this.description;
+    this.book.stock = this.stock;
+    this.book.averageStars = this.averageStars;
     this.book.genres = [];
     this.book.img = this.uploadedImage;
     this.book.ratings = this.editedBook.ratings;
-
-    for (let i = 0; i < existAuthors.length; i++) {
-      this.book.authors.push(existAuthors[i]);
+    for (let i = 0; i < authorsForUpload.length; i++) {
+      this.book.authors.push(authorsForUpload[i]);
     }
-    for (let i = 0; i < uploadedAuthors.length; i++) {
-      this.book.authors.push(uploadedAuthors[i]);
-    }
-    for (let i = 0; i < existGenres.length; i++) {
-      this.book.genres.push(existGenres[i]);
-    }
-    for (let i = 0; i < uploadedGenres.length; i++) {
-      this.book.genres.push(uploadedGenres[i]);
+    for (let i = 0; i < genresForUpload.length; i++) {
+      this.book.genres.push(genresForUpload[i]);
     }
     await this.bookUploadService.addBook(this.book).toPromise();
     this.reset();
     this.formValues.resetForm();
     this.added.emit(false);
   }
-
 }
