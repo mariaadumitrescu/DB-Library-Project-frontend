@@ -29,8 +29,12 @@ import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
+
 import { ParallaxDirective } from './parallax.directive';
 import { UserComponent } from './user/user.component';
+import {BookPageComponent} from './pages/book-page/book-page.component';
+import {ForbiddenComponent } from './pages/forbidden/forbidden.component';
+import {UserBookService} from './services/userBook.service';
 
 
 
@@ -41,6 +45,7 @@ import { UserComponent } from './user/user.component';
     AdminPageComponent,
     RegisterPageComponent,
     DashboardPageComponent,
+    LoginPageComponent,
     GridBooksComponent,
     GrdFilterPipe,
     GridBooksComponent,
@@ -53,8 +58,8 @@ import { UserComponent } from './user/user.component';
     RegisterPageComponent,
     ParallaxDirective,
     UserComponent,
-
-
+    BookPageComponent,
+    ForbiddenComponent,.
   ],
   imports: [
     BrowserModule,
@@ -65,12 +70,13 @@ import { UserComponent } from './user/user.component';
     ImageUploadModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [BookService,
     UserService,
     UploadImageService,
     AuthenticationService,
+    UserBookService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],

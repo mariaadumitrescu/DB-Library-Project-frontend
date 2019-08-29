@@ -22,7 +22,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  getToken(): String {
+  getToken(): string {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const token = currentUser && currentUser.token;
     return token ? token : "";
@@ -33,17 +33,15 @@ export class AuthenticationService {
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/authenticate`, { email, password })
       .pipe(map(token => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(token));
         localStorage.setItem('email', email);
         this.currentUserSubject.next(token);
         return token;
       }));
   }
-
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    localStorage.clear();
     this.currentUserSubject.next(null);
   }
 

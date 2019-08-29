@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {first} from 'rxjs/operators';
 import {Registration} from '../../models/registration';
 import {UserService} from '../../services/user.service';
 
@@ -60,6 +59,7 @@ export class RegisterPageComponent implements OnInit {
       return;
     }
 
+    this.loading = true;
 
     const registration = new Registration(this.f.userFirstName.value, this.f.userLastName.value, this.f.userPassword.value, this.f.userEmail.value);
 
