@@ -16,10 +16,13 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   private books: Book[];
   private value: string;
   private p: any;
+
   private nrOfElements: number;
   private addBookActivated: boolean;
   private added: any;
   private book: Book;
+  private q: any;
+  private flagSearch: boolean;
 
 
   constructor(private bookService: BookService, private confirmationDialogService: ConfirmationDialogService) {
@@ -29,7 +32,6 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
-      this.nrOfElements = this.paginatedBooks.nrOfElements;
     });
   }
 
@@ -38,7 +40,6 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
-      this.nrOfElements = this.paginatedBooks.nrOfElements;
     });
   }
 
@@ -64,6 +65,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
         this.nrOfElements = this.paginatedBooks.nrOfElements;
       }
     );
+
   }
 
   async deleteBook(book: Book) {

@@ -181,5 +181,7 @@ export class UploadBookComponent implements OnChanges {
     this.reset();
     this.formValues.resetForm();
     this.added.emit(false);
+
+   
   }
 }

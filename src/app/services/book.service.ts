@@ -60,6 +60,7 @@ export class BookService {
     }) as Observable<any>;
   }
 
+
   removeBook(id: number) {
     return this.http.delete('http://localhost:8080/remove/' + id, {
       headers: {
@@ -69,4 +70,18 @@ export class BookService {
     });
   }
 
+
+  getBookById(id: string){
+    return this.http.get('http://localhost:8080/searchBookById', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params: {
+        id: id
+      }
+    }) as Observable<Book>;
+  }
+
 }
+

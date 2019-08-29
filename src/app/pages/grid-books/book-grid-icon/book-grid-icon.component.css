@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 
+
 body {
   margin: 50px;
   text-align: center;
@@ -55,7 +56,7 @@ h2 {
 
 .flip-container, .front, .back {
 	width: 320px;
-	height: 200px;
+	height: 400px;
 }
 
 /* flip speed goes here */
@@ -83,4 +84,8 @@ h2 {
 /* back, initially hidden pane */
 .back {
 	transform: rotateY(180deg);
+}
+
+.btn-primary{
+  margin-bottom: 20px;
 }

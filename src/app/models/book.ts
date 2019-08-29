@@ -3,6 +3,7 @@ import {Author} from './author';
 import {Genre} from './genre';
 import {Rating} from './rating';
 
+
 export class Book {
   id: number;
   isbn: string;
@@ -20,6 +21,7 @@ export class Book {
 
 
   constructor(isbn: string, title: string, authors: Author[], publishingHouse: string, year: number, genre: Genre[], img: Image, ratings: Rating[], description: string, stock: number) {
+
     this.isbn = isbn;
     this.title = title;
     this.authors = authors;
