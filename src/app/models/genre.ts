@@ -1,6 +1,6 @@
 export class Genre {
 
-  private id: number;
+  id: number;
   name: string;
 
 

@@ -8,6 +8,8 @@ import {Genre} from '../models/genre';
 import {AuthorService} from '../services/author.service';
 import {GenreService} from '../services/genre.service';
 import {Image} from '../models/image';
+import {Rating} from '../models/rating';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-upload-book',
@@ -43,7 +45,7 @@ export class UploadBookComponent implements OnChanges {
 
   constructor(
     private imageUploadService: UploadImageService,
-    private bookUploadService: BookService) {
+    private bookUploadService: BookService,private userService :UserService) {
   }
 
   selected(imageResult: ImageResult) {
@@ -160,6 +162,8 @@ export class UploadBookComponent implements OnChanges {
       this.uploadedImage = new Image(this.imageResult.file.name, this.imageResult.file.type, this.selectedFile);
     }
     this.book = this.editedBook;
+    let user = await this.userService.getUserByEmail("brebu.ciprian@gmail.com").toPromise();
+    this.book.ratings.push(new Rating(3.5,"Best of",user,new Date(Date.now())));
     this.book.isbn = this.isbn;
     this.book.title = this.title;
     this.book.authors = [];
