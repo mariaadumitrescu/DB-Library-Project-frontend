@@ -11,18 +11,17 @@ import { Router } from '@angular/router';
 export class BookGridComponent implements OnInit {
 
   @Input() book: Book;
+  averagePercent: number;
 
   constructor(private router : Router) {
   }
 
   ngOnInit(): void {
     console.log(this.book.averageStars);
-
   }
   
   gotoDynamic(id:string) {
   //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
   this.router.navigate(['/book-page'], { queryParams: { bookId: id } });
   }
-
 }
