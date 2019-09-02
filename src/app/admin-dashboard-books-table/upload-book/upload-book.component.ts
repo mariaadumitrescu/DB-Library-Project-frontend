@@ -162,7 +162,7 @@ export class UploadBookComponent implements OnChanges {
       this.uploadedImage = new Image(this.imageResult.file.name, this.imageResult.file.type, this.selectedFile);
     }
     this.book = this.editedBook;
-    let user = await this.userService.getUserByEmail("brebu.ciprian@gmail.com").toPromise();
+    let user = await this.userService.getUserByEmail("andreirotaru1998@gmail.com").toPromise();
     this.book.ratings.unshift(new Rating(4.2,"Best of third",user,new Date(Date.now())));
     this.book.isbn = this.isbn;
     this.book.title = this.title;
