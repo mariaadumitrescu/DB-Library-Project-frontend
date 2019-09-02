@@ -37,6 +37,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BookDetailsComponent } from './admin-dashboard-books-table/book-details/book-details.component';
 import {BookPageComponent} from './pages/book-page/book-page.component';
 import {UserBookService} from './services/userBook.service';
+import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
 
 
 
@@ -75,6 +76,9 @@ import {UserBookService} from './services/userBook.service';
     HttpClientModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     DialogModule,
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [BookService,
     UserService,

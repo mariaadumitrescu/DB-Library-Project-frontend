@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {AuthenticationService} from '../services/autentication.service';
+import {UserService} from '../services/user.service';
+import * as jwt_decode from 'jwt-decode';
 
 
 @Component({
@@ -11,17 +13,20 @@ import {AuthenticationService} from '../services/autentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  private currentUser: any;
   loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   error = '';
+  private user: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private userService :UserService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -56,6 +61,10 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
+          this.userService.getUserByEmail(this.f.username.value).subscribe(user => {
+            this.user = user;
+            this.router.navigate(['/']);
+          });
         },
         error => {
           this.error = error;

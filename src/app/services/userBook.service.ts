@@ -5,7 +5,6 @@ import {Book} from '../models/book';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
 import {UserBook} from '../models/userBook';
-import {UserService} from './user.service';
 
 
 @Injectable()

@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="active-purple-4 active-cyan-3 mb-4">
   <input [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search"
          (ngModelChange)="inputSearchChanged()">
@@ -26,7 +27,6 @@
   <div *ngIf="formData">
     {{formData}}
   </div>
-  <app-upload-book></app-upload-book>
 </div>
 
 

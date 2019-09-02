@@ -1,26 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Abril+Fatface:400);
 @import url(https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i);
 @import url(https://fonts.googleapis.com/css?family=Dancing+Script:400,700); /* latin */
-@font-face {
-  font-family: 'Abril Fatface';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Abril Fatface'), local('AbrilFatface-Regular'), url(https://fonts.gstatic.com/s/abrilfatface/v11/zOL64pLDlL1D99S8g8PtiKchq-dmjQ.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 
-.display-8 {
+.apply-font-dancing-script {
   font-family: 'Dancing Script', handwriting, serif;
   font-size: 18px;
   line-height: 20px;
 }
 
-
 .bg-primary {
   background-color: #149dcc !important;
 }
 
-.btnsmall {
+.btn-small {
   font-weight: 500;
   border-width: 2px;
   height: 25px;
@@ -30,35 +22,35 @@
   border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-  margin: 10px
-
+  margin: 10px;
+  cursor: pointer;
 }
 
-.btn-primary,
-.btn-primary:active {
+.btn-modified,
+.btn-modified:active {
   background-color: #149dcc !important;
   border-color: #149dcc !important;
   color: #ffffff !important;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary.focus,
-.btn-primary.active {
+.btn-modified:hover,
+.btn-modified:focus,
+.btn-modified.focus,
+.btn-modified.active {
   color: #ffffff !important;
   background-color: #0d6786 !important;
   border-color: #0d6786 !important;
 }
 
-.btn-primary {
+.btn-modified {
   color: #fff;
   background-color: #149dcc;
   border-color: #149dcc;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
+.btn-modified:not(:disabled):not(.disabled):active:focus, .btn-modified:not(:disabled):not(.disabled).active:focus,
+.show > .btn-modified.dropdown-toggle:focus {
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(55, 172, 212, 0.5);
 }
 
@@ -68,7 +60,6 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1.5rem;
 }
 
 .navbar > .container,
@@ -81,17 +72,29 @@
 
 .navbar-brand {
   display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
   margin-right: 1.5rem;
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
+  width: 25%;
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
 }
+
+span.logo{
+  font-family: 'Abril Fatface', serif;
+  color: white;
+}
+
+#logo{
+  width: 15.5%;
+  border-radius: 50%;
+  color: white;
+}
+
+
 
 
 
