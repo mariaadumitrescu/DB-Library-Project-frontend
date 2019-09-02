@@ -37,6 +37,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BookDetailsComponent } from './admin-dashboard-books-table/book-details/book-details.component';
 import {BookPageComponent} from './pages/book-page/book-page.component';
 import {UserBookService} from './services/userBook.service';
+import { BorrowedBooksComponent } from './pages/borrowed-books/borrowed-books.component';
 
 
 
@@ -60,7 +61,8 @@ import {UserBookService} from './services/userBook.service';
     DialogConfirmComponent,
     NavbarComponent,
     BookDetailsComponent,
-    BookPageComponent
+    BookPageComponent,
+    BorrowedBooksComponent,
 
 
   ],
