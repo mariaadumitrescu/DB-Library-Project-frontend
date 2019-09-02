@@ -3,3 +3,8 @@
     display: none;
   }
 }
+
+.container-fluid{
+  margin-top: 30px;
+  width: 95%;
+}

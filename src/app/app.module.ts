@@ -19,7 +19,7 @@ import {GrdFilterPipe} from './grd-fiter.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import {ImageUploadModule} from 'ng2-imageupload';
-import { UploadBookComponent } from './upload-book/upload-book.component';
+import { UploadBookComponent } from './admin-dashboard-books-table/upload-book/upload-book.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BooksComponent } from './pages/dashboard-page/books/books.component';
 import { AdminDashboardBooksTableComponent } from './admin-dashboard-books-table/admin-dashboard-books-table.component';
@@ -30,7 +30,11 @@ import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
-
+import {DialogModule} from '@syncfusion/ej2-angular-popups';
+import { DialogConfirmComponent } from './services/dialog-confirm/dialog-confirm.component';
+import {ConfirmationDialogService} from './services/dialog-confirm/dialog-confirm.service';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BookDetailsComponent } from './admin-dashboard-books-table/book-details/book-details.component';
 
 
 
@@ -51,6 +55,9 @@ import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
     BookGridComponent,
     RegisterPageComponent,
     ForbiddenComponent,
+    DialogConfirmComponent,
+    NavbarComponent,
+    BookDetailsComponent
 
 
   ],
@@ -63,16 +70,19 @@ import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
     ImageUploadModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    DialogModule,
   ],
   providers: [BookService,
     UserService,
+    ConfirmationDialogService,
     UploadImageService,
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ DialogConfirmComponent ],
 })
 export class AppModule {
 }
