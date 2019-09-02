@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
-import {UploadImageService} from '../services/uploadImage.service';
-import {BookService} from '../services/book.service';
-import {Book} from '../models/book';
+import {UploadImageService} from '../../services/uploadImage.service';
+import {BookService} from '../../services/book.service';
+import {Book} from '../../models/book';
 import {ImageResult, ResizeOptions} from 'ng2-imageupload';
-import {Author} from '../models/author';
-import {Genre} from '../models/genre';
-import {AuthorService} from '../services/author.service';
-import {GenreService} from '../services/genre.service';
-import {Image} from '../models/image';
-import {Rating} from '../models/rating';
-import {UserService} from '../services/user.service';
+import {Author} from '../../models/author';
+import {Genre} from '../../models/genre';
+import {AuthorService} from '../../services/author.service';
+import {GenreService} from '../../services/genre.service';
+import {Image} from '../../models/image';
+import {Rating} from '../../models/rating';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-upload-book',
@@ -163,7 +163,7 @@ export class UploadBookComponent implements OnChanges {
     }
     this.book = this.editedBook;
     let user = await this.userService.getUserByEmail("brebu.ciprian@gmail.com").toPromise();
-    this.book.ratings.push(new Rating(3.5,"Best of",user,new Date(Date.now())));
+    this.book.ratings.unshift(new Rating(4.2,"Best of third",user,new Date(Date.now())));
     this.book.isbn = this.isbn;
     this.book.title = this.title;
     this.book.authors = [];

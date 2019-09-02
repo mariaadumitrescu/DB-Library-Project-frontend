@@ -1,18 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookService} from '../services/book.service';
 import {ResponsePageList} from '../models/responsePageList';
 import {Book} from '../models/book';
 import {ConfirmationDialogService} from '../services/dialog-confirm/dialog-confirm.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard-books-table',
   templateUrl: './admin-dashboard-books-table.component.html',
   styleUrls: ['./admin-dashboard-books-table.component.css']
 })
-export class AdminDashboardBooksTableComponent implements OnInit {
+export class AdminDashboardBooksTableComponent implements OnInit, OnDestroy{
+
+  private subscriptionInit: Subscription;
+  private subscriptionPageGridChanged: Subscription;
+  private subscriptionGoToLast: Subscription;
+  private subscriptionInputSearchChanged: Subscription;
 
   private paginatedBooks: ResponsePageList;
-
   private books: Book[];
   private value: string;
   private p: any;
@@ -20,22 +25,24 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   private addBookActivated: boolean;
   private added: any;
   private book: Book;
+  private selectedBook: Book;
 
 
   constructor(private bookService: BookService, private confirmationDialogService: ConfirmationDialogService) {
   }
 
   initListOfBooks() {
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', '').subscribe(p => {
-      this.paginatedBooks = p;
+    this.subscriptionInit = this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', '').subscribe(result => {
+      this.paginatedBooks = result;
       this.books = this.paginatedBooks.pageList;
+      this.selectedBook = this.books[0];
       this.nrOfElements = this.paginatedBooks.nrOfElements;
     });
   }
 
   pageGridChanged(event) {
     this.p = event;
-    this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', '').subscribe(p => {
+    this.subscriptionPageGridChanged = this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;
@@ -43,7 +50,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   goToLast(page: number) {
-    this.bookService.getPaginatedBooks('id', 'ASC', page.toString(), '5', '').subscribe(p => {
+    this.subscriptionGoToLast = this.bookService.getPaginatedBooks('id', 'ASC', (page-1).toString(), '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;
@@ -57,7 +64,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   inputSearchChanged() {
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', this.value).subscribe(
+    this.subscriptionInputSearchChanged = this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', this.value).subscribe(
       p => {
         this.paginatedBooks = p;
         this.books = this.paginatedBooks.pageList;
@@ -68,8 +75,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
 
   async deleteBook(book: Book) {
     await this.bookService.removeBook(book.id).toPromise();
-    this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', '0', '5', this.value).toPromise();
-    let nr: string = (this.nrOfElements / 5).toString();
+    let nr = String(this.nrOfElements / 5);
     if (this.nrOfElements % 5 == 0) {
       this.pageGridChanged(parseInt(nr));
     } else {
@@ -77,8 +83,9 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     }
   }
 
-  editBook(book: Book) {
-    this.book = book;
+  async editBook(book: Book) {
+    this.book = await this.bookService.getBookById(String(book.id)).toPromise();
+    this.selectedBook = await this.bookService.getBookById(String(book.id)).toPromise();
     this.addBookActivated = true;
   }
 
@@ -86,7 +93,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     this.addBookActivated = !this.addBookActivated;
   }
 
-  eventCaptured(event: boolean) {
+  async eventCaptured(event: boolean) {
     this.added = event;
     if (this.added) {
       if (this.nrOfElements % 5 == 0) {
@@ -94,13 +101,17 @@ export class AdminDashboardBooksTableComponent implements OnInit {
       } else {
         this.goToLast(this.p);
       }
+    } else {
+      this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p), '5', '').toPromise();
+      this.books = this.paginatedBooks.pageList;
+      this.nrOfElements = this.paginatedBooks.nrOfElements;
+      this.selectedBook = await this.bookService.getBookById(String(this.book.id)).toPromise();
     }
-    this.addBookActivated = false!
+    this.addBookActivated = false;
   }
 
   addFlag() {
     this.p = (this.nrOfElements / 5) + 1;
-    this.goToLast(parseInt(this.p));
     this.book = null;
     this.addBookActivated = true;
   }
@@ -115,5 +126,24 @@ export class AdminDashboardBooksTableComponent implements OnInit {
         }
       )
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+  }
+
+  async showDetails(book: Book) {
+    this.selectedBook = await this.bookService.getBookById(book.id.toString()).toPromise();
+    this.book = this.selectedBook;
+  }
+
+  async ratingDeleted(event) {
+    if(event){
+      this.selectedBook = await this.bookService.getBookById(this.selectedBook.id.toString()).toPromise();
+      this.book = await this.bookService.getBookById(this.selectedBook.id.toString()).toPromise();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionInit.unsubscribe();
+    this.subscriptionPageGridChanged.unsubscribe();
+    this.subscriptionGoToLast.unsubscribe();
+    this.subscriptionInputSearchChanged.unsubscribe();
   }
 }

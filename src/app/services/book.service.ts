@@ -4,7 +4,6 @@ import {Book} from '../models/book';
 import {interval, Observable} from 'rxjs';
 import {ResponsePageList} from '../models/responsePageList';
 import {AuthenticationService} from './autentication.service';
-import {startWith, switchMap} from 'rxjs/operators';
 
 
 @Injectable()
@@ -20,6 +19,18 @@ export class BookService {
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
       }
     }) as Observable<Book[]>;
+  }
+
+  getBookById(id: string) {
+    return this.http.get('http://localhost:8080/searchBookById', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+     params:{
+        id: id
+     }
+    }) as Observable<Book>;
   }
 
   getBooksFromApi(query: string) {

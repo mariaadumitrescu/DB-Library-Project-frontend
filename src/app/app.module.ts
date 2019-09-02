@@ -19,7 +19,7 @@ import {GrdFilterPipe} from './grd-fiter.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import {ImageUploadModule} from 'ng2-imageupload';
-import { UploadBookComponent } from './upload-book/upload-book.component';
+import { UploadBookComponent } from './admin-dashboard-books-table/upload-book/upload-book.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BooksComponent } from './pages/dashboard-page/books/books.component';
 import { AdminDashboardBooksTableComponent } from './admin-dashboard-books-table/admin-dashboard-books-table.component';
@@ -33,6 +33,8 @@ import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import {DialogModule} from '@syncfusion/ej2-angular-popups';
 import { DialogConfirmComponent } from './services/dialog-confirm/dialog-confirm.component';
 import {ConfirmationDialogService} from './services/dialog-confirm/dialog-confirm.service';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BookDetailsComponent } from './admin-dashboard-books-table/book-details/book-details.component';
 
 
 
@@ -53,7 +55,9 @@ import {ConfirmationDialogService} from './services/dialog-confirm/dialog-confir
     BookGridComponent,
     RegisterPageComponent,
     ForbiddenComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    NavbarComponent,
+    BookDetailsComponent
 
 
   ],

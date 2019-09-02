@@ -1,0 +1,69 @@
+<div class="content-book-detail shadow p-3 mb-5 bg-white rounded">
+  <div class="row">
+    <div class="col-sm-auto">
+      <img [src]="'data:image/jpeg;base64,'+selectedBook.img.pic" height="250">
+    </div>
+    <div class="col-sm">
+      <h3>{{selectedBook.title}}</h3>
+      <div class="rating  d-inline-flex mr-2">
+        <p class="mr-2">{{selectedBook.averageStars.toFixed(1)}}</p>
+        <div class="star-ratings-sprite"><span [style.width.%]="100/5*selectedBook.averageStars"
+                                               class="star-ratings-sprite-rating"></span></div>
+      </div>
+      <div class="d-inline-flex">ISBN: {{selectedBook.isbn}}</div>
+      <div>
+        <label for="authors" style="white-space: pre">Authors: </label>
+        <div id="authors" *ngFor="let author of selectedBook.authors; let isLast=last" class="d-inline-flex"
+             style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
+      </div>
+      <div>
+        <label for="genres" style="white-space: pre">Genres: </label>
+        <div id="genres" *ngFor="let genre of selectedBook.genres; let isLast=last" class="d-inline-flex"
+             style="white-space:pre">{{genre.name}}{{isLast ? '' : ', '}}</div>
+      </div>
+      <div>
+        <label for="publishingHouse" style="white-space: pre">Publishing house: </label>
+        <div id="publishingHouse" class="d-inline-flex" style="white-space:pre">{{selectedBook.publishingHouse}}</div>
+      </div>
+      <div>
+        <label for="publishingYear" style="white-space: pre">Publishing year: </label>
+        <div id="publishingYear" class="d-inline-flex" style="white-space:pre">{{selectedBook.year}}</div>
+      </div>
+      <div>
+        <label for="stock" style="white-space: pre">Stock: </label>
+        <div id="stock" class="d-inline-flex" style="white-space:pre">{{selectedBook.stock}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="overflow-auto m-3 text-justify" id="style-2"
+         style="height: 150px;padding-right: 10px;text-indent: 20px">{{selectedBook.description}}</div>
+  </div>
+  <div class="row ">
+
+
+    <div *ngFor="let rating of selectedBook.ratings; index as i" class="card p-1 m-1"
+         style="white-space:pre; width: 100%">
+      <div class="rating  d-inline-flex mr-2">
+        <p class="mr-2">{{rating.value}}</p>
+        <div class="star-ratings-sprite"><span [style.width.%]="100/5*rating.value"
+                                               class="star-ratings-sprite-rating"></span></div>
+      </div>
+    </div>
+
+
+    <div *ngFor="let rating of selectedBook.ratings; index as i"
+         class="col-sm border border-secondary p-1 m-1 bg-white rounded d-flex justify-content-around"
+         style="white-space:pre; width: 100%">
+      <div class="rating  d-inline-flex mr-2">
+        <p class="mr-2">{{rating.value}}</p>
+        <div class="star-ratings-sprite"><span [style.width.%]="100/5*rating.value"
+                                               class="star-ratings-sprite-rating"></span></div>
+      </div>
+
+      {{rating.user["firstName"] + " " + rating.user["lastName"] + "  " + rating.date + "  " + rating.description}}
+      <button class="btn btn-danger" (click)="deleteRating(i)">Delete</button>
+    </div>
+
+  </div>
+</div>

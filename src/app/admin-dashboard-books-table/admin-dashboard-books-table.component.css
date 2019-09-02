@@ -4,6 +4,7 @@
   }
 }
 
-.container{
-  margin-top: 50px;
+.container-fluid{
+  margin-top: 30px;
+  width: 95%;
 }
