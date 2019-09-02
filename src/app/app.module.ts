@@ -19,7 +19,7 @@ import {GrdFilterPipe} from './grd-fiter.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import {ImageUploadModule} from 'ng2-imageupload';
-import { UploadBookComponent } from './upload-book/upload-book.component';
+import { UploadBookComponent } from './admin-dashboard-books-table/upload-book/upload-book.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BooksComponent } from './pages/dashboard-page/books/books.component';
 import { AdminDashboardBooksTableComponent } from './admin-dashboard-books-table/admin-dashboard-books-table.component';
@@ -29,10 +29,14 @@ import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
+import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
+import {DialogModule} from '@syncfusion/ej2-angular-popups';
+import { DialogConfirmComponent } from './services/dialog-confirm/dialog-confirm.component';
+import {ConfirmationDialogService} from './services/dialog-confirm/dialog-confirm.service';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BookDetailsComponent } from './admin-dashboard-books-table/book-details/book-details.component';
 import {BookPageComponent} from './pages/book-page/book-page.component';
-import {ForbiddenComponent } from './pages/forbidden/forbidden.component';
-import {LoginPageComponent} from './pages/login-page/login-page.component';
-
+import {UserBookService} from './services/userBook.service';
 
 
 
@@ -42,7 +46,6 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
     AdminPageComponent,
     RegisterPageComponent,
     DashboardPageComponent,
-    LoginPageComponent,
     GridBooksComponent,
     GrdFilterPipe,
     GridBooksComponent,
@@ -53,8 +56,13 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
     AdminDashboardBooksTableComponent,
     BookGridComponent,
     RegisterPageComponent,
-    BookPageComponent,
     ForbiddenComponent,
+    DialogConfirmComponent,
+    NavbarComponent,
+    BookDetailsComponent,
+    BookPageComponent
+
+
   ],
   imports: [
     BrowserModule,
@@ -65,16 +73,20 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
     ImageUploadModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    DialogModule,
   ],
   providers: [BookService,
     UserService,
+    ConfirmationDialogService,
     UploadImageService,
     AuthenticationService,
+    UserBookService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ DialogConfirmComponent ],
 })
 export class AppModule {
 }

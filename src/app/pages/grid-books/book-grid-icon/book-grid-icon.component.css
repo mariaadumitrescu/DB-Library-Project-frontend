@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 
-
 body {
   margin: 50px;
   text-align: center;
@@ -56,7 +55,7 @@ h2 {
 
 .flip-container, .front, .back {
 	width: 320px;
-	height: 400px;
+	height: 250px;
 }
 
 /* flip speed goes here */
@@ -85,3 +84,16 @@ h2 {
 .back {
 	transform: rotateY(180deg);
 }
+
+.card{
+  height: 450px;
+}
+
+.bookDescription{
+  height: 250px;
+}
+
+.bookDescription{
+  text-indent: 20px;
+}
+
