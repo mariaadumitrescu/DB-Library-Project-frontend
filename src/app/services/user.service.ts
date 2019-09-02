@@ -7,6 +7,7 @@ import {Book} from '../models/book';
 import {Registration} from '../models/registration';
 import {AuthenticationService} from './autentication.service';
 import {map} from 'rxjs/operators';
+import {User} from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -17,12 +18,24 @@ export class UserService {
   }
 
   getUserByEmail(email: string) {
-    return this.http.get<any>('http://localhost:8080/findUserByEmail', {params:{email: email}})
+    return this.http.get<any>('http://localhost:8080/findUserByEmail', {
+      headers: {
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params:{email: email}})
       .pipe(map(obj => {
         localStorage.setItem('isEnabled',obj.enabled);
         localStorage.setItem('role',obj.roles[0].name);
         return obj;
       }));
+  }
+
+  returnUserByEmail(email: string){
+    return this.http.get<any>('http://localhost:8080/findUserByEmail', {
+      headers: {
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params:{email: email}}) as Observable<User>
   }
 
   registerUser(registration: Registration) {
