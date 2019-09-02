@@ -7,27 +7,41 @@
 </head>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-  <div class="container"><a class="navbar-brand" href="#" style="width: 25%">
-    <span style="font-family: 'Abril Fatface', display"><img src="../../assets/images/sigla-library.jpeg"
-                                                             style="width: 15.5%; border-radius: 50%">&nbsp;BOOKAHOLIC<br></span>
-  </a>
+  <div class="container">
+    <a class="navbar-brand">
+      <span class="logo"><img id="logo" src="../../assets/images/sigla-library.jpeg">&nbsp;BOOKAHOLIC<br></span>
+    </a>
     <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
-            data-target="#navbar16" style="" (click)="toggleNavbar()">
+            data-target="#navbar16" (click)="toggleNavbar()">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar16" [ngClass]="{ 'show': navbarOpen }">
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item"><a class="btnsmall btn-primary display-8" (click)="sendToNewsFeed()"><i
-          class="fa fa-home"></i> home</a></li>
-        <li class="nav-item"><a class="btnsmall btn-primary display-8" href="#">My Books</a></li>
-        <li class="nav-item"><a class="btnsmall btn-primary display-8" (click)="sendToUsername()"><i
-          class="fa fa-user fa-fw"></i>{{email}}<br></a></li>
-        &nbsp;
+        <li class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script"
+                                          (click)="sendToNewsFeed()"><i
+          class="fa fa-home"></i> Home</a></li>
+        <li *ngIf="currentUser"  class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script">My Books</a></li>
+
+
+        <li *ngIf="currentUser" class="nav-item mt-3 mb-3" ngbDropdown>
+          <a class="btn-small btn-modified apply-font-dancing-script" ngbDropdownToggle
+             id="navbarDropdown2">
+            <i class="fa fa-user fa-fw"></i>{{" " + email}}
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown2"
+               class="dropdown-menu dropdown-menu-right mt-3 apply-font-dancing-script">
+            <a class="dropdown-item apply-font-dancing-script" routerLink="/admin-table" routerLinkActive="active">Admin Table</a>
+            <a class="dropdown-item apply-font-dancing-script" routerLink="/grid-books" routerLinkActive="active">Grid Books</a>
+            <a class="dropdown-item apply-font-dancing-script text-danger" href="#" (click)="logout()">Logout</a>
+          </div>
+        </li>
       </ul>
-      <a class="btn ml-md-2 btn-light text-dark" style="padding: 12px 12px; font-size: 12px; border-radius: 50%; line-height: 0.01rem; width: 10%;"
-         (click)="logout()">
-        logout</a>
+      <!--      <a class="btn ml-md-2 btn-light text-dark" style="padding: 12px 12px; font-size: 12px; border-radius: 50%; line-height: 0.01rem; width: 10%;"-->
+      <!--         (click)="logout()">-->
+      <!--        logout</a>-->
     </div>
   </div>
 </nav>
+
+

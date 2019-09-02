@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
   templateUrl: './admin-dashboard-books-table.component.html',
   styleUrls: ['./admin-dashboard-books-table.component.css']
 })
-export class AdminDashboardBooksTableComponent implements OnInit, OnDestroy{
+export class AdminDashboardBooksTableComponent implements OnInit{
 
   private subscriptionInit: Subscription;
   private subscriptionPageGridChanged: Subscription;
@@ -138,12 +138,5 @@ export class AdminDashboardBooksTableComponent implements OnInit, OnDestroy{
       this.selectedBook = await this.bookService.getBookById(this.selectedBook.id.toString()).toPromise();
       this.book = await this.bookService.getBookById(this.selectedBook.id.toString()).toPromise();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptionInit.unsubscribe();
-    this.subscriptionPageGridChanged.unsubscribe();
-    this.subscriptionGoToLast.unsubscribe();
-    this.subscriptionInputSearchChanged.unsubscribe();
   }
 }
