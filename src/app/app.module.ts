@@ -35,6 +35,8 @@ import { DialogConfirmComponent } from './services/dialog-confirm/dialog-confirm
 import {ConfirmationDialogService} from './services/dialog-confirm/dialog-confirm.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BookDetailsComponent } from './admin-dashboard-books-table/book-details/book-details.component';
+import {BookPageComponent} from './pages/book-page/book-page.component';
+import {UserBookService} from './services/userBook.service';
 
 
 
@@ -57,7 +59,8 @@ import { BookDetailsComponent } from './admin-dashboard-books-table/book-details
     ForbiddenComponent,
     DialogConfirmComponent,
     NavbarComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    BookPageComponent
 
 
   ],
@@ -78,6 +81,7 @@ import { BookDetailsComponent } from './admin-dashboard-books-table/book-details
     ConfirmationDialogService,
     UploadImageService,
     AuthenticationService,
+    UserBookService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
