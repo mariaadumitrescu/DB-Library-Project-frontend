@@ -169,6 +169,7 @@ export class UploadBookComponent implements OnChanges {
     let email = decode['sub'];
     let user = await this.userService.getUserByEmail(email).toPromise();
     this.book.ratings.unshift(new Rating(4.2," My baby loves books from this author! They are all very vibrant, fun to touch, and include great vocabulary so the story can be different each time you read it again.",user,new Date(Date.now())));
+
     this.book.isbn = this.isbn;
     this.book.title = this.title;
     this.book.authors = [];

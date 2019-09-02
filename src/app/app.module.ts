@@ -38,6 +38,7 @@ import { BookDetailsComponent } from './admin-dashboard-books-table/book-details
 import {BookPageComponent} from './pages/book-page/book-page.component';
 import {UserBookService} from './services/userBook.service';
 import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
+import { BorrowedBooksComponent } from './pages/borrowed-books/borrowed-books.component';
 
 
 
@@ -61,7 +62,8 @@ import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
     DialogConfirmComponent,
     NavbarComponent,
     BookDetailsComponent,
-    BookPageComponent
+    BookPageComponent,
+    BorrowedBooksComponent,
 
 
   ],
