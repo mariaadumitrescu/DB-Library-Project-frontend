@@ -14,20 +14,23 @@ import {Book} from '../../models/book';
 export class BorrowedBooksComponent implements OnInit {
   private decoded: any;
   private books: Book[];
-
+  private  currentUser: User;
 
   constructor(private userService:UserService, private userBookService:UserBookService, private authenticationService:AuthenticationService) { }
 
   ngOnInit() {
-    this.getBorrowedBooks();
+    const token = this.authenticationService.getToken();
+    this.decoded = jwt_decode(token);
+    this.userService.getUserByEmail(this.decoded.sub).toPromise()
+      .then(t =>{
+        this.currentUser = t;
+        console.log(this.currentUser.penalties);
+        this.userBookService.getBorrowedBooks(t).subscribe(b=>this.books = b);
+      });
+
   }
 
-  async getBorrowedBooks(){
-      const token = this.authenticationService.getToken();
-      this.decoded = jwt_decode(token);
-      let currentUser = await this.userService.getUserByEmail(this.decoded.sub).toPromise();
-
-      console.log('a');
-      console.log(this.userBookService.getBorrowedBooks(currentUser).subscribe(t=>this.books = t));
+   returnBorrowBook(book: Book){
+    this.userBookService.returnBorrowBook(this.currentUser, book).subscribe(t=>console.log(t));
     }
 }

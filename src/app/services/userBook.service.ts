@@ -36,5 +36,19 @@ export class UserBookService{
         'id': user.id.toString()
       }
     }) as Observable<any>;
+
+  }
+
+  returnBorrowBook(user:User, book: Book){
+    return this.http.post('http://localhost:8080/returnBook', book, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params:{
+        'id': user.id.toString()
+      }
+    }) as Observable<any>;
+
   }
 }

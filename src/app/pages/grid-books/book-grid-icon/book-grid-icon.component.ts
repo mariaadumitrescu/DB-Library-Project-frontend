@@ -7,6 +7,7 @@ import * as jwt_decode from 'jwt-decode';
 import {UserService} from '../../../services/user.service';
 import {UserBook} from '../../../models/userBook';
 import {UserBookService} from '../../../services/userBook.service';
+import {getMilliseconds} from 'ngx-bootstrap/chronos/utils/date-getters';
 
 @Component({
   selector: 'book-grid-icon',
@@ -37,7 +38,13 @@ export class BookGridComponent implements OnInit {
     this.decoded = jwt_decode(token);
     let currentUser = await this.userService.getUserByEmail(this.decoded.sub).toPromise();
     console.log(currentUser);
-    await this.userBookService.addUserBook(currentUser, this.book, "2019-05-04").subscribe(
+
+    //get current date and add maximum-period days
+    var today = new Date();
+    var maximumBarrowedDays = 10;
+    today.setDate(today.getDate() + maximumBarrowedDays);
+
+    await this.userBookService.addUserBook(currentUser, this.book, today.toISOString().slice(0,10)).subscribe(
       value => console.log(value)
     );
 
