@@ -1,0 +1,26 @@
+
+
+<div class="booksTableHeader row m-2 border shadow-sm bg-white rounded">
+  <div class="col-sm-3 text-center badge-primary">Title</div>
+  <div class="col-sm-3 text-center badge-primary">Authors</div>
+  <div class="col-sm-6 text-center badge-primary">
+    Returned / Review
+  </div>
+</div>
+
+<div
+  *ngFor="let book of books"
+  class="row m-2 border shadow-sm bg-white rounded">
+  <div class="col-sm-3 text-center my-auto">
+    {{book.title}}
+  </div>
+  <div class="col-sm-3 text-center my-auto">
+    <div *ngFor="let author of book.authors; let isLast=last" class="d-inline-flex"
+         style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
+  </div>
+  <div class="col-sm-6 text-center ">
+
+    <button  class="btn btn-secondary m-2">Returned</button>
+    <button  class="btn btn-danger m-2">Review</button>
+  </div>
+</div>
