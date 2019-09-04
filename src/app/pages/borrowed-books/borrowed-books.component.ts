@@ -5,6 +5,7 @@ import {User} from '../../models/user';
 import * as jwt_decode from "jwt-decode";
 import {UserService} from '../../services/user.service';
 import {Book} from '../../models/book';
+import {UserBook} from '../../models/userBook';
 
 @Component({
   selector: 'app-borrowed-books',
@@ -13,7 +14,7 @@ import {Book} from '../../models/book';
 })
 export class BorrowedBooksComponent implements OnInit {
   private decoded: any;
-  private books: Book[];
+  private userBooks: UserBook[];
   private  currentUser: User;
 
   constructor(private userService:UserService, private userBookService:UserBookService, private authenticationService:AuthenticationService) { }
@@ -35,6 +36,6 @@ export class BorrowedBooksComponent implements OnInit {
     }
 
     getBorrowedBooks(){
-      this.userBookService.getBorrowedBooks(this.currentUser).subscribe(b=>this.books = b);
+      this.userBookService.getBorrowedBooks(this.currentUser).subscribe(b=>this.userBooks = b);
     }
 }
