@@ -14,7 +14,7 @@ export class UserBookService{
 
   addUserBook(user: User, book: Book, return_date: string) {
 
-    let newuserbook = new UserBook(user, book, return_date);
+    let newuserbook = new UserBook(user, book, return_date, false);
 
     console.log(newuserbook);
     return this.http.post('http://localhost:8080/addUserBook', newuserbook, {

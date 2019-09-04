@@ -23,24 +23,24 @@
           </div>
         </div>
 
-        <div
-          *ngFor="let book of books"
-          class="row m-2 border shadow-sm bg-white rounded">
+        <div [ngStyle]="{'background-color': userBook.generatedPenalty == true ? 'red': 'green'}"
+          *ngFor="let userBook of userBooks"
+          class="row m-2 border shadow-sm rounded">
 
           <div class="col-sm-2 text-center my-auto">
-            <img [src]="'data:image/jpeg;base64,'+ book.img.pic" height="75px" width="auto">
+            <img [src]="'data:image/jpeg;base64,'+ userBook.book.img.pic" height="75px" width="auto">
           </div>
           <div class="col-sm-2 text-center my-auto">
-          {{book.title}}
+          {{userBook.book.title}}
         </div>
 
           <div class="col-sm-2 text-center my-auto">
-            <div *ngFor="let author of book.authors; let isLast=last" class="d-inline-flex"
+            <div *ngFor="let author of userBook.book.authors; let isLast=last" class="d-inline-flex"
                  style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
           </div>
           <div class="col-sm-6 text-center ">
 
-            <button  class="btn btn-secondary m-2" (click)="returnBorrowBook(book)">Return</button>
+            <button  class="btn btn-secondary m-2" (click)="returnBorrowBook(userBook.book)">Return</button>
             <button  class="btn btn-danger m-2">Details</button>
           </div>
         </div>
