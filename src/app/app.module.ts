@@ -38,7 +38,8 @@ import { BookDetailsComponent } from './admin-dashboard-books-table/book-details
 import {BookPageComponent} from './pages/book-page/book-page.component';
 import {UserBookService} from './services/userBook.service';
 import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
-import { BorrowedBooksComponent } from './pages/borrowed-books/borrowed-books.component';
+import { UsersDashboardComponent } from './admin-dashboard-books-table/users-dashboard/users-dashboard.component';
+import {UserDetailsComponent} from './admin-dashboard-books-table/user-details/user-details.component';
 
 
 
@@ -63,7 +64,8 @@ import { BorrowedBooksComponent } from './pages/borrowed-books/borrowed-books.co
     NavbarComponent,
     BookDetailsComponent,
     BookPageComponent,
-    BorrowedBooksComponent,
+    UsersDashboardComponent,
+    UserDetailsComponent
 
 
   ],

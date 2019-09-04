@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/grid-books']);
     }
   }
 
@@ -60,10 +60,10 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
-          this.userService.getUserByEmail(this.f.username.value).subscribe(user => {
+          //this.router.navigate([this.returnUrl]);
+          this.userService.setLocalStorage(this.f.username.value).subscribe(user => {
             this.user = user;
-            this.router.navigate(['/']);
+            this.router.navigate(['/grid-books']);
           });
         },
         error => {

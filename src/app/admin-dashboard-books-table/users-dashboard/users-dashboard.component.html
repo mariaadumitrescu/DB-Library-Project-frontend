@@ -1,0 +1,40 @@
+<div class="container-user-dashboard">
+<div class="row align-items-center mt-3">
+  <div class="col-sm ml-2 mr2 mb-2">
+    <input [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search"
+           (ngModelChange)="inputSearchChanged()">
+  </div>
+  <div class="col-auto text-center mr-2">
+    <pagination-controls maxSize="5" responsive="true" id="userGridPagination"
+                         (pageChange)="pageGridChanged($event)"></pagination-controls>
+  </div>
+</div>
+  <div class="row mr-2 ml-2 shadow-sm  bg-primary">
+    <div class="col-sm-3 text-center badge-primary">First name</div>
+    <div class="col-sm-3 text-center badge-primary">Last Name</div>
+    <div class="col-sm-3 text-center badge-primary">Email</div>
+    <div class="col-sm-3 text-center badge-primary">
+      Details / Edit / Delete
+    </div>
+  </div>
+
+
+  <div
+    *ngFor="let user of users | paginate: { id: 'userGridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}"
+    class="row m-2 border shadow-sm bg-white rounded">
+    <div class="col-sm-3 text-center my-auto">
+      {{user.firstName}}
+    </div>
+    <div class="col-sm-3 text-center my-auto">
+      {{user.lastName}}
+    </div>
+    <div class="col-sm-3 text-center my-auto">
+      {{user.email}}
+    </div>
+    <div class="col-sm-3 text-center ">
+      <button (click)="showDetails(user)" class="btn btn-sm btn-primary m-2">Details</button>
+    </div>
+  </div>
+</div>
+
+

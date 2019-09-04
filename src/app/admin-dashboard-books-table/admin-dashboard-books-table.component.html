@@ -2,25 +2,27 @@
 <div class="container-fluid shadow p-3 mb-5 bg-white rounded">
   <div class="row">
     <div class="col-lg-5">
-        <app-book-details *ngIf="selectedBook" [selectedBook]="selectedBook" (ratingDeleted)="ratingDeleted($event)"></app-book-details>
+      <app-book-details *ngIf="selectedBook&&!switch" [selectedBook]="selectedBook"
+                        (ratingDeleted)="ratingDeleted($event)"></app-book-details>
+      <app-user-details *ngIf="selectedUser&&switch" [selectedUser]="selectedUser"></app-user-details>
     </div>
     <div class="col-lg-7">
-      <div class="row">
-        <div class="col-sm m-2">
+      <div class="row  align-items-center">
+        <div class="col-sm ml-2 mr2 mb-2">
           <input [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search"
                  (ngModelChange)="inputSearchChanged()">
         </div>
-        <div class="col-auto text-center m-2 ">
+        <div class="col-auto text-center mr-2">
           <pagination-controls maxSize="5" responsive="true" id="gridPagination"
                                (pageChange)="pageGridChanged($event)"></pagination-controls>
         </div>
-        <div class="col-auto m-2 text-center">
-          <button id="showPanel" class="btn btn-primary mr-2" (click)="hideAndShow()">Show panel</button>
-          <button class="btn btn-primary" (click)="addFlag()">Add book</button>
+        <div class="col-auto text-center mr-2">
+          <button id="showPanel" class="btn btn-sm btn-primary mr-2" (click)="hideAndShow()">Show panel</button>
+          <button class="btn btn-sm btn-primary" (click)="addFlag()">Add book</button>
         </div>
 
       </div>
-      <div class="row m-2 shadow-sm  bg-primary rounded">
+      <div class="row mr-2 ml-2 shadow-sm  bg-primary">
         <div class="col-sm-3 text-center badge-primary">Title</div>
         <div class="col-sm-3 text-center badge-primary">Authors</div>
         <div class="col-sm-6 text-center badge-primary">
@@ -39,12 +41,14 @@
                style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
         </div>
         <div class="col-sm-6 text-center ">
-          <button (click)="showDetails(book)" class="btn btn-primary m-2">Details</button>
-          <button (click)="editBook(book)" class="btn btn-secondary m-2">Edit</button>
-          <button (click)="deleteBookDialog(book)" class="btn btn-danger m-2">Delete</button>
+          <button (click)="showDetails(book)" class="btn btn-sm btn-primary m-2">Details</button>
+          <button (click)="editBook(book)" class="btn btn-sm btn-secondary m-2">Edit</button>
+          <button (click)="deleteBookDialog(book)" class="btn btn-sm btn-danger m-2">Delete</button>
         </div>
       </div>
       <app-upload-book *ngIf="addBookActivated" (added)="eventCaptured($event)" [editedBook]="book"></app-upload-book>
+      <app-users-dashboard (fullUserEventEmitter)="userCaptured($event)"
+                           (userEmitted)="userEmitted($event)"></app-users-dashboard>
     </div>
   </div>
 </div>

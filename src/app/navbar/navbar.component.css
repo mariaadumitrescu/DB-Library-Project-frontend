@@ -94,6 +94,12 @@ span.logo{
   color: white;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  color: #000;
+  text-decoration: none;
+  background-color: #fff;
+}
+
 
 
 
