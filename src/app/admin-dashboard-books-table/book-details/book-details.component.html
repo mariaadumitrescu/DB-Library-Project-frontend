@@ -1,4 +1,4 @@
-<div class="content-book-detail shadow p-3 mb-5 bg-white rounded">
+<div class="content-book-detail shadow card p-3 bg-white rounded">
   <div class="row">
     <div class="col-sm-auto">
       <img [src]="'data:image/jpeg;base64,'+selectedBook.img.pic" height="250">
@@ -36,34 +36,30 @@
     </div>
   </div>
   <div class="row">
-    <div class="overflow-auto m-3 text-justify" id="style-2"
+    <div class="overflow-auto m-3 text-justify scrollbar-custom-style"
          style="height: 150px;padding-right: 10px;text-indent: 20px">{{selectedBook.description}}</div>
   </div>
-  <div class="row ">
 
-
-    <div *ngFor="let rating of selectedBook.ratings; index as i" class="card p-1 m-1"
-         style="white-space:pre; width: 100%">
-      <div class="rating  d-inline-flex mr-2">
-        <p class="mr-2">{{rating.value}}</p>
-        <div class="star-ratings-sprite"><span [style.width.%]="100/5*rating.value"
-                                               class="star-ratings-sprite-rating"></span></div>
+  <div class="card overflow-auto shadow-sm scrollbar-custom-style p-3" style="height: 300px" >
+    <div class="row" *ngFor="let rating of selectedBook.ratings; index as i">
+      <div class="col-sm-auto text-center first-col m-auto">
+        <img class="rounded-circle mr-2 " src="../../../assets/images/no-photo-profile.png" height="40" width="40">
+        <div class="flex-row">
+          <p class="mr-2 d-inline-flex">{{rating.value}}</p>
+          <div class="d-flex flex-row rating mr-2 mt-2 d-inline-flex">
+            <div class="star-ratings-sprite-small mt-1"><span [style.width.%]="100/5*rating.value"
+                                                              class="star-ratings-sprite-rating-small"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm text-center">
+        <div
+          class="font-weight-bold mt-auto">{{rating.date + " - " + rating.user['firstName'] + " " + rating.user['lastName']}}</div>
+        <blockquote class="blockquote-footer text-justify">{{rating.description}}</blockquote>
+      </div>
+      <div class="col-sm-auto m-auto">
+        <button class="btn btn-sm btn-danger mr-2" (click)="deleteBookDialog(i)">Delete</button>
       </div>
     </div>
-
-
-    <div *ngFor="let rating of selectedBook.ratings; index as i"
-         class="col-sm border border-secondary p-1 m-1 bg-white rounded d-flex justify-content-around"
-         style="white-space:pre; width: 100%">
-      <div class="rating  d-inline-flex mr-2">
-        <p class="mr-2">{{rating.value}}</p>
-        <div class="star-ratings-sprite"><span [style.width.%]="100/5*rating.value"
-                                               class="star-ratings-sprite-rating"></span></div>
-      </div>
-
-      {{rating.user["firstName"] + " " + rating.user["lastName"] + "  " + rating.date + "  " + rating.description}}
-      <button class="btn btn-danger" (click)="deleteRating(i)">Delete</button>
-    </div>
-
   </div>
 </div>

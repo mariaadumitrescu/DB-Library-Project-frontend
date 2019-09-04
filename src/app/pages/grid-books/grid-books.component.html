@@ -1,32 +1,35 @@
-<div class="active-purple-4 active-cyan-3 mb-4">
-  <input [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search"
-         (ngModelChange)="inputSearchChanged()">
-</div>
-<div *ngIf=" value != '' && value && flagSearch && searchedPaginatedBooks.nrOfElements > 0">
-  <table class="table-dark">
-    <tr
-      *ngFor="let book of searchedBooks | paginate: { id: 'searchPagination', itemsPerPage: 2, currentPage: q, totalItems: searchedPaginatedBooks.nrOfElements}">
-      <td style="width: 10%;">{{book.title}}</td>
-    </tr>
-    <pagination-controls id="searchPagination" (pageChange)="pageSearchChanged($event)"></pagination-controls>
-  </table>
-</div>
+<app-navbar></app-navbar>
 <div class="container">
-  <pagination-controls id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
-  <div *ngIf="paginatedBooks" class="listOfBooks">
-    <div
-      *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
-
-      <!--  | grdFilter: {title: value, genre: value, author: value}-->
-      <div>
-        <book-grid-icon [book]="book"></book-grid-icon>
-      </div>
+  <div class="d-flex flex-column">
+    <div class="active-purple-4 active-cyan-3 mt-5 mb-5 flex-fill flex-grow-1">
+      <input [(ngModel)]="value" class="form-control" type="text" placeholder="Search" aria-label="Search"
+             (ngModelChange)="inputSearchChanged()">
+    </div>
+    <div *ngIf=" value != '' && value && flagSearch && searchedPaginatedBooks.nrOfElements > 0">
+        <table class="table-dark">
+          <tr
+            *ngFor="let book of searchedBooks | paginate: { id: 'searchPagination', itemsPerPage: 2, currentPage: q, totalItems: searchedPaginatedBooks.nrOfElements}">
+            <td style="width: 10%;">{{book.title}}</td>
+          </tr>
+          <pagination-controls id="searchPagination" (pageChange)="pageSearchChanged($event)"></pagination-controls>
+        </table>
     </div>
   </div>
-  <div *ngIf="formData">
-    {{formData}}
+
+    <div *ngIf="paginatedBooks" class="container-widget">
+      <div *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 9, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
+        <div>
+          <book-grid-icon class="widget" [book]="book"></book-grid-icon>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="formData">
+      {{formData}}
+    </div>
+  <div class="text-center">
+    <pagination-controls  id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
   </div>
-  <app-upload-book></app-upload-book>
+
 </div>
 
 

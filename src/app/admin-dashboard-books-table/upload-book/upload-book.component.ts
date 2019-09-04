@@ -10,6 +10,8 @@ import {GenreService} from '../../services/genre.service';
 import {Image} from '../../models/image';
 import {Rating} from '../../models/rating';
 import {UserService} from '../../services/user.service';
+import {AuthenticationService} from '../../services/autentication.service';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-upload-book',
@@ -45,7 +47,7 @@ export class UploadBookComponent implements OnChanges {
 
   constructor(
     private imageUploadService: UploadImageService,
-    private bookUploadService: BookService,private userService :UserService) {
+    private bookUploadService: BookService, private userService: UserService, private authenticationService: AuthenticationService) {
   }
 
   selected(imageResult: ImageResult) {
@@ -162,8 +164,12 @@ export class UploadBookComponent implements OnChanges {
       this.uploadedImage = new Image(this.imageResult.file.name, this.imageResult.file.type, this.selectedFile);
     }
     this.book = this.editedBook;
-    let user = await this.userService.getUserByEmail("brebu.ciprian@gmail.com").toPromise();
-    this.book.ratings.unshift(new Rating(4.2,"Best of third",user,new Date(Date.now())));
+    let token = this.authenticationService.getToken();
+    let decode = jwt_decode(token);
+    let email = decode['sub'];
+    let user = await this.userService.getUserByEmail(email).toPromise();
+    this.book.ratings.unshift(new Rating(4.2, ' My baby loves books from this author! They are all very vibrant, fun to touch, and include great vocabulary so the story can be different each time you read it again.', user, new Date(Date.now())));
+
     this.book.isbn = this.isbn;
     this.book.title = this.title;
     this.book.authors = [];

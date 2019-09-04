@@ -1,0 +1,45 @@
+<div class="content-book-detail shadow card p-3 bg-white rounded">
+  <div class="row">
+    <div class="col-sm-auto">
+      <img *ngIf="selectedUser.img; else noPhoto" [src]="'data:image/jpeg;base64,'+selectedUser.img.pic" height="250">
+      <ng-template #noPhoto>
+        <img src="../../../assets/images/no-profile-picture.jpg" height="250">
+      </ng-template>
+    </div>
+    <div class="col-sm">
+      <h3>{{selectedUser.firstName + " " + selectedUser.lastName}}</h3>
+      <div>
+        <label for="email" style="white-space: pre">Email: </label>
+        <div id="email" class="d-inline-flex" style="white-space:pre">{{selectedUser.email}}</div>
+      </div>
+      <div>
+        <label for="enabled" style="white-space: pre">IsEnabled: </label>
+        <div id="enabled" class="d-inline-flex" style="white-space:pre">{{selectedUser.enabled}}</div>
+      </div>
+      <div>
+        <label for="admin" style="white-space: pre">IsAdmin: </label>
+        <div id="admin" class="d-inline-flex" style="white-space:pre">{{selectedUser.admin}}</div>
+      </div>
+      <div>
+        <label for="role" style="white-space: pre">Role: </label>
+        <div id="role" class="d-inline-flex" style="white-space:pre">{{selectedUser.roles[0].name}}</div>
+      </div>
+      <div>
+        <label for="permission" style="white-space: pre">Permissions: </label>
+        <div id="permission" class="d-inline-flex" style="white-space:pre">{{selectedUser.roles[0].description}}</div>
+      </div>
+
+      <div>
+        <label for="penalty" style="white-space: pre">Penalties: </label>
+        <div id="penalty" *ngFor="let penalty of selectedUser.penalties; let isLast=last" class="d-inline-flex"
+             style="white-space:pre">{{penalty['penaltyAddedDate']}}{{isLast ? '' : ', '}}</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selectedUser.email!='librarymaster0@gmail.com'" class="row">
+    <div class="col-sm-auto mt-2">
+      <button id="enable" class="btn btn-primary btn-sm" (click)="activateOrDeactivate(selectedUser)">Enable</button>
+    </div>
+  </div>
+</div>
+

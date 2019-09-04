@@ -55,7 +55,7 @@ export class BookService {
               size: size,
               query: query
             }
-          }) as Observable<ResponsePageList>;
+          }) as Observable<ResponsePageList<Book>>;
   }
 
   addBook(book: Book) {
