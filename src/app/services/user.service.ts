@@ -9,6 +9,7 @@ import {AuthenticationService} from './autentication.service';
 import {map} from 'rxjs/operators';
 import {ResponsePageList} from '../models/responsePageList';
 import {FullUser} from '../models/fullUser';
+import {User} from '../models/user';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -70,4 +71,22 @@ export class UserService {
     }) as Observable<any>;
   }
 
+  clearPenalties(user: User){
+    return this.http.post('http://localhost:8080/clearPenalties', user, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      }
+    }) as Observable<any>;
+  }
+
+  checkForPenalties(user: User) {
+    return this.http.post('http://localhost:8080/checkForPenalties', user, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      }
+    }) as Observable<any>;
+
+  }
 }
