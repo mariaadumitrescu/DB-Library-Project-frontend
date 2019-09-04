@@ -9105,42 +9105,6 @@ a.text-dark:hover, a.text-dark:focus {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@import url(https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i);
-@import url(https://fonts.googleapis.com/css?family=Dancing+Script:400,700);
-@import url(https://fonts.googleapis.com/css?family=Abril+Fatface:400);
-
-
-
-
-
 body {
   font-style: normal;
   line-height: 1.5;
@@ -12673,9 +12637,9 @@ section .mbr-background-video-preview {
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  -webkit-align-items: start;
+  -webkit-align-items: flex-start;
   -ms-flex-align: start;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .media-container-row .media-size-item {

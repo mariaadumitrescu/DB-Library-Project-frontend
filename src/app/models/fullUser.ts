@@ -11,4 +11,5 @@ export class FullUser {
   roles: any;
   enabled: boolean;
   admin: boolean;
+  banned: boolean;
 }

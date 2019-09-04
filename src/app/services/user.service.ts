@@ -37,6 +37,7 @@ export class UserService {
     })
       .pipe(map(obj => {
         localStorage.setItem('isEnabled', obj.enabled);
+        localStorage.setItem('isBanned', obj.banned);
         localStorage.setItem('role', obj.roles[0].name);
         return obj;
       }));

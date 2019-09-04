@@ -1,34 +1,47 @@
-  <div class="card text-center shadow">
-    <!-- Imaginea cartii -->
-    <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-      <div class="flipper">
-        <div class="front">
-          <!-- front content -->
-          <div *ngIf="book.img, else nonImg">
-            <img [src]="'data:image/jpeg;base64,'+book.img.pic" width="165">
-          </div>
-          <ng-template #nonImg>
-            <img src="https://abeon-hosting.com/images/default-png-9.png" height="400" width="200">
-          </ng-template>
+<div class="card text-center shadow">
+  <!-- Imaginea cartii -->
+  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+    <div class="flipper">
+      <div class="front">
+        <!-- front content -->
+        <div *ngIf="book.img, else nonImg">
+          <img [src]="'data:image/jpeg;base64,'+book.img.pic" width="165">
         </div>
-        <div class="back">
-          <!-- back content -->
-          <p class="bookDescription overflow-auto m-2 text-justify p-2 scrollbar-custom-style">{{book.description}}</p>
-          <button href="#" class="btn btn-primary mt-auto">View more</button>
-        </div>
+        <ng-template #nonImg>
+          <img src="https://abeon-hosting.com/images/default-png-9.png" height="400" width="200">
+        </ng-template>
       </div>
-    </div>
-    <!-- Detalii carte -->
-    <div class="card-body d-flex flex-column">
-      <h5 class="bookTitle">{{book.title}}</h5>
-      <h5 class="bookAuthor"></h5>
-      <div class="rating mt-auto">
-        <div class="star-ratings-sprite">
-          <span [style.width.%]="100/5*book.averageStars" class="star-ratings-sprite-rating"></span>
-        </div>
-        <p>{{book.averageStars}}</p>
+      <div class="back">
+        <!-- back content -->
+        <p class="bookDescription overflow-auto m-2 text-justify p-2 scrollbar-custom-style">{{book.description}}</p>
       </div>
-      <button class="btn btn-primary" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)" >Descopera cartea {{book.id}}!</button>
-     <a class="btn btn-primary mt-auto btn-borrow" (click)="borrow()">Imprumuta cartea!</a>
     </div>
   </div>
+  <!-- Detalii carte -->
+  <div class="card-body d-flex flex-column">
+    <div class="d-flex d-flex flex-row justify-content-center">
+      <h5 class="bookTitle">{{book.title}}</h5>
+    </div>
+    <div class="d-flex flex-row justify-content-center">
+      <div *ngFor="let author of book.authors; let isLast=last">
+        <div class="bookAuthor">{{author.name}}{{isLast ? '' : ', '}}</div>
+      </div>
+    </div>
+    <div class="rating d-flex flex-row align-items-center">
+      <div class="text-dark font-weight-lighter">{{book.averageStars.toFixed(1)}}</div>
+      <ng-template #t let-fill="fill">
+        <span class="star" [class.full]="fill === 100">
+          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+        </span>
+      </ng-template>
+      <ngb-rating class="mb-1" [(rate)]="book.averageStars" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+
+    </div>
+    <div class="mt-auto d-flex flex-row justify-content-center">
+      <button class="btn btn-primary mr-2" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)">View details
+      </button>
+      <button class="btn btn-success" (click)="borrow()">Borrow</button>
+    </div>
+
+  </div>
+</div>
