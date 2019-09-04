@@ -4,20 +4,21 @@ import {ResponsePageList} from '../models/responsePageList';
 import {Book} from '../models/book';
 import {ConfirmationDialogService} from '../services/dialog-confirm/dialog-confirm.service';
 import {Subscription} from 'rxjs';
+import {FullUser} from '../models/fullUser';
 
 @Component({
   selector: 'app-admin-dashboard-books-table',
   templateUrl: './admin-dashboard-books-table.component.html',
   styleUrls: ['./admin-dashboard-books-table.component.css']
 })
-export class AdminDashboardBooksTableComponent implements OnInit, OnDestroy{
+export class AdminDashboardBooksTableComponent implements OnInit {
 
   private subscriptionInit: Subscription;
   private subscriptionPageGridChanged: Subscription;
   private subscriptionGoToLast: Subscription;
   private subscriptionInputSearchChanged: Subscription;
 
-  private paginatedBooks: ResponsePageList;
+  private paginatedBooks: ResponsePageList<Book>;
   private books: Book[];
   private value: string;
   private p: any;
@@ -26,6 +27,8 @@ export class AdminDashboardBooksTableComponent implements OnInit, OnDestroy{
   private added: any;
   private book: Book;
   private selectedBook: Book;
+  private selectedUser: FullUser;
+  private switch: boolean;
 
 
   constructor(private bookService: BookService, private confirmationDialogService: ConfirmationDialogService) {
@@ -50,7 +53,7 @@ export class AdminDashboardBooksTableComponent implements OnInit, OnDestroy{
   }
 
   goToLast(page: number) {
-    this.subscriptionGoToLast = this.bookService.getPaginatedBooks('id', 'ASC', (page-1).toString(), '5', '').subscribe(p => {
+    this.subscriptionGoToLast = this.bookService.getPaginatedBooks('id', 'ASC', (page - 1).toString(), '5', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;
@@ -131,19 +134,21 @@ export class AdminDashboardBooksTableComponent implements OnInit, OnDestroy{
   async showDetails(book: Book) {
     this.selectedBook = await this.bookService.getBookById(book.id.toString()).toPromise();
     this.book = this.selectedBook;
+    this.switch =false;
   }
 
   async ratingDeleted(event) {
-    if(event){
+    if (event) {
       this.selectedBook = await this.bookService.getBookById(this.selectedBook.id.toString()).toPromise();
       this.book = await this.bookService.getBookById(this.selectedBook.id.toString()).toPromise();
     }
   }
 
-  ngOnDestroy(): void {
-    this.subscriptionInit.unsubscribe();
-    this.subscriptionPageGridChanged.unsubscribe();
-    this.subscriptionGoToLast.unsubscribe();
-    this.subscriptionInputSearchChanged.unsubscribe();
+  userCaptured(event: FullUser) {
+    this.selectedUser = event;
+  }
+
+  userEmitted(event: boolean) {
+    this.switch = event;
   }
 }

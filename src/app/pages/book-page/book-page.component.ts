@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
-import { BookGridComponent } from '../grid-books/book-grid-icon/book-grid-icon.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -24,6 +23,7 @@ export class BookPageComponent implements OnInit {
     //this.id = history.state;
     this.bookService.getBookById(this.id).subscribe(p=> {
       this.book = p;
+      console.log(this.book);
     });
   }
 }

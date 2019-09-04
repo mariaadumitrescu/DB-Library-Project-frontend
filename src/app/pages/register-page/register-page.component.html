@@ -73,7 +73,7 @@
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Register
                   </button>
-                  <div *ngIf="error" class="invalid-feedback">Please check your errors!</div>
+                  <div *ngIf="error" class="invalid-feedback">{{error}}</div>
                 </div>
               </form>
             </div>

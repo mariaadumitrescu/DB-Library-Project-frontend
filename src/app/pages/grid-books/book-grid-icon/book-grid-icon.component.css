@@ -55,7 +55,8 @@ h2 {
 
 .flip-container, .front, .back {
 	width: 320px;
-	height: 250px;
+	height: 270px;
+  align-content: center;
 }
 
 /* flip speed goes here */
@@ -88,10 +89,12 @@ h2 {
 .card{
   display: flex;
   height: 450px;
+  width: 320px;
+  align-items: center;
 }
 
 .bookDescription{
-  height: 250px;
+  height: 200px;
 }
 
 .bookDescription{

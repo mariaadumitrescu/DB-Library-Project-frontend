@@ -15,3 +15,26 @@
   display: block;
 }
 
+.star-ratings-sprite-small {
+  background: url(~src/assets/images/small_rating.png) repeat-x;
+  font-size: 0;
+  height: 11px;
+  line-height: 0;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 55px;
+  margin: 0;
+}
+.star-ratings-sprite-rating-small {
+  background: url(~src/assets/images/small_rating.png) repeat-x 0 100%;
+  float: left;
+  height: 11px;
+  display: block;
+}
+
+.first-col{
+  margin-bottom: -15px;
+}
+
+
+

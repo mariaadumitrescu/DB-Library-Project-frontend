@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../services/autentication.service';
+import {Router} from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-navbar',
@@ -6,12 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  navbarOpen: any;
-  email = "brebu.ciprian@gmail.com";
-
-  constructor() { }
+  private navbarOpen: any;
+  private decode: any;
+  private email : any;
+  private currentUser: any;
+  constructor(private authenticationService :AuthenticationService, private router :Router) { }
 
   ngOnInit() {
+    this.currentUser = localStorage.getItem('currentUser');
+    if(this.currentUser){
+      this.decode = jwt_decode(localStorage.getItem('currentUser'));
+      this.email = this.decode['sub'];
+    }else {
+      this.email = "No user";
+    }
   }
 
   toggleNavbar() {
@@ -27,6 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-
+    this.authenticationService.logout();
+    this.router.navigate(['']);
   }
 }

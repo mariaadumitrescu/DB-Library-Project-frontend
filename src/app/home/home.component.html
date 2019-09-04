@@ -1,10 +1,19 @@
-<div class="card mt-4">
-  <h4 class="card-header">You're logged in with Angular 8 & JWT!!</h4>
-  <div class="card-body">
-    <h6>Users from secure api end point</h6>
-    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-    <ul *ngIf="users">
-      <li *ngFor="let user of users">{{user.title}} {{user.author}}</li>
-    </ul>
+<section class="background mbr-fullscreen mbr-parallax-background" id="header2-4">
+  <div class="mbr-overlay-sm mbr-overlay "></div>
+  <div class="container align-center">
+    <div class="row justify-content-md-center">
+      <div class="mbr-white col-md-10">
+        <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-5">BOOKAHOLIC</h1>
+        <img class="logo mb-2 mt-2" src="../../assets/images/sigla-library.jpeg" alt="sigla">
+        <p class="mbr-text pb-3 mbr-fonts-style display-2 font-italic">for dedicated readers</p>
+        <div class="mbr-section-btn">
+          <a class="btn btn-md btn-primary display-4" (click)="sendToLogin()">LOGIN</a>
+          <a class="btn btn-md btn-white-outline display-4 text-black-hover" (click)="sendToRegister()">REGISTER</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+  <div class="style2 jarallax"></div>
+</section>
+
+
