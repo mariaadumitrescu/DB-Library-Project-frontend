@@ -10,6 +10,7 @@ import {AuthGuard} from './helpers/auth.gurad';
 import {ForbiddenComponent} from './pages/forbidden/forbidden.component';
 import { BookPageComponent } from './pages/book-page/book-page.component';
 import {HomeComponent} from './home/home.component';
+import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.component';
 
 const routes: Routes = [
   { path: 'grid-books', component: GridBooksComponent, canActivate: [AuthGuard] },
@@ -19,6 +20,8 @@ const routes: Routes = [
   { path: 'forbidden', component: ForbiddenComponent },
   { path: '', component: HomeComponent },
   { path: 'admin-table', component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard]},
+  { path: 'borrowed-books', component: BorrowedBooksComponent},
+
 
 
   { path: '**', redirectTo: 'login' }
