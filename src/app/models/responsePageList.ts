@@ -1,6 +1,6 @@
 import {Book} from './book';
 
-export class ResponsePageList {
+export class ResponsePageList<T> {
   nrOfElements: number;
-  pageList: Book[];
+  pageList: T[];
 }

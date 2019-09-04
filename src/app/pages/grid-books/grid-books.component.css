@@ -27,11 +27,28 @@
   box-shadow: 0 0 0 1px #4dd0e1;
 }
 
-.ngx-pagination a, .ngx-pagination button {
-  cursor: pointer;
-  background-color: red;
+pagination-controls /deep/ ul.ngx-pagination {
+  justify-content: center;
+  justify-items: center;
 }
 
-pagination-controls /deep/  .current {
-  background-color: red;
+.container-widget {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
+
+
+.button-plus {
+  font-size: 60px;
+  color: grey;
+}
+
+.widget {
+  display: flex;
+  margin-bottom: 2.5rem;
+
+}
+
+
+

@@ -9,3 +9,9 @@
   width: 95%;
   background-color: #7c7c7c;
 }
+
+pagination-controls /deep/ .ngx-pagination {
+  margin-bottom: -2px!important;
+  align-self: center;
+  align-items: center;
+}

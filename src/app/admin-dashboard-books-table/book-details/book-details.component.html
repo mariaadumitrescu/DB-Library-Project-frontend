@@ -1,4 +1,4 @@
-<div class="content-book-detail shadow card p-3 m-2 bg-white rounded">
+<div class="content-book-detail shadow card p-3 bg-white rounded">
   <div class="row">
     <div class="col-sm-auto">
       <img [src]="'data:image/jpeg;base64,'+selectedBook.img.pic" height="250">
@@ -58,7 +58,7 @@
         <blockquote class="blockquote-footer text-justify">{{rating.description}}</blockquote>
       </div>
       <div class="col-sm-auto m-auto">
-        <button class="btn btn-danger mr-2" (click)="deleteBookDialog(i)">Delete</button>
+        <button class="btn btn-sm btn-danger mr-2" (click)="deleteBookDialog(i)">Delete</button>
       </div>
     </div>
   </div>

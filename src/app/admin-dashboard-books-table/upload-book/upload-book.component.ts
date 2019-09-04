@@ -47,7 +47,7 @@ export class UploadBookComponent implements OnChanges {
 
   constructor(
     private imageUploadService: UploadImageService,
-    private bookUploadService: BookService,private userService :UserService, private authenticationService :AuthenticationService) {
+    private bookUploadService: BookService, private userService: UserService, private authenticationService: AuthenticationService) {
   }
 
   selected(imageResult: ImageResult) {
@@ -168,7 +168,7 @@ export class UploadBookComponent implements OnChanges {
     let decode = jwt_decode(token);
     let email = decode['sub'];
     let user = await this.userService.getUserByEmail(email).toPromise();
-    this.book.ratings.unshift(new Rating(4.2," My baby loves books from this author! They are all very vibrant, fun to touch, and include great vocabulary so the story can be different each time you read it again.",user,new Date(Date.now())));
+    this.book.ratings.unshift(new Rating(4.2, ' My baby loves books from this author! They are all very vibrant, fun to touch, and include great vocabulary so the story can be different each time you read it again.', user, new Date(Date.now())));
 
     this.book.isbn = this.isbn;
     this.book.title = this.title;
