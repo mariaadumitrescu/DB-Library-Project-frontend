@@ -40,6 +40,7 @@ import {UserBookService} from './services/userBook.service';
 import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
 import { UsersDashboardComponent } from './admin-dashboard-books-table/users-dashboard/users-dashboard.component';
 import {UserDetailsComponent} from './admin-dashboard-books-table/user-details/user-details.component';
+import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.component';
 
 
 
@@ -65,7 +66,9 @@ import {UserDetailsComponent} from './admin-dashboard-books-table/user-details/u
     BookDetailsComponent,
     BookPageComponent,
     UsersDashboardComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    BorrowedBooksComponent
+
 
 
   ],
