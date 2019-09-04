@@ -12,8 +12,8 @@ export class GridBooksComponent implements OnInit {
 
   formData: FormData;
 
-  paginatedBooks: ResponsePageList;
-  searchedPaginatedBooks: ResponsePageList;
+  paginatedBooks: ResponsePageList<Book>;
+  searchedPaginatedBooks: ResponsePageList<Book>;
   books: Book[];
   searchedBooks: Book[];
   value: string;
