@@ -40,14 +40,12 @@ export class BookGridComponent implements OnInit {
     console.log(currentUser);
 
     //get current date and add maximum-period days
-    var today = new Date();
-    var maximumBarrowedDays = 10;
-    today.setDate(today.getDate() + maximumBarrowedDays);
+    let today = new Date();
+    const maximumBorrowedDays = 10;
 
-    await this.userBookService.addUserBook(currentUser, this.book, today.toISOString().slice(0,10)).subscribe(
+    today.setDate(today.getDate() + maximumBorrowedDays);
+
+    await this.userBookService.addUserBook(currentUser, this.book, today.toISOString().slice(0, 10)).subscribe(
       value => console.log(value)
     );
-
-
-  }
-}
+  }}

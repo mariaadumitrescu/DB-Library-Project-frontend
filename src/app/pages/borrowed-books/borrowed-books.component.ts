@@ -24,13 +24,17 @@ export class BorrowedBooksComponent implements OnInit {
     this.userService.getUserByEmail(this.decoded.sub).toPromise()
       .then(t =>{
         this.currentUser = t;
-        console.log(this.currentUser.penalties);
-        this.userBookService.getBorrowedBooks(t).subscribe(b=>this.books = b);
+        this.getBorrowedBooks();
       });
 
   }
 
    returnBorrowBook(book: Book){
     this.userBookService.returnBorrowBook(this.currentUser, book).subscribe(t=>console.log(t));
+    this.getBorrowedBooks();
+    }
+
+    getBorrowedBooks(){
+      this.userBookService.getBorrowedBooks(this.currentUser).subscribe(b=>this.books = b);
     }
 }

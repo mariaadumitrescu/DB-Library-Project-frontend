@@ -28,7 +28,6 @@ import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
-import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import {DialogModule} from '@syncfusion/ej2-angular-popups';
 import { DialogConfirmComponent } from './services/dialog-confirm/dialog-confirm.component';
@@ -41,6 +40,7 @@ import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
 import { UsersDashboardComponent } from './admin-dashboard-books-table/users-dashboard/users-dashboard.component';
 import {UserDetailsComponent} from './admin-dashboard-books-table/user-details/user-details.component';
 import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.component';
+import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
 
 
 
@@ -67,7 +67,7 @@ import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.comp
     BookPageComponent,
     UsersDashboardComponent,
     UserDetailsComponent,
-    BorrowedBooksComponent
+    BorrowedBooksComponent,
 
 
 
