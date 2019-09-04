@@ -8,9 +8,12 @@ import {Rating} from '../models/rating';
 export class RatingService {
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
-  addRatings(ratings: Rating[]) {
-    return this.http.post('http://localhost:8080/addRatings', ratings, {
-      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()}
+  addRatings(rating: Rating, id:string) {
+    return this.http.post('http://localhost:8080/addRatings', rating, {
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()},
+      params: {
+        id: id
+      }
     }) as Observable<any>;
   }
 

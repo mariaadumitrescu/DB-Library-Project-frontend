@@ -23,12 +23,12 @@
       <h5 class="bookTitle">{{book.title}}</h5>
       <h5 class="bookAuthor"></h5>
       <div class="rating mt-auto">
-        <div class="star-ratings-sprite"><span [style.width.%]="100/5*book.averageStars"
-                                               class="star-ratings-sprite-rating"></span></div>
+        <div class="star-ratings-sprite">
+          <span [style.width.%]="100/5*book.averageStars" class="star-ratings-sprite-rating"></span>
+        </div>
         <p>{{book.averageStars}}</p>
       </div>
-      <a class="btn btn-primary mt-auto btn-borrow" (click)="borrow()">Imprumuta cartea!</a>
-
+      <button class="btn btn-primary" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)" >Descopera cartea {{book.id}}!</button>
+     <a class="btn btn-primary mt-auto btn-borrow" (click)="borrow()">Imprumuta cartea!</a>
     </div>
   </div>
-
