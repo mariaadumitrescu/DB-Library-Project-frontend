@@ -17,7 +17,6 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   private subscriptionPageGridChanged: Subscription;
   private subscriptionGoToLast: Subscription;
   private subscriptionInputSearchChanged: Subscription;
-
   private paginatedBooks: ResponsePageList<Book>;
   private books: Book[];
   private value: string;
@@ -29,6 +28,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   private selectedBook: Book;
   private selectedUser: FullUser;
   private switch: boolean;
+  private showUserTable = true;
 
 
   constructor(private bookService: BookService, private confirmationDialogService: ConfirmationDialogService) {
@@ -87,13 +87,18 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   async editBook(book: Book) {
-    this.book = await this.bookService.getBookById(String(book.id)).toPromise();
-    this.selectedBook = await this.bookService.getBookById(String(book.id)).toPromise();
-    this.addBookActivated = true;
+    if(this.addBookActivated){
+      this.book = await this.bookService.getBookById(String(book.id)).toPromise();
+      this.selectedBook = await this.bookService.getBookById(String(book.id)).toPromise();
+    }else {
+      this.changePanelButton();
+      this.book = await this.bookService.getBookById(String(book.id)).toPromise();
+      this.selectedBook = await this.bookService.getBookById(String(book.id)).toPromise();
+    }
   }
 
   hideAndShow() {
-    this.addBookActivated = !this.addBookActivated;
+    this.changePanelButton();
   }
 
   async eventCaptured(event: boolean) {
@@ -114,9 +119,14 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   addFlag() {
-    this.p = (this.nrOfElements / 5) + 1;
-    this.book = null;
-    this.addBookActivated = true;
+    if(this.addBookActivated){
+      this.p = (this.nrOfElements / 5) + 1;
+      this.book = null;
+    }else {
+      this.changePanelButton();
+      this.p = (this.nrOfElements / 5) + 1;
+      this.book = null;
+    }
   }
 
   deleteBookDialog(book: Book) {
@@ -150,5 +160,16 @@ export class AdminDashboardBooksTableComponent implements OnInit {
 
   userEmitted(event: boolean) {
     this.switch = event;
+  }
+
+  changePanelButton(){
+    let showPanel = document.getElementById('showPanel');
+    this.addBookActivated = !this.addBookActivated;
+    this.showUserTable = !this.showUserTable;
+    if(!this.showUserTable){
+      showPanel.innerHTML = 'Show author panel'
+    }else {
+      showPanel.innerHTML = 'Show book panel'
+    }
   }
 }

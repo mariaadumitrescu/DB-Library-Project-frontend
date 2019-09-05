@@ -17,8 +17,8 @@
                                (pageChange)="pageGridChanged($event)"></pagination-controls>
         </div>
         <div class="col-auto text-center mr-2">
-          <button id="showPanel" class="btn btn-sm btn-primary mr-2" (click)="hideAndShow()">Show panel</button>
-          <button class="btn btn-sm btn-primary" (click)="addFlag()">Add book</button>
+          <button id="showPanel" class="btn btn-sm btn-secondary mr-2" (click)="hideAndShow()">Show book panel</button>
+          <button class="btn btn-sm btn-success" (click)="addFlag()">Add book</button>
         </div>
 
       </div>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <app-upload-book *ngIf="addBookActivated" (added)="eventCaptured($event)" [editedBook]="book"></app-upload-book>
-      <app-users-dashboard (fullUserEventEmitter)="userCaptured($event)"
+      <app-users-dashboard *ngIf="showUserTable" (fullUserEventEmitter)="userCaptured($event)"
                            (userEmitted)="userEmitted($event)"></app-users-dashboard>
     </div>
   </div>

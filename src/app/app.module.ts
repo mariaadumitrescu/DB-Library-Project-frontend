@@ -42,6 +42,8 @@ import { UsersDashboardComponent } from './admin-dashboard-books-table/users-das
 import {UserDetailsComponent} from './admin-dashboard-books-table/user-details/user-details.component';
 import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.component';
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
+import {DialogBannedService} from './services/dialog-banned/dialog-banned.service';
+import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.component';
 
 
 
@@ -69,9 +71,7 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     UsersDashboardComponent,
     UserDetailsComponent,
     BorrowedBooksComponent,
-    
-
-
+    DialogBannedComponent
 
   ],
   imports: [
@@ -96,11 +96,12 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     UploadImageService,
     AuthenticationService,
     UserBookService,
+    DialogBannedService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ DialogConfirmComponent ],
+  entryComponents: [ DialogConfirmComponent,DialogBannedComponent ],
 })
 export class AppModule {
 }

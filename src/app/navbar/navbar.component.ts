@@ -41,4 +41,8 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.logout();
     this.router.navigate(['']);
   }
+
+  goToBorrowedBooks() {
+    this.router.navigate(["/borrowed-books"]);
+  }
 }

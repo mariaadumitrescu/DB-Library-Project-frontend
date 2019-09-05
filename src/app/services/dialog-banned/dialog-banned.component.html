@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ title }}</h5>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  {{ message }}
+  <p>Custom rating template provided as child element</p>
+
+  <ngb-rating [(rate)]="currentRate">
+    <ng-template let-fill="fill" let-index="index">
+      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+    </ng-template>
+  </ngb-rating>
+  <hr>
+  <pre>Rate: <b>{{currentRate}}</b></pre>
+</div>

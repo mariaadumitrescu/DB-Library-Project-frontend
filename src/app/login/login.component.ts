@@ -60,9 +60,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //this.router.navigate([this.returnUrl]);
+          this.router.navigate([this.returnUrl]);
           this.userService.setLocalStorage(this.f.username.value).subscribe(user => {
             this.user = user;
+            //clear old penalties
+            console.log(this.userService.clearPenalties(user));
+            console.log(this.userService.checkForPenalties(user).subscribe(p=>console.log(p)));
             this.router.navigate(['/grid-books']);
           });
         },
