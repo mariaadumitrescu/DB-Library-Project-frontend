@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Route, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/autentication.service';
 import { ForbiddenService } from 'src/app/services/forbidden.service';
-import { UserService } from 'src/app/services/user.service';
 import * as jwt_decode from 'jwt-decode'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forbidden',
@@ -17,7 +17,7 @@ export class ForbiddenComponent implements OnInit {
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
               private forbiddenService : ForbiddenService,
-              private userService: UserService) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -38,9 +38,13 @@ export class ForbiddenComponent implements OnInit {
     .resendVerification(this.email)
     .subscribe(
       data=>{
-        console.log("hello from forbidden");
+
       }
     )
+  }
+
+  showSuccess() {
+    this.toastr.success('The activation code was sent to your email address', 'Thank you!');
   }
 
 }
