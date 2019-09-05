@@ -43,6 +43,7 @@ import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.comp
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
 import {DialogBannedService} from './services/dialog-banned/dialog-banned.service';
 import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.component';
+import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.component';
 
 
 
@@ -70,7 +71,8 @@ import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.comp
     UsersDashboardComponent,
     UserDetailsComponent,
     BorrowedBooksComponent,
-    DialogBannedComponent
+    DialogBannedComponent,
+    BorrowListComponent
 
 
 

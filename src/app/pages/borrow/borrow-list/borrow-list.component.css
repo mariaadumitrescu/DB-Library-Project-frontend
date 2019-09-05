@@ -5,8 +5,3 @@ button.calendar, button.calendar:active {
   background-size: 23px;
   background-position: center;
 }
-
-.datePicker {
-  width: 100px!important;
-}
-

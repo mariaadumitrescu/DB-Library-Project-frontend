@@ -25,14 +25,18 @@ export class UserBookService{
     }) as Observable<any>;
   }
 
-  getBorrowedBooks(user: User){
+  getBorrowedBooks(orderBy: string, direction: string, page: string, size: string, id: string){
     return this.http.get('http://localhost:8080/getBorrowedBooks', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
       },
       params:{
-        'id': user.id.toString()
+        orderBy: orderBy,
+        direction: direction,
+        page: page,
+        size: size,
+        id: id
       }
     }) as Observable<any>;
 

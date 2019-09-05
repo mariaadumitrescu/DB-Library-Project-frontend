@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUser = this.authenticationService.currentUserValue;
-    // if (currentUser) {
-    //   this.router.navigate(['/grid-books']);
-    // }
+    if (currentUser) {
+      this.router.navigate(['/grid-books']);
+    }
   }
 }
