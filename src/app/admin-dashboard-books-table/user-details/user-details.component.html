@@ -48,7 +48,7 @@
       <form class="form-inline">
         <div class="form-group">
           <div class="input-group input-group-sm">
-            <input class="form-control" placeholder="Ban until..."
+            <input class="form-control datePicker" placeholder="Ban until..."
                    name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelected()" >
             <div class="input-group-append">
               <button class="btn btn-outline-secondary btn-sm calendar" (click)="d.toggle()" type="button"></button>

@@ -18,44 +18,32 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const currentUser = this.authenticationService.currentUserValue;
+    const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       const token = this.authenticationService.currentUserValue.token;
       this.decoded = jwt_decode(token);
       const date = new Date(0).setUTCSeconds(this.decoded.exp);
       if (date.valueOf() > new Date().valueOf()) {
-        if (localStorage.getItem('isEnabled') === 'true') {
-          if (localStorage.getItem('isBanned') === 'false') {
+        if (localStorage.getItem('isEnabled') == 'true') {
+          if (localStorage.getItem('isBanned') == 'false') {
             return true;
           } else {
             this.bannedUserDialog();
             return false;
           }
         } else {
-          this.router.navigate(['']);
-          return false;
+          this.router.navigate(['/forbidden']);
         }
       } else {
-        localStorage.clear();
-        this.router.navigate(['']);
-        return false;
+        this.authenticationService.logout();
       }
     } else {
-      this.router.navigate(['']);
-      return false;
+      this.authenticationService.logout();
     }
   }
 
   bannedUserDialog() {
     this.confirmationDialogService.confirm('This account is banned!', 'Please contact your library administrator!')
-      .then((confirmed) => {
-          if (confirmed) {
-            this.authenticationService.logout();
-          }else {
-            this.authenticationService.logout();
-          }
-        }
-      )
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 }

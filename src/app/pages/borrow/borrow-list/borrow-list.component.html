@@ -1,0 +1,40 @@
+<div class="container-user-dashboard" *ngIf="borrows">
+  <div class="row align-items-center mt-3">
+    <div class="col-auto text-center mr-2">
+    </div>
+  </div>
+  <div class="row mr-2 ml-2 shadow-sm  bg-primary">
+    <div class="col-sm-3 text-center badge-primary">Title</div>
+    <div class="col-sm-3 text-center badge-primary">Authors</div>
+    <div class="col-sm-3 text-center badge-primary">Return date</div>
+    <div class="col-sm-3 text-center badge-primary">
+      Return / Go to book
+    </div>
+  </div>
+
+
+  <div
+    *ngFor="let borrow of borrows | paginate: { id: 'userGridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}"
+    class="row m-2 border shadow-sm bg-white rounded">
+    <div class="col-sm text-center my-auto">
+      {{borrow.book.title}}
+    </div>
+    <div class="col-sm text-center my-auto">
+      <div class="d-flex flex-row justify-content-center">
+        <div id="authors" *ngFor="let author of borrow.book.authors; let isLast=last" class="d-flex d-inline-flex"
+             style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
+      </div>
+    </div>
+    <div class="col-sm text-center my-auto">
+      {{borrow.return_date}}
+    </div>
+    <div class="col-sm text-center ">
+                  <button  class="btn btn-secondary m-2" (click)="returnBorrowBook(borrow.book)">Return</button>
+                  <button  class="btn btn-danger m-2">Details</button>
+    </div>
+  </div>
+  <pagination-controls maxSize="5" responsive="true" id="userGridPagination"
+                       (pageChange)="pageGridChanged($event)"></pagination-controls>
+</div>
+
+
