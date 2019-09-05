@@ -42,4 +42,8 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
     this.router.navigate(['']);
   }
+
+  resendVerification(email:string) {
+    return this.http.post(`${environment.apiUrl}/resendVerificationLink`, email) as Observable<any>;
+  }
 }
