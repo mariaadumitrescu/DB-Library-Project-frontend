@@ -27,7 +27,6 @@ export class AuthenticationService {
     return token ? token : "";
   }
 
-
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/authenticate`, { email, password })
       .pipe(map(token => {
@@ -36,6 +35,7 @@ export class AuthenticationService {
         return token;
       }));
   }
+
   logout() {
     localStorage.clear();
     this.currentUserSubject.next(null);

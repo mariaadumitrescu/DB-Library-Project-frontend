@@ -8,6 +8,7 @@ import {AppComponent} from './app.component';
 
 import { BookService} from './services/book.service';
 import { UserService} from './services/user.service';
+import { ForbiddenService} from './services/forbidden.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
@@ -68,6 +69,7 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     UsersDashboardComponent,
     UserDetailsComponent,
     BorrowedBooksComponent,
+    
 
 
 
@@ -88,6 +90,7 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     ModalModule.forRoot()
   ],
   providers: [BookService,
+    ForbiddenService,
     UserService,
     ConfirmationDialogService,
     UploadImageService,
