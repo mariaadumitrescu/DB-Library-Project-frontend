@@ -45,7 +45,8 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
 import {DialogBannedService} from './services/dialog-banned/dialog-banned.service';
 import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.component';
 import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -89,7 +90,9 @@ import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.compon
     DialogModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [BookService,
     ForbiddenService,
