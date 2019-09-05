@@ -13,9 +13,7 @@
   </div>
 
 
-  <div
-    *ngFor="let borrow of borrows | paginate: { id: 'userGridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}"
-    class="row m-2 border shadow-sm bg-white rounded">
+  <div [ngClass]="{'border-danger': borrow.generatedPenalty == true,'border-success': borrow.generatedPenalty == false }" *ngFor="let borrow of borrows | paginate: { id: 'userGridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}" class="row m-2 border  shadow-sm rounded">
     <div class="col-sm text-center my-auto">
       {{borrow.book.title}}
     </div>
@@ -29,8 +27,8 @@
       {{borrow.return_date}}
     </div>
     <div class="col-sm text-center ">
-                  <button  class="btn btn-secondary m-2" (click)="returnBorrowBook(borrow.book)">Return</button>
-                  <button  class="btn btn-danger m-2">Details</button>
+                  <button [disabled]="borrow.generatedPenalty==true" class="btn btn-secondary m-2" (click)="returnBorrowBook(borrow.book)">Return</button>
+                  <button  class="btn btn-danger m-2" (click)="goToPage(borrow.book.id)">Details</button>
     </div>
   </div>
   <pagination-controls maxSize="5" responsive="true" id="userGridPagination"
