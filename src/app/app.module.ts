@@ -8,6 +8,7 @@ import {AppComponent} from './app.component';
 
 import { BookService} from './services/book.service';
 import { UserService} from './services/user.service';
+import { ForbiddenService} from './services/forbidden.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
@@ -72,9 +73,6 @@ import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.comp
     BorrowedBooksComponent,
     DialogBannedComponent
 
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -92,6 +90,7 @@ import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.comp
     ModalModule.forRoot()
   ],
   providers: [BookService,
+    ForbiddenService,
     UserService,
     ConfirmationDialogService,
     UploadImageService,
