@@ -17,9 +17,9 @@
   </div>
 
     <div *ngIf="paginatedBooks" class="container-widget">
-      <div *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 9, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
+      <div *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
         <div>
-          <book-grid-icon class="widget" [book]="book"></book-grid-icon>
+          <book-grid-icon (bookBorrowed)="bookBorrowed($event)" class="widget" [book]="book"></book-grid-icon>
         </div>
       </div>
     </div>

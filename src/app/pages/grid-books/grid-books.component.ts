@@ -25,7 +25,7 @@ export class GridBooksComponent implements OnInit {
   }
 
   initListOfBooks() {
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '4', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
     });
@@ -38,12 +38,13 @@ export class GridBooksComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.p =0;
     this.initListOfBooks();
   }
 
   pageGridChanged(event) {
     this.p = event;
-    this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '4', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '3', '').subscribe(p => {
 
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
@@ -70,5 +71,12 @@ export class GridBooksComponent implements OnInit {
 
   receiveMessage(event) {
     this.formData = event;
+  }
+
+  bookBorrowed(event: boolean) {
+    this.bookService.getPaginatedBooks('id', 'ASC', this.p.toString(), '3', '').subscribe(p => {
+      this.paginatedBooks = p;
+      this.books = this.paginatedBooks.pageList;
+    });
   }
 }
