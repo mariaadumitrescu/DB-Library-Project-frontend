@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService, private confirmationDialogService: DialogBannedService) {
+    private authenticationService: AuthenticationService, private dialogBannedService: DialogBannedService, private confirmationDialogService: ConfirmationDialogService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -32,7 +32,9 @@ export class AuthGuard implements CanActivate {
             return false;
           }
         } else {
-          this.router.navigate(['/forbidden']);
+          this.notEnabledUserDialog(this.decoded.sub);
+          console.log("cartof");
+          return false;
         }
       } else {
         this.authenticationService.logout();
@@ -43,7 +45,19 @@ export class AuthGuard implements CanActivate {
   }
 
   bannedUserDialog() {
-    this.confirmationDialogService.confirm('This account is banned!', 'Please contact your library administrator!')
+    this.dialogBannedService.confirm('This account is banned!', 'Please contact your library administrator!')
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
+
+  notEnabledUserDialog(email: string) {
+    this.confirmationDialogService.confirm('This account was not activated!', 'Please check your email for confirmation link',
+      'Resend email', 'Logout').then(value => {
+
+      if (value) {
+        this.authenticationService.resendVerification(email).subscribe(t => console.log(t));
+      }
+      this.authenticationService.logout();
+    });
+  }
+
 }

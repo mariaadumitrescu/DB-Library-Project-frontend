@@ -46,6 +46,8 @@ import {DialogBannedService} from './services/dialog-banned/dialog-banned.servic
 import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.component';
 import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 
 
@@ -77,6 +79,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     BorrowListComponent,
     NotFoundPageComponent
 
+
   ],
   imports: [
     BrowserModule,
@@ -91,7 +94,9 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     DialogModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [BookService,
     ForbiddenService,

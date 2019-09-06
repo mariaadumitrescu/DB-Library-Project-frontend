@@ -1,12 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FullUser} from '../../../models/fullUser';
-import {UserService} from '../../../services/user.service';
-import {Subscription} from 'rxjs';
 import {ResponsePageList} from '../../../models/responsePageList';
 import {UserBookService} from '../../../services/userBook.service';
-import {Book} from '../../../models/book';
 import {UserBook} from '../../../models/userBook';
 import {User} from '../../../models/user';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -20,42 +19,25 @@ export class BorrowListComponent implements OnInit {
   @Output() fullUserEventEmitter: EventEmitter<FullUser> = new EventEmitter<FullUser>();
   @Output() userEmitted: EventEmitter<boolean> = new EventEmitter<boolean>();
   private borrows: UserBook[];
-  private value: any;
-  private users: FullUser[];
   private nrOfElements: any;
   private p: any;
-  private subscriptionInit: Subscription;
   private paginatedBorrows: ResponsePageList<UserBook>;
-  private selectedUser: User;
-  private subscriptionPageGridChanged: Subscription;
-  private subscriptionInputSearchChanged: Subscription;
 
-  constructor(private userBookService: UserBookService) {
+  constructor(private userBookService: UserBookService, private router: Router, private toastrService: ToastrService) {
   }
 
   initListOfBorrows() {
-    this.userBookService.getBorrowedBooks('id', 'ASC', '0', '5', String(this.currentUser.id)).subscribe(userBooks =>{
+    this.userBookService.getBorrowedBooks('id', 'ASC', '0', '5', String(this.currentUser.id)).subscribe(userBooks => {
       this.paginatedBorrows = userBooks;
       this.borrows = this.paginatedBorrows.pageList;
       this.nrOfElements = this.paginatedBorrows.nrOfElements;
-    } );
-    console.log(this.borrows);
+    });
   }
 
 
   ngOnInit() {
     this.p = 0;
     this.initListOfBorrows();
-  }
-
-  inputSearchChanged() {
-    // this.subscriptionInputSearchChanged = this.userService.getPaginatedUsers('id', 'ASC', '0', '5', this.value).subscribe(
-    //   p => {
-    //     this.paginatedUsers = p;
-    //     this.users = this.paginatedUsers.pageList;
-    //     this.nrOfElements = this.paginatedUsers.nrOfElements;
-    //   }
-    // );
   }
 
   pageGridChanged(event) {
@@ -67,13 +49,24 @@ export class BorrowListComponent implements OnInit {
     });
   }
 
-  showDetails(user: FullUser) {
-    this.fullUserEventEmitter.emit(user);
-    this.userEmitted.emit(true);
+
+  async returnBorrowBook(userBook: UserBook) {
+    this.userBookService.returnBorrowBook(userBook).subscribe(() => {
+      this.toastrService.success('The book with title: ' + userBook.book.title + ' was returned', 'Returned with success!');
+      let nr = Math.floor(this.nrOfElements / 5);
+      if (this.nrOfElements % 5 == 0) {
+        this.pageGridChanged(nr);
+      } else {
+        if (nr < 1) {
+          this.pageGridChanged(nr + 1);
+        } else {
+          this.pageGridChanged(nr);
+        }
+      }
+    });
   }
 
-  returnBorrowBook(book: Book) {
-    this.userBookService.returnBorrowBook(this.currentUser, book).subscribe(t => console.log(t));
-    this.pageGridChanged(this.p);
+  goToPage(id: number) {
+    this.router.navigate(['/book-page'], {queryParams: {bookId: id}});
   }
 }
