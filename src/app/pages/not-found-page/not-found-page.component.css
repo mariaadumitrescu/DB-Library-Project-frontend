@@ -17,14 +17,14 @@ main #errorLink {
   font-size: 20px;
   padding: 12px;
   border: 1px solid;
-  color: rgb(49, 102, 202);
+  color:#0018A8;
   background-color: transparent;
   text-decoration: none;
   transition: all 0.5s ease-in-out;
 }
 main #errorLink:hover, main #errorLink:active {
   color: #fff;
-  background: rgb(5, 93, 145);
+  background: #0018A8;
 }
 main #g6219 {
   -webkit-transform-origin: 85px 4px;
