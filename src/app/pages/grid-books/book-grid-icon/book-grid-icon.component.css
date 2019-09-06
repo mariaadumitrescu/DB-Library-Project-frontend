@@ -13,23 +13,6 @@ body {
   justify-content: space-around;
   padding: 0 15% 0 15%;
 }
-.star-ratings-sprite {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-  font-size: 0;
-  height: 21px;
-  line-height: 0;
-  overflow: hidden;
-  text-indent: -999em;
-  width: 110px;
-  margin: 0;
-}
-.star-ratings-sprite-rating {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-  background-position: 0 100%;
-  float: left;
-  height: 21px;
-  display: block;
-}
 em {
   font-style: italic;
 }
@@ -88,17 +71,36 @@ h2 {
 
 .card{
   display: flex;
-  height: 450px;
+  height: 500px;
   width: 320px;
   align-items: center;
 }
 
 .bookDescription{
-  height: 200px;
+  height: 270px;
   text-indent: 20px;
 }
 
-a {
-  margin-bottom: 20px;
+.bookAuthor{
+  font-size: smaller;
+  white-space: pre;
+}
+.card-body{
+  width: 320px;
+}
 
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+  color: #d3d3d3;
+}
+.full {
+  color: #E7711B;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #E7711B;
 }

@@ -21,6 +21,10 @@
         <div id="admin" class="d-inline-flex" style="white-space:pre">{{selectedUser.admin}}</div>
       </div>
       <div>
+        <label for="banned" style="white-space: pre">IsBanned: </label>
+        <div id="banned" class="d-inline-flex" style="white-space:pre">{{selectedUser.banned}}</div>
+      </div>
+      <div>
         <label for="role" style="white-space: pre">Role: </label>
         <div id="role" class="d-inline-flex" style="white-space:pre">{{selectedUser.roles[0].name}}</div>
       </div>
@@ -37,8 +41,23 @@
     </div>
   </div>
   <div *ngIf="selectedUser.email!='librarymaster0@gmail.com'" class="row">
-    <div class="col-sm-auto mt-2">
-      <button id="enable" class="btn btn-primary btn-sm" (click)="activateOrDeactivate(selectedUser)">Enable</button>
+    <div class="col-sm-auto mt-2 d-flex d-inline-flex">
+      <button id="enable" class="btn btn-primary btn-sm mr-2" (click)="activateOrDeactivate()">Enable</button>
+      <button id="banButton" class="btn btn-primary btn-sm mr-2" (click)="banOrUnBan()">Ban</button>
+
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group input-group-sm">
+            <input class="form-control datePicker" placeholder="Ban until..."
+                   name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelected()" >
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary btn-sm calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
     </div>
   </div>
 </div>

@@ -5,12 +5,17 @@
     </div>
     <div class="col-sm">
       <h3>{{selectedBook.title}}</h3>
-      <div class="rating  d-inline-flex mr-2">
-        <p class="mr-2">{{selectedBook.averageStars.toFixed(1)}}</p>
-        <div class="star-ratings-sprite"><span [style.width.%]="100/5*selectedBook.averageStars"
-                                               class="star-ratings-sprite-rating"></span></div>
+      <div class="rating d-flex align-items-center mr-2 ">
+        <div class="mr-2">{{selectedBook.averageStars.toFixed(1)}}</div>
+        <ng-template #t let-fill="fill">
+        <span class="star" [class.full]="fill === 100">
+          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+        </span>
+        </ng-template>
+        <ngb-rating class="mb-1 mr-1" [(rate)]="selectedBook.averageStars" [starTemplate]="t" [readonly]="true"
+                    max="5"></ngb-rating>
+        <div class="d-inline-flex">ISBN: {{selectedBook.isbn}}</div>
       </div>
-      <div class="d-inline-flex">ISBN: {{selectedBook.isbn}}</div>
       <div>
         <label for="authors" style="white-space: pre">Authors: </label>
         <div id="authors" *ngFor="let author of selectedBook.authors; let isLast=last" class="d-inline-flex"
@@ -40,16 +45,19 @@
          style="height: 150px;padding-right: 10px;text-indent: 20px">{{selectedBook.description}}</div>
   </div>
 
-  <div class="card overflow-auto shadow-sm scrollbar-custom-style p-3" style="height: 300px" >
+  <div class="card overflow-auto shadow-sm scrollbar-custom-style p-3" style="height: 300px">
     <div class="row" *ngFor="let rating of selectedBook.ratings; index as i">
       <div class="col-sm-auto text-center first-col m-auto">
         <img class="rounded-circle mr-2 " src="../../../assets/images/no-photo-profile.png" height="40" width="40">
         <div class="flex-row">
-          <p class="mr-2 d-inline-flex">{{rating.value}}</p>
-          <div class="d-flex flex-row rating mr-2 mt-2 d-inline-flex">
-            <div class="star-ratings-sprite-small mt-1"><span [style.width.%]="100/5*rating.value"
-                                                              class="star-ratings-sprite-rating-small"></span></div>
-          </div>
+          <div class="mr-2 d-inline-flex small align-items-center">{{rating.value}}</div>
+          <ng-template #t let-fill="fill">
+        <span class="star-small" [class.full]="fill === 100">
+          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+        </span>
+          </ng-template>
+          <ngb-rating class="mb-1 mr-1 ngb-small" [(rate)]="selectedBook.averageStars" [starTemplate]="t" [readonly]="true"
+                      max="5"></ngb-rating>
         </div>
       </div>
       <div class="col-sm text-center">

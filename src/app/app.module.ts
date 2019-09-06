@@ -8,6 +8,7 @@ import {AppComponent} from './app.component';
 
 import { BookService} from './services/book.service';
 import { UserService} from './services/user.service';
+import { ForbiddenService} from './services/forbidden.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
@@ -41,7 +42,11 @@ import { UsersDashboardComponent } from './admin-dashboard-books-table/users-das
 import {UserDetailsComponent} from './admin-dashboard-books-table/user-details/user-details.component';
 import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.component';
 import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-icon.component';
-
+import {DialogBannedService} from './services/dialog-banned/dialog-banned.service';
+import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.component';
+import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 
 @NgModule({
@@ -68,8 +73,8 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     UsersDashboardComponent,
     UserDetailsComponent,
     BorrowedBooksComponent,
-
-
+    DialogBannedComponent,
+    BorrowListComponent,
 
   ],
   imports: [
@@ -85,19 +90,23 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
     DialogModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [BookService,
+    ForbiddenService,
     UserService,
     ConfirmationDialogService,
     UploadImageService,
     AuthenticationService,
     UserBookService,
+    DialogBannedService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ DialogConfirmComponent ],
+  entryComponents: [ DialogConfirmComponent,DialogBannedComponent ],
 })
 export class AppModule {
 }

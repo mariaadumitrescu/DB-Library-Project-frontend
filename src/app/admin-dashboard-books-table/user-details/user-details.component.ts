@@ -13,6 +13,8 @@ export class UserDetailsComponent implements OnChanges {
 
   @Input() selectedUser: FullUser;
   private enableButton: any;
+  private banButton: any;
+  model: any;
 
   constructor(private userService: UserService, private confirmationDialogService: ConfirmationDialogService) {
   }
@@ -27,6 +29,7 @@ export class UserDetailsComponent implements OnChanges {
   async ngOnChanges(changes: SimpleChanges) {
     this.selectedUser = await this.userService.getUserByEmail(this.selectedUser.email).toPromise();
     this.enableButton = document.getElementById('enable');
+    this.banButton = document.getElementById('banButton');
     this.changeEnableButton(this.selectedUser);
   }
 
@@ -38,5 +41,23 @@ export class UserDetailsComponent implements OnChanges {
         this.enableButton.innerHTML = 'Enable account';
       }
     }
+    if (this.banButton) {
+      if (!user.banned) {
+        this.banButton.innerHTML = 'Ban account';
+      } else {
+        this.banButton.innerHTML = 'UnBan account';
+      }
+    }
+  }
+
+  async banOrUnBan() {
+    this.selectedUser.banned = !this.selectedUser.banned;
+    await this.userService.updateUser(this.selectedUser).toPromise();
+    this.selectedUser = await this.userService.getUserByEmail(this.selectedUser.email).toPromise();
+    this.changeEnableButton(this.selectedUser);
+  }
+
+  onDateSelected() {
+    console.log(this.model)
   }
 }

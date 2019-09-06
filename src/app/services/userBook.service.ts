@@ -14,7 +14,7 @@ export class UserBookService{
 
   addUserBook(user: User, book: Book, return_date: string) {
 
-    let newuserbook = new UserBook(user, book, return_date);
+    let newuserbook = new UserBook(user, book, return_date, false);
 
     console.log(newuserbook);
     return this.http.post('http://localhost:8080/addUserBook', newuserbook, {
@@ -25,27 +25,31 @@ export class UserBookService{
     }) as Observable<any>;
   }
 
-  getBorrowedBooks(user: User){
+  getBorrowedBooks(orderBy: string, direction: string, page: string, size: string, id: string){
     return this.http.get('http://localhost:8080/getBorrowedBooks', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
       },
       params:{
-        'id': user.id.toString()
+        orderBy: orderBy,
+        direction: direction,
+        page: page,
+        size: size,
+        id: id
       }
     }) as Observable<any>;
 
   }
 
-  returnBorrowBook(user:User, book: Book){
-    return this.http.post('http://localhost:8080/returnBook', book, {
+  returnBorrowBook(userBook: UserBook){
+    return this.http.post('http://localhost:8080/returnBook', userBook,{
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
       },
       params:{
-        'id': user.id.toString()
+        'id': userBook.id.toString()
       }
     }) as Observable<any>;
 
