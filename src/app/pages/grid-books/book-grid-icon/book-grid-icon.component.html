@@ -40,7 +40,11 @@
     <div class="mt-auto d-flex flex-row justify-content-center">
       <button class="btn btn-primary mr-2" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)">View details
       </button>
-      <button [disabled]="book.stock==0" [ngClass]="{'btn-danger': book.stock==0}" [innerHTML]="book.stock==0?'Out of stock':'Borrow'" class="btn btn-success" (click)="borrow()">Borrow</button>
+      <button [disabled]="book.stock==0||loading" [ngClass]="{'btn-danger': book.stock==0}"
+              [innerHTML]="book.stock==0?'Out of stock':'Borrow'" class="btn btn-success" (click)="borrow()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Borrow
+      </button>
     </div>
 
   </div>

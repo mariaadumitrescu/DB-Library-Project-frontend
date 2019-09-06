@@ -57,11 +57,7 @@ export class BorrowListComponent implements OnInit {
       if (this.nrOfElements % 5 == 0) {
         this.pageGridChanged(nr);
       } else {
-        if (nr < 1) {
-          this.pageGridChanged(nr + 1);
-        } else {
-          this.pageGridChanged(nr);
-        }
+        this.pageGridChanged(nr + 1);
       }
     });
   }
