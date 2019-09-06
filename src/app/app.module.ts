@@ -45,8 +45,10 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
 import {DialogBannedService} from './services/dialog-banned/dialog-banned.service';
 import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.component';
 import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import {ToastrModule} from 'ngx-toastr';
     BorrowedBooksComponent,
     DialogBannedComponent,
     BorrowListComponent,
+    NotFoundPageComponent
+
 
   ],
   imports: [

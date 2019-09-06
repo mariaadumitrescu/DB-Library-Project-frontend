@@ -11,22 +11,21 @@ import {ForbiddenComponent} from './pages/forbidden/forbidden.component';
 import { BookPageComponent } from './pages/book-page/book-page.component';
 import {HomeComponent} from './home/home.component';
 import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.component';
-
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import {paths} from './app-paths';
+import {PathResolveServiceService} from './services/path-resolve-service.service';
 
 const routes: Routes = [
-  { path: 'grid-books', component: GridBooksComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterPageComponent },
-  { path: 'book-page', component: BookPageComponent, canActivate: [AuthGuard]},
-  { path: 'forbidden', component: ForbiddenComponent },
+  { path: paths.gridBooks, component: GridBooksComponent, canActivate: [AuthGuard] },
+  { path: paths.login, component: LoginComponent },
+  { path: paths.register, component: RegisterPageComponent },
+  { path: paths.bookPage, component: BookPageComponent, canActivate: [AuthGuard]},
+  { path: paths.forbidden, component: ForbiddenComponent },
   { path: '', component: HomeComponent },
-  { path: 'admin-table', component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard]},
-  { path: 'borrowed-books', component: BorrowedBooksComponent},
+  { path: paths.adminTable, component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard]},
+  { path: paths.borrowedBooks, component: BorrowedBooksComponent},
 
-
-
-
-  { path: '**', redirectTo: 'login' }
+  {path: '**', resolve: { path: PathResolveServiceService },component: NotFoundPageComponent}
 ];
 
 
