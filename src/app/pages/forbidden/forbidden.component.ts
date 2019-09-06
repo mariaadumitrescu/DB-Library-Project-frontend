@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Route, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/autentication.service';
-import { ForbiddenService } from 'src/app/services/forbidden.service';
-import * as jwt_decode from 'jwt-decode'
-import { ToastrService } from 'ngx-toastr';
+import {ForbiddenService} from 'src/app/services/forbidden.service';
+import * as jwt_decode from 'jwt-decode';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-forbidden',
@@ -16,7 +16,7 @@ export class ForbiddenComponent implements OnInit {
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
-              private forbiddenService : ForbiddenService,
+              private forbiddenService: ForbiddenService,
               private toastr: ToastrService) {
   }
 
@@ -35,16 +35,22 @@ export class ForbiddenComponent implements OnInit {
 
   resendVerificationEmail() {
     this.forbiddenService
-    .resendVerification(this.email)
-    .subscribe(
-      data=>{
-
-      }
-    )
+      .resendVerification(this.email)
+      .subscribe(
+        data => {
+          this.showSuccess();
+        },
+        error => {
+          this.showError(error);
+        });
   }
 
   showSuccess() {
     this.toastr.success('The activation code was sent to your email address', 'Thank you!');
+  }
+
+  showError(error:string) {
+    this.toastr.error(error, 'Error!');
   }
 
 }

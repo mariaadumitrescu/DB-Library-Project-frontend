@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService, private dialogBannedService: DialogBannedService, private confirmationDialogService:ConfirmationDialogService) {
+    private authenticationService: AuthenticationService, private dialogBannedService: DialogBannedService, private confirmationDialogService: ConfirmationDialogService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -33,6 +33,7 @@ export class AuthGuard implements CanActivate {
           }
         } else {
           this.notEnabledUserDialog(this.decoded.sub);
+          console.log("cartof");
           return false;
         }
       } else {
@@ -48,17 +49,15 @@ export class AuthGuard implements CanActivate {
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
-   notEnabledUserDialog(email: string) {
-     this.confirmationDialogService.confirm('This account was not activated!', 'Please check your email for confirmation link',
-       'Resend email', 'Logout').then(value => {
+  notEnabledUserDialog(email: string) {
+    this.confirmationDialogService.confirm('This account was not activated!', 'Please check your email for confirmation link',
+      'Resend email', 'Logout').then(value => {
 
-       if (value)
-         this.authenticationService.resendVerification(email).subscribe(t=>console.log(t));
-
-       this.authenticationService.logout();
-
-
-     });
-   }
+      if (value) {
+        this.authenticationService.resendVerification(email).subscribe(t => console.log(t));
+      }
+      this.authenticationService.logout();
+    });
+  }
 
 }

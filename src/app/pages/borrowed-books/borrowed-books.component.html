@@ -1,10 +1,8 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
-  <div class="d-flex flex-row justify-content-center">
-    <h2 class="display-2 font-italic mt-5 mb-5">Welcome back!</h2>
-  </div>
   <div class="d-flex row text-center align-items-center justify-content-center" *ngIf="currentUser">
     <div class="d-flex flex-column flex-sm-fill align-items-center">
+      <h2 class="display-2 font-italic mt-5 mb-5">Welcome back!</h2>
       <img class="rounded-circle mb-2" src="../../../assets/images/no-profile-picture.jpg" width="300">
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><b>First Name</b>: {{currentUser.firstName}}</li>
@@ -15,51 +13,12 @@
         </li>
       </ul>
       <div class="d-flex flex-row">
-        <button class="btn btn-primary btn-sm mt-2 mr-2" (click)="showBorrowedBooks()">Show borrowed books</button>
+        <button [ngClass]="showBorrowed" [innerHTML]="showBorrowed?'Hide borrowed list':'Show borrowed list'" class="btn btn-primary btn-sm mt-2 mr-2" (click)="showBorrowedBooks()"></button>
         <button class="btn btn-danger btn-sm mt-2" (click)="showBorrowedBooks()">Edit account</button>
       </div>
     </div>
-    <div class="d-flex flex-sm-column  flex-sm-fill" *ngIf="showBorrowed">
-      <app-borrow-list [currentUser]="currentUser"></app-borrow-list>
-    </div>
-  </div>
-
-  <div class="py-2">
-    <div class="row" *ngIf="currentUser">
-
-      <!--        <div class="col-sm">-->
-      <!--        <div class="booksTableHeader row m-2 border shadow-sm bg-white rounded">-->
-      <!--          <div class="col-sm-2 text-center badge-primary">Image</div>-->
-      <!--          <div class="col-sm-2 text-center badge-primary">Title</div>-->
-      <!--          <div class="col-sm-2 text-center badge-primary">Authors</div>-->
-      <!--          <div class="col-sm-6 text-center badge-primary">-->
-      <!--            Returned / Review-->
-      <!--          </div>-->
-      <!--        </div>-->
-
-      <!--        <div [ngStyle]="{'background-color': userBook.generatedPenalty == true ? 'red': 'green'}"-->
-      <!--          *ngFor="let userBook of userBooks"-->
-      <!--          class="row m-2 border shadow-sm rounded">-->
-
-      <!--          <div class="col-sm-2 text-center my-auto">-->
-      <!--            <img [src]="'data:image/jpeg;base64,'+ userBook.book.img.pic" height="75px" width="auto">-->
-      <!--          </div>-->
-      <!--          <div class="col-sm-2 text-center my-auto">-->
-      <!--          {{userBook.book.title}}-->
-      <!--        </div>-->
-
-      <!--          <div class="col-sm-2 text-center my-auto">-->
-      <!--            <div *ngFor="let author of userBook.book.authors; let isLast=last" class="d-inline-flex"-->
-      <!--                 style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>-->
-      <!--          </div>-->
-      <!--          <div class="col-sm-6 text-center ">-->
-
-      <!--            <button  class="btn btn-secondary m-2" (click)="returnBorrowBook(userBook.book)">Return</button>-->
-      <!--            <button  class="btn btn-danger m-2">Details</button>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
-
+    <div class="d-flex flex-sm-column  flex-sm-fill" *ngIf="showBorrowed" >
+      <app-borrow-list  [currentUser]="currentUser"></app-borrow-list>
     </div>
   </div>
 </div>
