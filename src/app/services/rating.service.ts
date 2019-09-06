@@ -9,7 +9,7 @@ export class RatingService {
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
   addRatings(rating: Rating, id:string) {
-    return this.http.post('http://localhost:8080/addRatings', rating, {
+    return this.http.post('http://localhost:8080/addRating', rating, {
       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()},
       params: {
         id: id
