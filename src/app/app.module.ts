@@ -45,11 +45,13 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
 import {DialogBannedService} from './services/dialog-banned/dialog-banned.service';
 import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.component';
 import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {DialogEditProfileComponent} from './services/dialog-edit-profile/dialog-edit-profile.component';
 import {DialogEditProfileService} from './services/dialog-edit-profile/dialog-edit-profile.service';
 import {ImageCropperModule} from 'ngx-image-cropper';
+
 
 
 @NgModule({
@@ -79,6 +81,8 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     DialogBannedComponent,
     BorrowListComponent,
     DialogEditProfileComponent
+    NotFoundPageComponent
+
 
   ],
   imports: [
