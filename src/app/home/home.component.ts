@@ -24,6 +24,16 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    if(document.getElementById("testScript")){
+      document.getElementById("testScript").remove();
+    }
+
+    let testScript = document.createElement("script");
+    testScript.setAttribute("id", "testScript");
+    testScript.setAttribute("src", "assets/js/script.js");
+    document.body.appendChild(testScript);
+
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
       this.router.navigate(['/grid-books']);
