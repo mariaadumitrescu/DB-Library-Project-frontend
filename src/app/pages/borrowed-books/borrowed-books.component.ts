@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserBookService} from '../../services/userBook.service';
 import {AuthenticationService} from '../../services/autentication.service';
-import {User} from '../../models/user';
 import * as jwt_decode from 'jwt-decode';
 import {UserService} from '../../services/user.service';
 import {DialogEditProfileService} from '../../services/dialog-edit-profile/dialog-edit-profile.service';
