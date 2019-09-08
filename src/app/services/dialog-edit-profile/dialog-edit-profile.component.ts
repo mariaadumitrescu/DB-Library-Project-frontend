@@ -26,6 +26,8 @@ export class DialogEditProfileComponent implements OnInit {
   private firstName: string;
   private lastName: string;
   private byteBlob: string;
+  private imageChangedEvent: any = '';
+  private croppedImage: any = '';
 
 
   constructor(private activeModal: NgbActiveModal,
@@ -77,10 +79,6 @@ export class DialogEditProfileComponent implements OnInit {
       this.toastrService.error(error);
     });
   }
-
-
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;

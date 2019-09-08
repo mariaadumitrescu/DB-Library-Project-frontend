@@ -48,10 +48,10 @@ export class BorrowedBooksComponent implements OnInit, OnDestroy {
   }
 
   editAccount() {
-    this.bannedUserDialog();
+    this.editUserDialog();
   }
 
-  bannedUserDialog() {
+  editUserDialog() {
     this.dialogEditProfileService.confirm("Edit your profile","Message").then(value => {
       this.userService.getUserByEmail(this.decoded.sub).toPromise()
         .then(t => {
