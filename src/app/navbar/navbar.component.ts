@@ -35,14 +35,6 @@ export class NavbarComponent implements OnInit {
     this.navbarOpen = !this.navbarOpen;
   }
 
-  sendToNewsFeed() {
-
-  }
-
-  sendToUsername() {
-
-  }
-
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['']);

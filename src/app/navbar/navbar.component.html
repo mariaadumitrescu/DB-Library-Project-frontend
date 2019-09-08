@@ -18,11 +18,9 @@
     <div class="collapse navbar-collapse" id="navbar16" [ngClass]="{ 'show': navbarOpen }">
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script"
-                                          (click)="sendToNewsFeed()"><i
-          class="fa fa-home"></i> Home</a></li>
-        <li *ngIf="currentUser" class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script"
-                                                              (click)="goToBorrowedBooks()">My Books</a></li>
+        <li class="nav-item mt-3 mb-3"><a routerLink="/grid-books" class="btn-small btn-modified apply-font-dancing-script">
+          <i class="fa fa-home"></i> Home</a></li>
+        <li *ngIf="currentUser" class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script">My Books</a></li>
 
 
         <li *ngIf="currentUser" class="nav-item mt-3 mb-3" ngbDropdown>
@@ -37,10 +35,9 @@
           </a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdown2"
                class="dropdown-menu dropdown-menu-right mt-3 apply-font-dancing-script">
-            <a class="dropdown-item apply-font-dancing-script " routerLink="/admin-table" routerLinkActive="active">Admin
+            <a *ngIf="fullUser.admin" class="dropdown-item apply-font-dancing-script " routerLink="/admin-table" routerLinkActive="active">Admin
               Table</a>
-            <a class="dropdown-item apply-font-dancing-script " routerLink="/grid-books" routerLinkActive="active">Grid
-              Books</a>
+            <a class="dropdown-item apply-font-dancing-script " routerLink="/borrowed-books" routerLinkActive="active">My account</a>
             <a class="dropdown-item apply-font-dancing-script text-danger " href="#" (click)="logout()">Logout</a>
           </div>
         </li>

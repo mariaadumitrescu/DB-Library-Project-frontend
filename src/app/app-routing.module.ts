@@ -14,6 +14,7 @@ import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.comp
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import {paths} from './app-paths';
 import {PathResolveServiceService} from './services/path-resolve-service.service';
+import {AdminGuard} from './helpers/admin.guard';
 
 const routes: Routes = [
   { path: paths.gridBooks, component: GridBooksComponent, canActivate: [AuthGuard] },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: paths.bookPage, component: BookPageComponent, canActivate: [AuthGuard]},
   { path: paths.forbidden, component: ForbiddenComponent },
   { path: '', component: HomeComponent },
-  { path: paths.adminTable, component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard]},
+  { path: paths.adminTable, component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard,AdminGuard]},
   { path: paths.borrowedBooks, component: BorrowedBooksComponent},
 
   {path: '**', resolve: { path: PathResolveServiceService },component: NotFoundPageComponent}
