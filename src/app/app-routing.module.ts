@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: paths.forbidden, component: ForbiddenComponent },
   { path: '', component: HomeComponent },
   { path: paths.adminTable, component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard,AdminGuard]},
-  { path: paths.borrowedBooks, component: BorrowedBooksComponent},
+  { path: paths.borrowedBooks, component: BorrowedBooksComponent, canActivate: [AuthGuard]},
 
   {path: '**', resolve: { path: PathResolveServiceService },component: NotFoundPageComponent}
 ];
