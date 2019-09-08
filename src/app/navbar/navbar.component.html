@@ -21,18 +21,26 @@
         <li class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script"
                                           (click)="sendToNewsFeed()"><i
           class="fa fa-home"></i> Home</a></li>
-        <li *ngIf="currentUser"  class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script" (click)="goToBorrowedBooks()">My Books</a></li>
+        <li *ngIf="currentUser" class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script"
+                                                              (click)="goToBorrowedBooks()">My Books</a></li>
 
 
         <li *ngIf="currentUser" class="nav-item mt-3 mb-3" ngbDropdown>
           <a class="btn-small btn-modified apply-font-dancing-script" ngbDropdownToggle
              id="navbarDropdown2">
-            <i class="fa fa-user fa-fw"></i>{{" " + email}}
+            <img *ngIf="fullUser;else noUser" class="rounded-circle" [src]="'data:image/jpeg;base64,'+fullUser.img.pic"
+                 width="25" height="25">
+            <ng-template #noUser>
+              <i class="fa fa-user fa-fw"></i>
+            </ng-template>
+            {{" " + email}}
           </a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdown2"
                class="dropdown-menu dropdown-menu-right mt-3 apply-font-dancing-script">
-            <a class="dropdown-item apply-font-dancing-script " routerLink="/admin-table" routerLinkActive="active">Admin Table</a>
-            <a class="dropdown-item apply-font-dancing-script " routerLink="/grid-books" routerLinkActive="active">Grid Books</a>
+            <a class="dropdown-item apply-font-dancing-script " routerLink="/admin-table" routerLinkActive="active">Admin
+              Table</a>
+            <a class="dropdown-item apply-font-dancing-script " routerLink="/grid-books" routerLinkActive="active">Grid
+              Books</a>
             <a class="dropdown-item apply-font-dancing-script text-danger " href="#" (click)="logout()">Logout</a>
           </div>
         </li>
