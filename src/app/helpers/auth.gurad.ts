@@ -33,9 +33,8 @@ export class AuthGuard implements CanActivate {
           }
         } else {
           this.notEnabledUserDialog(this.decoded.sub);
-          console.log("cartof");
           return false;
-        };
+        }
       } else {
         this.authenticationService.logout();
       }

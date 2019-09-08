@@ -80,7 +80,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     BorrowedBooksComponent,
     DialogBannedComponent,
     BorrowListComponent,
-    DialogEditProfileComponent
+    DialogEditProfileComponent,
     NotFoundPageComponent
 
 
