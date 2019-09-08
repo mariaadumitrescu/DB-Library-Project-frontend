@@ -3,7 +3,7 @@
   <h2 class="display-2 font-italic mt-5 mb-5 text-center">Welcome back!</h2>
   <div class="d-flex row text-center align-items-center justify-content-center" *ngIf="currentUser">
     <div class="d-flex flex-column flex-sm-fill align-items-center">
-      <img *ngIf="currentUser.img; else anotherImage" class="rounded-pill mb-2 imgShadow"
+      <img *ngIf="currentUser.img; else anotherImage" class="rounded-circle mb-2 imgShadow"
            [src]="'data:image/jpeg;base64,'+currentUser.img.pic" width="300" height="300">
       <ng-template #anotherImage>
         <img class="rounded-circle mb-2 imgShadow" src="../../../assets/images/no-profile-picture.jpg" width="300">
