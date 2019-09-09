@@ -26,8 +26,8 @@ export class GridBooksComponent implements OnInit {
   constructor(private bookService: BookService) {
   }
 
-  initListOfBooks() {
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(p => {
+  async initListOfBooks() {
+    await this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
     });
