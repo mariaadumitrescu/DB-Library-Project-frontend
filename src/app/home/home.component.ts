@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../services/autentication.service';
+import {DialogLoginService} from '../services/dialog-login-profile/dialog-login.service';
+import {DialogRegisterService} from '../services/dialog-register-profile/dialog-register.service';
 
-declare var $ :any;
+declare var $: any;
 
 @Component({
   selector: 'app-home',
@@ -12,22 +14,57 @@ declare var $ :any;
 
 export class HomeComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService,
+              private dialogLoginService: DialogLoginService,
+              private dialogRegisterService: DialogRegisterService) {
   }
 
 
   sendToLogin() {
     $.when().then(() => {
       $('#background').ripples('destroy');
-      this.router.navigate(['/login']);
+      this.loginDialog();
+    });
+  }
+
+  loginDialog() {
+    this.dialogLoginService.confirm('Login', 'Submit your login details').then(() => {
     })
+      .catch(() => {
+        console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)');
+        $(function() {
+          $('#background').ripples({
+              dropRadius: 20,
+              perturbance: 0.002,
+              resolution: 256
+            }
+          );
+        });
+      });
+  }
+
+  registerDialog() {
+    this.dialogRegisterService.confirm('Register', 'Submit your register details').then(() => {
+    })
+      .catch(() => {
+        console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)');
+        $(function() {
+          $('#background').ripples({
+              dropRadius: 20,
+              perturbance: 0.002,
+              resolution: 256
+            }
+          );
+        });
+      });
   }
 
   sendToRegister() {
     $.when().then(() => {
       $('#background').ripples('destroy');
-      this.router.navigate(['/register']);
-    })
+      this.registerDialog();
+    });
   }
 
 
@@ -39,11 +76,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     $(function() {
       $('#background').ripples({
-        dropRadius: 20,
-        perturbance: 0.002,
-        resolution:256
+          dropRadius: 20,
+          perturbance: 0.002,
+          resolution: 256
         }
-      )
+      );
     });
 
   }
@@ -51,7 +88,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     $.when().then(r => {
       $('#background').ripples('destroy');
-    })
+    });
   }
 
 }
