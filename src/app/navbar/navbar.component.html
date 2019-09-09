@@ -26,7 +26,7 @@
         <li *ngIf="fullUser" class="nav-item mt-3 mb-3" ngbDropdown>
           <a class="btn-small btn-modified apply-font-dancing-script" ngbDropdownToggle
              id="navbarDropdown2">
-            <img *ngIf="fullUser;else noUser" class="rounded-circle" [src]="'data:image/jpeg;base64,'+fullUser.img.pic"
+            <img *ngIf="fullUser.img;else noUser" class="rounded-circle" [src]="'data:image/jpeg;base64,'+fullUser.img.pic"
                  width="25" height="25">
             <ng-template #noUser>
               <i class="fa fa-user fa-fw"></i>
