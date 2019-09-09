@@ -5,9 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../autentication.service';
 import {UserService} from '../user.service';
 import {first} from 'rxjs/operators';
-import {DialogRegisterService} from '../dialog-register-profile/dialog-register.service';
-
-declare var $: any;
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -30,8 +27,7 @@ export class DialogLoginComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private authenticationService: AuthenticationService,
-              private userService: UserService,
-              private dialogRegisterService :DialogRegisterService) {
+              private userService: UserService) {
   }
 
   // convenience getter for easy access to form fields
@@ -45,6 +41,10 @@ export class DialogLoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  public decline() {
+    this.activeModal.close(false);
   }
 
   public dismiss() {
@@ -74,7 +74,7 @@ export class DialogLoginComponent implements OnInit {
             this.userService.clearPenalties(user);
             this.userService.checkForPenalties(user).subscribe(p => console.log(p));
             this.router.navigate(['/grid-books']);
-            this.activeModal.close(true);
+            this.accept();
           });
         },
         error => {
@@ -83,24 +83,7 @@ export class DialogLoginComponent implements OnInit {
         });
   }
 
-  registerDialog() {
-    $.when().then(() => {
-      $('#background').ripples('destroy');
-      this.accept();
-    });
-    this.dialogRegisterService.confirm('Register', 'Submit your register details').then(() => {
-    })
-      .catch(() => {
-        console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)');
-        $(function() {
-          $('#background').ripples({
-              dropRadius: 20,
-              perturbance: 0.002,
-              resolution: 256
-            }
-          );
-        });
-      });
+  sendToRegister() {
+    this.decline();
   }
-
 }

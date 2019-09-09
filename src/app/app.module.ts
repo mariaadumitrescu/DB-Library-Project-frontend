@@ -12,7 +12,6 @@ import { ForbiddenService} from './services/forbidden.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
-import {RegisterPageComponent} from './pages/register-page/register-page.component';
 import {DashboardPageComponent} from './pages/dashboard-page/dashboard-page.component';
 import {GridBooksComponent} from './pages/grid-books/grid-books.component';
 import {UploadImageService} from './services/uploadImage.service';
@@ -26,7 +25,6 @@ import { BooksComponent } from './pages/dashboard-page/books/books.component';
 import { AdminDashboardBooksTableComponent } from './admin-dashboard-books-table/admin-dashboard-books-table.component';
 import {AuthenticationService} from './services/autentication.service';
 import {HomeComponent} from './home/home.component';
-import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
@@ -62,7 +60,6 @@ import {DialogRegisterService} from './services/dialog-register-profile/dialog-r
   declarations: [
     AppComponent,
     AdminPageComponent,
-    RegisterPageComponent,
     DashboardPageComponent,
     GridBooksComponent,
     GrdFilterPipe,
@@ -70,10 +67,8 @@ import {DialogRegisterService} from './services/dialog-register-profile/dialog-r
     UploadBookComponent,
     BooksComponent,
     HomeComponent,
-    LoginComponent,
     AdminDashboardBooksTableComponent,
     BookGridComponent,
-    RegisterPageComponent,
     ForbiddenComponent,
     DialogConfirmComponent,
     NavbarComponent,

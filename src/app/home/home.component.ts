@@ -29,7 +29,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   loginDialog() {
-    this.dialogLoginService.confirm('Login', 'Submit your login details').then(() => {
+    this.dialogLoginService.confirm('Login', 'Submit your login details').then(confirmed => {
+      if (!confirmed) {
+        this.registerDialog();
+      }
     })
       .catch(() => {
         console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)');
@@ -45,7 +48,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   registerDialog() {
-    this.dialogRegisterService.confirm('Register', 'Submit your register details').then(() => {
+    this.dialogRegisterService.confirm('Register', 'Submit your register details').then(confirm => {
+      if (!confirm) {
+        this.loginDialog();
+      }
     })
       .catch(() => {
         console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)');

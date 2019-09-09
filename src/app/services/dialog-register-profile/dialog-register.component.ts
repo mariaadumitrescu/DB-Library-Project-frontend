@@ -68,11 +68,15 @@ export class DialogRegisterComponent implements OnInit {
 
     this.userService.registerUser(registration).subscribe(value => {
       this.dismiss();
-      this.loginDialog();
+      this.goToLogin();
     }, error => {
       this.error = error;
       this.loading = false;
     });
+  }
+
+  public decline() {
+    this.activeModal.close(false);
   }
 
   public dismiss() {
@@ -83,24 +87,8 @@ export class DialogRegisterComponent implements OnInit {
     this.activeModal.close(true);
   }
 
-  loginDialog() {
-    $.when().then(() => {
-      $('#background').ripples('destroy');
-      this.accept();
-    });
-    this.dialogLoginService.confirm('Login', 'Submit your login details').then(() => {
-    })
-      .catch(() => {
-        console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)');
-        $(function() {
-          $('#background').ripples({
-              dropRadius: 20,
-              perturbance: 0.002,
-              resolution: 256
-            }
-          );
-        });
-      });
+  goToLogin() {
+    this.decline();
   }
 
 }
