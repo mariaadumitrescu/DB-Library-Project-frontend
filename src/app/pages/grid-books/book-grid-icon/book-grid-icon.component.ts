@@ -1,13 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Book} from 'src/app/models/book';
-import {BookService} from '../../../services/book.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../services/autentication.service';
 import * as jwt_decode from 'jwt-decode';
 import {UserService} from '../../../services/user.service';
-import {UserBook} from '../../../models/userBook';
 import {UserBookService} from '../../../services/userBook.service';
-import {getMilliseconds} from 'ngx-bootstrap/chronos/utils/date-getters';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -18,8 +15,9 @@ import {ToastrService} from 'ngx-toastr';
 export class BookGridComponent implements OnInit {
 
   @Input() book: Book;
-  averagePercent: number;
+  @Output() bookBorrowed: EventEmitter<boolean> = new EventEmitter<boolean>();
   decoded: any;
+  private loading: boolean;
 
   constructor(private userBookService: UserBookService,
               private userService: UserService,
@@ -33,12 +31,12 @@ export class BookGridComponent implements OnInit {
   }
 
   gotoDynamic(id: number) {
-    //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
     this.router.navigate(['/book-page'], {queryParams: {bookId: id}});
   }
 
 
   async borrow() {
+    this.loading = true;
     const token = this.authenticationService.getToken();
     this.decoded = jwt_decode(token);
     let currentUser = await this.userService.getUserByEmail(this.decoded.sub).toPromise();
@@ -53,8 +51,12 @@ export class BookGridComponent implements OnInit {
     this.userBookService.addUserBook(currentUser, this.book, today.toISOString().slice(0, 10)).subscribe(
       value => {
         this.showSuccess();
+        this.bookBorrowed.emit(true);
+        this.loading = false;
+
       },error => {
         this.showError(error);
+        this.loading = false;
       }
     );
   }

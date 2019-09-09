@@ -6,7 +6,9 @@
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <input name="title" type="text" class="form-control" required aria-describedby="titleBookHelp"
-                   placeholder="Title" [ngClass]="{ 'is-invalid': bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)}" [(ngModel)]="title" #bookTitle="ngModel"/>
+                   placeholder="Title"
+                   [ngClass]="{ 'is-invalid': bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)}"
+                   [(ngModel)]="title" #bookTitle="ngModel"/>
           </div>
           <div class="input-group input-group-sm mb-1">
             <div *ngIf="bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)" class="invalid-feedback">
@@ -20,7 +22,9 @@
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <input name="isbn" type="text" class="form-control" required aria-describedby="isbnBookHelp"
-                   placeholder="ISBN" [ngClass]="{ 'is-invalid': bookIsbn.invalid && (bookIsbn.dirty || bookIsbn.touched)}" [(ngModel)]="isbn" #bookIsbn="ngModel"/>
+                   placeholder="ISBN"
+                   [ngClass]="{ 'is-invalid': bookIsbn.invalid && (bookIsbn.dirty || bookIsbn.touched)}"
+                   [(ngModel)]="isbn" #bookIsbn="ngModel"/>
           </div>
 
           <div class="input-group input-group-sm mb-1">
@@ -91,7 +95,9 @@
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <input id="author" name="author" type="text" class="form-control" aria-describedby="authorBookHelp"
-                   placeholder="Authors" [ngClass]="{ 'is-invalid': tempAuthors.size == 0 && (bookAuthor.dirty || bookAuthor.touched)}" [(ngModel)]="author" #bookAuthor="ngModel"/>
+                   placeholder="Authors"
+                   [ngClass]="{ 'is-invalid': tempAuthors.size == 0 && (bookAuthor.dirty || bookAuthor.touched)}"
+                   [(ngModel)]="author" #bookAuthor="ngModel"/>
           </div>
 
           <div class="input-group input-group-sm mb-1">
@@ -171,8 +177,8 @@
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <textarea id="description" name="description" type="text" class="form-control" required
-                   aria-describedby="descriptionBookHelp"
-                   placeholder="Description"
+                      aria-describedby="descriptionBookHelp"
+                      placeholder="Description"
                       [ngClass]="{ 'is-invalid': bookDescription.invalid && (bookDescription.dirty || bookDescription.touched)}"
                       [(ngModel)]="description" #bookDescription="ngModel"></textarea>
           </div>
@@ -194,12 +200,12 @@
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <span
-              class="btn btn-primary btn-sm btn-file "
+              class="btn btn-primary btn-file"
               id="btnUpload"> {{btnValue}}
-              <input #fileInput class="btn btn-primary btn-sm " id="bookImage" type="file" imageUpload
-                     (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" height="50px"/>
+              <input #fileInput class="btn btn-primary" id="bookImage" type="file" imageUpload height="50px"
+                     (change)="fileChangeEvent($event)"/>
               </span>
-            <img [src]="imgURL" height="38" *ngIf="imgURL">
+            <img  [src]="this.imgURL" height="38" *ngIf="imgURL">
           </div>
         </div>
 
@@ -211,9 +217,27 @@
                   (click)="uploadBook()" *ngIf="!editedBook">Add
           </button>
         </div>
-
       </div>
     </form>
+
+    <div class="row">
+      <div class="col-sm">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="false"
+          [aspectRatio]="6/9"
+          [resizeToWidth]="1024"
+          format="jpeg"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </div>
+      <div class="col-sm text-center align-self-center" [style.width.px]="250">
+        <img  [src]="croppedImage" width="250"/>
+      </div>
+    </div>
   </div>
 </div>
 

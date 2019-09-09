@@ -47,7 +47,10 @@ pagination-controls /deep/ ul.ngx-pagination {
 .widget {
   display: flex;
   margin-bottom: 2.5rem;
+}
 
+.canvasjs-chart-credit{
+  display: none!important;
 }
 
 

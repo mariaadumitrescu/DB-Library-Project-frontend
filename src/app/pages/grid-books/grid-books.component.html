@@ -16,10 +16,10 @@
     </div>
   </div>
 
-    <div *ngIf="paginatedBooks" class="container-widget">
+    <div *ngIf="paginatedBooks" class="container-widget justify-content-around">
       <div *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
         <div>
-          <book-grid-icon class="widget" [book]="book"></book-grid-icon>
+          <book-grid-icon (bookBorrowed)="bookBorrowed($event)" class="widget" [book]="book"></book-grid-icon>
         </div>
       </div>
     </div>
@@ -29,7 +29,8 @@
   <div class="text-center">
     <pagination-controls  id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
   </div>
-
+  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+  <div id="chartContainerPie" style="height: 370px; width: 100%;"></div>
 </div>
 
 
