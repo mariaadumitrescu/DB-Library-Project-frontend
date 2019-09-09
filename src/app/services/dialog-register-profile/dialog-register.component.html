@@ -1,14 +1,12 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <div class="container register">
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
   <div class="row">
-    <div class="col-md-3 register-left">
+    <div class="col-md-3 register-left align-middle">
       <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
       <h3>Welcome</h3>
-      <button type="submit" class="btnRegister" (click)="sendToLogin()">Login</button>
+      <button type="submit" class="btnRegister" (click)="loginDialog()">Login</button>
       <br/>
     </div>
     <div class="col-md-9 register-right">
@@ -62,7 +60,8 @@
                 <div class="form-group">
                   <input id="userEmail" type="text" placeholder="E-mail" formControlName="userEmail"
                          class="form-control"
-                         [ngClass]="{ 'is-invalid': submitted && f.userEmail.errors }" pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(gmail)\.com$"/>
+                         [ngClass]="{ 'is-invalid': submitted && f.userEmail.errors }"
+                         pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(gmail)\.com$"/>
                   <div *ngIf="submitted && f.userEmail.errors" class="invalid-feedback">
                     <div *ngIf="f.userEmail.errors.required">Email is required</div>
                     <div *ngIf="f.userEmail.errors.pattern"> This email is in the wrong format (*@gmail.com).</div>
@@ -83,7 +82,3 @@
     </div>
   </div>
 </div>
-
-
-
-

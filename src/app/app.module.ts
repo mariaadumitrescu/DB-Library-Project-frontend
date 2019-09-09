@@ -51,6 +51,10 @@ import {ToastrModule} from 'ngx-toastr';
 import {DialogEditProfileComponent} from './services/dialog-edit-profile/dialog-edit-profile.component';
 import {DialogEditProfileService} from './services/dialog-edit-profile/dialog-edit-profile.service';
 import {ImageCropperModule} from 'ngx-image-cropper';
+import {DialogLoginComponent} from './services/dialog-login-profile/dialog-login.component';
+import {DialogLoginService} from './services/dialog-login-profile/dialog-login.service';
+import {DialogRegisterComponent} from './services/dialog-register-profile/dialog-register.component';
+import {DialogRegisterService} from './services/dialog-register-profile/dialog-register.service';
 
 
 
@@ -81,7 +85,9 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     DialogBannedComponent,
     BorrowListComponent,
     DialogEditProfileComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    DialogLoginComponent,
+    DialogRegisterComponent
 
 
   ],
@@ -112,11 +118,13 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     UserBookService,
     DialogBannedService,
     DialogEditProfileService,
+    DialogLoginService,
+    DialogRegisterService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ DialogConfirmComponent,DialogBannedComponent,DialogEditProfileComponent ],
+  entryComponents: [ DialogConfirmComponent,DialogBannedComponent,DialogEditProfileComponent,DialogLoginComponent, DialogRegisterComponent ],
 })
 export class AppModule {
 }
