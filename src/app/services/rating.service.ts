@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {AuthenticationService} from './autentication.service';
 import {Observable} from 'rxjs';
 import {Rating} from '../models/rating';
+import { ResponsePageList } from '../models/responsePageList';
 
 @Injectable({ providedIn: 'root' })
 export class RatingService {
@@ -16,5 +17,17 @@ export class RatingService {
       }
     }) as Observable<any>;
   }
+  getPaginatedRatings(orderBy: string, direction: string, page: string, size: string, bookId:string) {
+    return this.http.get('http://localhost:8080/paginatedRatings', {
+          headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()},
+          params: {
+            orderBy: orderBy,
+            direction: direction,
+            page: page,
+            size: size,
+            bookId: bookId
+          }
+        }) as Observable<ResponsePageList<Rating>>;
+}
 
 }

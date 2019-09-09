@@ -10,6 +10,7 @@ import * as jwt_decode from "jwt-decode";
 import { UserBookService } from 'src/app/services/userBook.service';
 import { User } from 'src/app/models/user';
 import { empty } from 'rxjs';
+import { ResponsePageList } from 'src/app/models/responsePageList';
 
 
 @Component({
@@ -28,6 +29,9 @@ export class BookPageComponent implements OnInit {
   currentUser: User;
   ratingValue: any;
   descriptionValue: any;
+  paginatedRatings: ResponsePageList<Rating>;
+  ratings: any;
+  private p: any;
 
   constructor(private route: ActivatedRoute, private router:Router,
      private bookService: BookService, private ratingService: RatingService,
@@ -52,6 +56,7 @@ export class BookPageComponent implements OnInit {
         this.currentUser = t;
       });
     this.descriptionValue = '';
+    this.initListOfBooks();
   }
 
   printValue(){
@@ -64,6 +69,20 @@ export class BookPageComponent implements OnInit {
       this.bookService.getBookById(this.id).subscribe(p=> {
         this.book = p;
       });
+    });
+  }
+  initListOfBooks() {
+    this.ratingService.getPaginatedRatings('id', 'ASC', '0', '3', this.id).subscribe(p => {
+      this.paginatedRatings = p;
+      this.ratings = this.paginatedRatings.pageList;
+    });
+  }
+  pageGridChanged(event) {
+    this.p = event;
+    this.ratingService.getPaginatedRatings('id', 'ASC', (this.p - 1).toString(), '3', this.id).subscribe(p => {
+
+      this.paginatedRatings = p;
+      this.ratings = this.paginatedRatings.pageList;
     });
   }
   
