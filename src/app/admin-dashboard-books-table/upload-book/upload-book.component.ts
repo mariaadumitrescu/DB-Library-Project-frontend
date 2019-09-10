@@ -9,6 +9,7 @@ import {UserService} from '../../services/user.service';
 import {AuthenticationService} from '../../services/autentication.service';
 import * as jwt_decode from 'jwt-decode';
 import {ImageCroppedEvent} from 'ngx-image-cropper';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-upload-book',
@@ -35,15 +36,12 @@ export class UploadBookComponent implements OnChanges {
   private byteBlob: string;
 
 
-
-
-
   @ViewChild('f', {static: false}) formValues;
   author: any;
   genre: any;
 
   constructor(
-    private bookUploadService: BookService, private userService: UserService, private authenticationService: AuthenticationService) {
+    private bookUploadService: BookService, private userService: UserService, private authenticationService: AuthenticationService, private toastr: ToastrService) {
   }
 
   imageChangedEvent: any = '';
@@ -93,7 +91,16 @@ export class UploadBookComponent implements OnChanges {
     for (let i = 0; i < genresForUpload.length; i++) {
       this.book.genres.push(genresForUpload[i]);
     }
-    await this.bookUploadService.addBook(this.book).toPromise();
+
+    this.bookUploadService.addBook(this.book)
+    .subscribe(
+      data => {
+        this.showUploadSuccess();
+      },
+      error => {
+        this.showUploadError(error);
+    });
+
     this.reset();
     this.formValues.resetForm();
     this.added.emit(true);
@@ -202,9 +209,35 @@ export class UploadBookComponent implements OnChanges {
     for (let i = 0; i < genresForUpload.length; i++) {
       this.book.genres.push(genresForUpload[i]);
     }
-    await this.bookUploadService.addBook(this.book).toPromise();
+
+    this.bookUploadService.addBook(this.book)
+    .subscribe(
+      data => {
+        this.showEditSuccess();
+      },
+      error => {
+        this.showEditError(error);
+    });
+
     this.reset();
     this.formValues.resetForm();
     this.added.emit(false);
   }
+
+  showEditSuccess() {
+    this.toastr.success('Your edit was successful', 'Great!');
+  }
+
+  showEditError(error:string) {
+    this.toastr.error(error, 'Error!');
+  }
+
+  showUploadSuccess() {
+    this.toastr.success('You successfully added a new book', 'Great!');
+  }
+
+  showUploadError(error:string) {
+    this.toastr.error(error, 'Error!');
+  }
+
 }

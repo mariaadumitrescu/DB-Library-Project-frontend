@@ -518,6 +518,11 @@ h2 {
   color: #fff;
   transform: translateY(-7px);
 }
+.btn-danger{
+  color: #fff;
+  background-color: rgba(255,110,75, 0.9);
+  pointer-events:none;
+}
 .auth{
   color: #FCF7FF;
   font-family: 'Dancing Script', handwriting;
@@ -539,14 +544,16 @@ body{
   display: flex;
   justify-content: center;
   background-color: #cde7f3;
+
 }
 .media{
   display: flex;
   align-items: center;
 }
-.comment-wrapper .panel-body {
-  max-height:650px;
-  overflow:auto;
+.comment-wrapper{
+  max-height:1000px;
+  width: 1200px;
+  /* overflow:auto; */
 }
 
 .comment-wrapper .media-list .media img {
@@ -610,6 +617,8 @@ body{
 #comment-content{
   font-family: 'Montserrat', sans-serif;
   margin-top: 35px;
+  overflow: auto;
+  height: auto;
 }
 .card {
   /* Add shadows to create the "card" effect */
@@ -631,3 +640,4 @@ body{
   align-items: center;
   margin-bottom: 5px; 
 }
+
