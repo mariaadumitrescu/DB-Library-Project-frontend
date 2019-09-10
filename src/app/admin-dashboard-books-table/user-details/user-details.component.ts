@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ConfirmationDialogService} from '../../services/dialog-confirm/dialog-confirm.service';
 import {FullUser} from '../../models/fullUser';
 import {UserService} from '../../services/user.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-details',
@@ -14,16 +15,31 @@ export class UserDetailsComponent implements OnChanges {
   @Input() selectedUser: FullUser;
   private enableButton: any;
   private banButton: any;
+  private activationToken: any;
   model: any;
 
-  constructor(private userService: UserService, private confirmationDialogService: ConfirmationDialogService) {
+  constructor(private userService: UserService,
+              private toastrService :ToastrService,
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
-  async activateOrDeactivate() {
-    this.selectedUser.enabled = !this.selectedUser.enabled;
-    await this.userService.updateUser(this.selectedUser).toPromise();
-    this.selectedUser = await this.userService.getUserByEmail(this.selectedUser.email).toPromise();
-    this.changeEnableButton(this.selectedUser);
+  async activate() {
+    // this.selectedUser.enabled = !this.selectedUser.enabled;
+    // await this.userService.updateUser(this.selectedUser).toPromise();
+
+    this.userService.findVerificationTokenByEmail(this.selectedUser.email).subscribe(value => {
+      this.userService.registerConfirm(value['token']).subscribe(() =>{
+        this.toastrService.success("The user with email: " + this.selectedUser.email + " was activated");
+        this.userService.getUserByEmail(this.selectedUser.email).toPromise().then(v => {
+          this.selectedUser = v;
+          this.changeEnableButton(this.selectedUser);
+        });
+
+      },error => {
+        this.toastrService.error(error);
+      });
+    });
+
   }
 
   async ngOnChanges(changes: SimpleChanges) {

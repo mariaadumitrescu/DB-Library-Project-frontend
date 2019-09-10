@@ -42,7 +42,7 @@
   </div>
   <div *ngIf="selectedUser.email!='librarymaster0@gmail.com'" class="row">
     <div class="col-sm-auto mt-2 d-flex d-inline-flex">
-      <button id="enable" class="btn btn-primary btn-sm mr-2 shadowed" (click)="activateOrDeactivate()">Enable</button>
+      <button *ngIf="!selectedUser.enabled" id="enable" class="btn btn-primary btn-sm mr-2 shadowed" (click)="activate()">Enable</button>
       <button id="banButton" class="btn btn-primary btn-sm mr-2 shadowed" (click)="banOrUnBan()">Ban</button>
 
       <form class="form-inline">
