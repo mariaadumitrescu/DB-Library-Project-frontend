@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
   <h2 class="display-2 font-italic mt-5 mb-5 text-center">Welcome back!</h2>
-  <div class="d-flex row text-center align-items-center justify-content-center" *ngIf="currentUser">
+  <div class="d-flex row text-center justify-content-center" *ngIf="currentUser">
     <div class="d-flex flex-column flex-sm-fill align-items-center">
-      <img *ngIf="currentUser.img; else anotherImage" class="rounded-circle mb-2 imgShadow"
+      <img *ngIf="currentUser.img; else anotherImage" class="rounded-circle mb-3 imgShadow"
            [src]="'data:image/jpeg;base64,'+currentUser.img.pic" width="300" height="300">
       <ng-template #anotherImage>
         <img class="rounded-circle mb-2 imgShadow" src="../../../assets/images/no-profile-picture.jpg" width="300">
@@ -18,8 +18,8 @@
       </ul>
       <div class="d-flex flex-row">
         <button [innerHTML]="showBorrowed?'Hide borrowed list':'Show borrowed list'"
-                class="btn btn-primary btn-sm mt-2 mr-2" (click)="showBorrowedBooks()"></button>
-        <button class="btn btn-danger btn-sm mt-2" (click)="editAccount()">Edit account</button>
+                class="btn btn-primary btn-sm mt-2 mr-2 shadowed" (click)="showBorrowedBooks()"></button>
+        <button class="btn btn-danger btn-sm mt-2 shadowed" (click)="editAccount()">Edit account</button>
       </div>
     </div>
     <div class="d-flex flex-sm-column  flex-sm-fill" *ngIf="showBorrowed">

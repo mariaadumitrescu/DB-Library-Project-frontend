@@ -1,4 +1,4 @@
-<div class="container login">
+<div class="container login shadowed">
   <button type="button" class="close" aria-label="Close" (click)="dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -6,10 +6,10 @@
     <div class="col-md-3 login-left">
       <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
       <h3>Welcome</h3>
-      <button type="submit" class="btnLogin" (click)="sendToRegister()">Register</button>
+      <button type="submit" class="btnLogin shadowed" (click)="sendToRegister()">Register</button>
       <br/>
     </div>
-    <div class="col-md-9 login-right">
+    <div class="col-md-9 login-right shadowed">
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <h3 class="login-heading">Login</h3>
@@ -28,19 +28,21 @@
 
                 <div class="form-group">
                   <input id="password" type="password" placeholder="Password" formControlName="password"
-                         class="form-control"
+                         class="form-control mb-3"
                          [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                     <div *ngIf="f.password.errors.required">Password is required</div>
                   </div>
 
-                  <button [disabled]="loading" class="btnLogin">
+                  <button [disabled]="loading" class="btnLogin shadowed">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Login
                   </button>
+
                   <div *ngIf="error" class="invalid-feedback">{{error}}</div>
                 </div>
               </form>
+              <button [disabled]="f.username.errors" (click)="forgotPassword()" class="btn btn-link form-control">Forgot your password?</button>
             </div>
           </div>
         </div>
