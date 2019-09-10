@@ -107,5 +107,29 @@ export class UserService {
     }) as Observable<any>;
   }
 
+  findVerificationTokenByEmail(email: string) {
+    return this.http.get('http://localhost:8080/findVerificationTokenByEmail', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params: {
+        email: email
+      }
+    }) as Observable<any>;
+  }
+
+  registerConfirm(activationToken: string) {
+    return this.http.get('http://localhost:8080/registerConfirm', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params: {
+        token: activationToken
+      }
+    }) as Observable<any>;
+  }
+
 
 }
