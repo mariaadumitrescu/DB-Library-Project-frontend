@@ -9,11 +9,11 @@
                          (pageChange)="pageGridChanged($event)"></pagination-controls>
   </div>
 </div>
-  <div class="row mr-2 ml-2 shadow-sm  bg-primary">
-    <div class="col-sm-3 text-center badge-primary">First name</div>
-    <div class="col-sm-3 text-center badge-primary">Last Name</div>
-    <div class="col-sm-3 text-center badge-primary">Email</div>
-    <div class="col-sm-3 text-center badge-primary">
+  <div class="row mr-2 ml-2 shadowed  bg-blue">
+    <div class="col-sm-3 text-center bg-blue">First name</div>
+    <div class="col-sm-3 text-center bg-blue">Last Name</div>
+    <div class="col-sm-3 text-center bg-blue">Email</div>
+    <div class="col-sm-3 text-center bg-blue">
       Details / Edit / Delete
     </div>
   </div>
@@ -21,7 +21,7 @@
 
   <div
     *ngFor="let user of users | paginate: { id: 'userGridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}"
-    class="row m-2 border shadow-sm bg-white rounded">
+    class="row m-2 border shadowed bg-white rounded">
     <div class="col-sm-3 text-center my-auto">
       {{user.firstName}}
     </div>
@@ -32,7 +32,7 @@
       {{user.email}}
     </div>
     <div class="col-sm-3 text-center ">
-      <button (click)="showDetails(user)" class="btn btn-sm btn-primary m-2">Details</button>
+      <button (click)="showDetails(user)" class="btn btn-sm btn-primary m-2 shadowed">Details</button>
     </div>
   </div>
 </div>

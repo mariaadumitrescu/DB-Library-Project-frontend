@@ -53,8 +53,8 @@ import {DialogLoginComponent} from './services/dialog-login-profile/dialog-login
 import {DialogLoginService} from './services/dialog-login-profile/dialog-login.service';
 import {DialogRegisterComponent} from './services/dialog-register-profile/dialog-register.component';
 import {DialogRegisterService} from './services/dialog-register-profile/dialog-register.service';
-
-
+import {DialogForgotPasswordComponent} from './services/dialog-forgot-password/dialog-forgot-password.component';
+import {DialogForgotPasswordService} from './services/dialog-forgot-password/dialog-forgot-password.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +82,8 @@ import {DialogRegisterService} from './services/dialog-register-profile/dialog-r
     DialogEditProfileComponent,
     NotFoundPageComponent,
     DialogLoginComponent,
-    DialogRegisterComponent
+    DialogRegisterComponent,
+    DialogForgotPasswordComponent
 
 
   ],
@@ -115,11 +116,12 @@ import {DialogRegisterService} from './services/dialog-register-profile/dialog-r
     DialogEditProfileService,
     DialogLoginService,
     DialogRegisterService,
+    DialogForgotPasswordService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ DialogConfirmComponent,DialogBannedComponent,DialogEditProfileComponent,DialogLoginComponent, DialogRegisterComponent ],
+  entryComponents: [ DialogConfirmComponent,DialogBannedComponent,DialogEditProfileComponent,DialogLoginComponent, DialogRegisterComponent,DialogForgotPasswordComponent ],
 })
 export class AppModule {
 }
