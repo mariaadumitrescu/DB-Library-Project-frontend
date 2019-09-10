@@ -3,8 +3,9 @@
 @import url(https://fonts.googleapis.com/css?family=Dancing+Script:400,700); /* latin */
 
 .apply-font-dancing-script {
-  font-family: 'Dancing Script', handwriting, serif;
-  font-size: 18px;
+  /* font-family: 'Dancing Script', handwriting, serif; */
+  font-family: 'Playball', cursive;
+  font-size: 17px;
   line-height: 20px;
 }
 
