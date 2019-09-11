@@ -9,8 +9,8 @@
   line-height: 20px;
 }
 
-.bg-primary {
-  background-color: #149dcc !important;
+.bg-blue {
+  background-color: #149dcc;
 }
 
 .btn-small {
@@ -56,7 +56,7 @@
 }
 
 .navbar {
-  position: relative;
+  /* position: relative; */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
