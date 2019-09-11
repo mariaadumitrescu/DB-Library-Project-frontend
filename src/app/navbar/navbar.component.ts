@@ -45,4 +45,5 @@ export class NavbarComponent implements OnInit {
   goToBorrowedBooks() {
     this.router.navigate(["/borrowed-books"]);
   }
+  
 }

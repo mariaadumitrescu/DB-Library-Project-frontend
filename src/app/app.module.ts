@@ -48,6 +48,7 @@ import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.compon
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import { PreferredGenresPageComponent } from './pages/preferred-genres-page/preferred-genres-page.component';
 
 
 
@@ -77,7 +78,9 @@ import {ToastrModule} from 'ngx-toastr';
     BorrowedBooksComponent,
     DialogBannedComponent,
     BorrowListComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    PreferredGenresPageComponent,
+
 
 
   ],
