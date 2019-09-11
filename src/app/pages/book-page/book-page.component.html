@@ -1,7 +1,4 @@
-<!-- <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head> -->
+<app-navbar class="bg-secondary" id="nav-book-page"></app-navbar>
 <div class="element" *ngIf="book">
   <div class="text-info">
     <h1>{{book.title}}</h1>
@@ -30,6 +27,9 @@
         <img src="https://abeon-hosting.com/images/default-png-9.png">
       </ng-template>
   </div>
+</div>
+<div class="book-description" *ngIf="book">
+  <pre id="book-desc-id">{{book.description}}</pre>
 </div>
 <body *ngIf="book">
   <div class="row bootstrap snippets">
@@ -74,12 +74,21 @@
                                 <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
                             </a>
                             <div class="media-body">
+                              <div class="comment-header">
                                 <span class="text-muted pull-right">
                                     <small class="text-muted">{{comment.date}} </small>
                                 </span>
                                 <strong class="text-success">@{{comment.user.firstName}} {{comment.user.lastName}}</strong>
+                                <div class = "rating" id="comment-stars">
+                                  <div class="star-ratings-sprite" id="stars-for-comment">
+                                    <span class="star-ratings-sprite-rating" [ngStyle]="{'width.%': comment.value/5 * 100}"></span>
+                                  </div>
+                                    <p id="comment-value">{{comment.value | number:'1.2-2'}}</p>
+                                  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+                                </div>
+                              </div>
                                 <p>
-                                    {{comment.description}}
+                                  {{comment.description}}
                                 </p>
                             </div>
                         </li>

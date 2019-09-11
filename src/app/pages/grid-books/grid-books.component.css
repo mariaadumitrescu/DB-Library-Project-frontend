@@ -59,7 +59,7 @@ pagination-controls /deep/ ul.ngx-pagination {
 
 pagination-controls ::ng-deep .ngx-pagination .current{
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  background-color: #149dcc;
+  background-color: #0077EA;
 }
 .form-no-bottom{
   border-color: #dee2e6;

@@ -3,13 +3,14 @@
 @import url(https://fonts.googleapis.com/css?family=Dancing+Script:400,700); /* latin */
 
 .apply-font-dancing-script {
-  font-family: 'Dancing Script', handwriting, serif;
-  font-size: 18px;
+  /* font-family: 'Dancing Script', handwriting, serif; */
+  font-family: 'Playball', cursive;
+  font-size: 17px;
   line-height: 20px;
 }
 
-.bg-primary {
-  background-color: #149dcc !important;
+.bg-blue {
+  background-color: #0077EA !important;
 }
 
 .btn-small {
@@ -28,8 +29,8 @@
 
 .btn-modified,
 .btn-modified:active {
-  background-color: #149dcc !important;
-  border-color: #149dcc !important;
+  background-color: #0077EA !important;
+  border-color: #0077EA !important;
   color: #ffffff !important;
 }
 
@@ -38,8 +39,8 @@
 .btn-modified.focus,
 .btn-modified.active {
   color: #ffffff !important;
-  background-color: #0d6786 !important;
-  border-color: #0d6786 !important;
+  background-color: rgb(3, 101, 194) !important;
+  border-color: rgb(3, 101, 194) !important;
 }
 
 .btn-modified {
@@ -60,6 +61,8 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 0 !important;
+  padding-top: 0 !important; 
 }
 
 .navbar > .container,
@@ -68,6 +71,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  
 }
 
 .navbar-brand {
