@@ -11,6 +11,7 @@ import { UserBookService } from 'src/app/services/userBook.service';
 import { User } from 'src/app/models/user';
 import { empty } from 'rxjs';
 import { ResponsePageList } from 'src/app/models/responsePageList';
+import { FullUser } from 'src/app/models/fullUser';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class BookPageComponent implements OnInit {
   title: any;
   rating: Rating;
   decoded: any;
-  currentUser: User;
+  currentUser: FullUser;
   ratingValue: any;
   descriptionValue: any;
   paginatedRatings: ResponsePageList<Rating>;
