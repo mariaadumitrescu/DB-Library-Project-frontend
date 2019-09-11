@@ -109,13 +109,16 @@ export class AdminDashboardBooksTableComponent implements OnInit {
       } else {
         this.goToLast(this.p);
       }
+      this.addBookActivated = !this.addBookActivated
+      this.showUserTable = !this.showUserTable;
     } else {
       this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p), '5', '').toPromise();
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;
       this.selectedBook = await this.bookService.getBookById(String(this.book.id)).toPromise();
+      this.addBookActivated = !this.addBookActivated
+      this.showUserTable = !this.showUserTable;
     }
-    this.addBookActivated = false;
   }
 
   addFlag() {

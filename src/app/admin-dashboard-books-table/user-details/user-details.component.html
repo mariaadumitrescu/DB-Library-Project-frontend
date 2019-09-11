@@ -1,9 +1,9 @@
-<div class="content-book-detail shadow card p-3 bg-white rounded">
+<div class="content-book-detail shadowed card p-3 bg-white rounded">
   <div class="row">
     <div class="col-sm-auto">
-      <img *ngIf="selectedUser.img; else noPhoto" [src]="'data:image/jpeg;base64,'+selectedUser.img.pic" height="250">
+      <img class="shadowed" *ngIf="selectedUser.img; else noPhoto" [src]="'data:image/jpeg;base64,'+selectedUser.img.pic" height="250">
       <ng-template #noPhoto>
-        <img src="../../../assets/images/no-profile-picture.jpg" height="250">
+        <img class="shadowed" src="../../../assets/images/no-profile-picture.jpg" height="250">
       </ng-template>
     </div>
     <div class="col-sm">
@@ -42,8 +42,8 @@
   </div>
   <div *ngIf="selectedUser.email!='librarymaster0@gmail.com'" class="row">
     <div class="col-sm-auto mt-2 d-flex d-inline-flex">
-      <button id="enable" class="btn btn-primary btn-sm mr-2" (click)="activateOrDeactivate()">Enable</button>
-      <button id="banButton" class="btn btn-primary btn-sm mr-2" (click)="banOrUnBan()">Ban</button>
+      <button *ngIf="!selectedUser.enabled" id="enable" class="btn btn-primary btn-sm mr-2 shadowed" (click)="activate()">Enable</button>
+      <button id="banButton" class="btn btn-primary btn-sm mr-2 shadowed" (click)="banOrUnBan()">Ban</button>
 
       <form class="form-inline">
         <div class="form-group">
@@ -51,7 +51,7 @@
             <input class="form-control datePicker" placeholder="Ban until..."
                    name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelected()" >
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary btn-sm calendar" (click)="d.toggle()" type="button"></button>
+              <button class="btn btn-outline-secondary btn-sm calendar shadowed" (click)="d.toggle()" type="button"></button>
             </div>
           </div>
         </div>

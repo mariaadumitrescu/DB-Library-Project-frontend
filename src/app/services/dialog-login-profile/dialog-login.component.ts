@@ -5,6 +5,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../autentication.service';
 import {UserService} from '../user.service';
 import {first} from 'rxjs/operators';
+import {DialogForgotPasswordService} from '../dialog-forgot-password/dialog-forgot-password.service';
+import {ToastrService} from 'ngx-toastr';
+
+declare var $: any;
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -27,7 +31,10 @@ export class DialogLoginComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private authenticationService: AuthenticationService,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialogForgotPasswordService: DialogForgotPasswordService,
+              private toastrService:ToastrService
+  ) {
   }
 
   // convenience getter for easy access to form fields
@@ -86,4 +93,34 @@ export class DialogLoginComponent implements OnInit {
   sendToRegister() {
     this.decline();
   }
+
+  forgotPassword() {
+    $.when().then(() => {
+      $('#background').ripples('destroy');
+      this.userService.forgotPassword(this.f.username.value).subscribe(() => {
+        this.toastrService.success("The reset code was send");
+        this.forgotPasswordDialog();
+        this.accept();
+      },error => {
+        this.toastrService.error(error);
+      });
+    });
+  }
+
+  forgotPasswordDialog() {
+    this.dialogForgotPasswordService.confirm('Login', 'Submit your login details').then(confirmed => {
+    })
+      .catch(() => {
+        console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)');
+        $(function() {
+          $('#background').ripples({
+              dropRadius: 20,
+              perturbance: 0.002,
+              resolution: 256
+            }
+          );
+        });
+      });
+  }
+
 }

@@ -35,7 +35,6 @@ export class UploadBookComponent implements OnChanges {
   private imgURL: string;
   private byteBlob: string;
 
-  private btnValue: string = 'Select image ( * required )';
 
   @ViewChild('f', {static: false}) formValues;
   author: any;
@@ -50,6 +49,7 @@ export class UploadBookComponent implements OnChanges {
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
+    this.selectedFile = event
   }
 
   imageCropped(event: ImageCroppedEvent) {
@@ -81,7 +81,6 @@ export class UploadBookComponent implements OnChanges {
       await fetch(this.selectedFile.base64).then(res => res.blob()).then(() => {
         let splitBlob = this.selectedFile.base64.split(',');
         this.byteBlob = splitBlob[1];
-        this.btnValue = 'Choose another image';
       });
       this.uploadedImage = new Image(this.selectedFile.file.name, this.selectedFile.file.type, this.byteBlob);
     }
@@ -113,13 +112,13 @@ export class UploadBookComponent implements OnChanges {
     this.publishingHouse = null;
     this.year = null;
     this.imgURL = null;
-    this.btnValue = 'Select image ( * required )';
     this.tempAuthors = new Set<string>();
     this.tempGenres = new Set<string>();
     this.book = null;
     this.editedBook = null;
     this.description = null;
     this.stock = null;
+    this.selectedFile = null;
   }
 
   addAuthor(event: any) {
@@ -156,7 +155,6 @@ export class UploadBookComponent implements OnChanges {
       this.stock = this.editedBook.stock;
       this.averageStars = this.editedBook.averageStars;
       this.uploadedImage = this.editedBook.img;
-      this.btnValue = 'Choose another image';
       for (let author of this.editedBook.authors) {
         this.tempAuthors.add(author.name);
       }
@@ -184,7 +182,6 @@ export class UploadBookComponent implements OnChanges {
       await fetch(this.selectedFile.base64).then(res => res.blob()).then(() => {
         let splitBlob = this.selectedFile.base64.split(',');
         this.byteBlob = splitBlob[1];
-        this.btnValue = 'Choose another image';
       });
       this.uploadedImage = new Image(this.selectedFile.file.name, this.selectedFile.file.type, this.byteBlob);
     }

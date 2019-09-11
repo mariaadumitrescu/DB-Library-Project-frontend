@@ -3,11 +3,11 @@
     <div class="col-auto text-center mr-2">
     </div>
   </div>
-  <div class="row mr-2 ml-2 shadow-sm  bg-primary">
-    <div class="col-sm-3 text-center badge-primary">Title</div>
-    <div class="col-sm-3 text-center badge-primary">Authors</div>
-    <div class="col-sm-3 text-center badge-primary">Return date</div>
-    <div class="col-sm-3 text-center badge-primary">
+  <div class="row mr-2 ml-2 bg-blue shadowed">
+    <div class="col-sm-3 text-center bg-blue">Title</div>
+    <div class="col-sm-3 text-center bg-blue">Authors</div>
+    <div class="col-sm-3 text-center bg-blue">Return date</div>
+    <div class="col-sm-3 text-center bg-blue">
       Return / View
     </div>
   </div>
@@ -16,7 +16,7 @@
   <div
     [ngClass]="{'border-danger': borrow.generatedPenalty == true,'border-success': borrow.generatedPenalty == false }"
     *ngFor="let borrow of borrows | paginate: { id: 'userGridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}"
-    class="row m-2 border  shadow-sm rounded">
+    class="row m-2 border  rounded shadowed">
     <div class="col-sm text-center my-auto">
       {{borrow.book.title}}
     </div>
@@ -30,10 +30,10 @@
       {{borrow.return_date}}
     </div>
     <div class="col-sm text-center ">
-      <button [disabled]="borrow.generatedPenalty==true" class="btn btn-success m-2" (click)="returnBorrowBook(borrow)">
+      <button [disabled]="borrow.generatedPenalty==true" class="btn btn-success m-2 shadowed" (click)="returnBorrowBook(borrow)">
         Return
       </button>
-      <button class="btn btn-danger m-2" (click)="goToPage(borrow.book.id)">View book</button>
+      <button class="btn btn-danger m-2 shadowed" (click)="goToPage(borrow.book.id)">View book</button>
     </div>
   </div>
   <pagination-controls maxSize="5" responsive="true" id="userGridPagination"

@@ -1,7 +1,7 @@
-<div class="content-book-detail shadow card p-3 bg-white rounded">
+<div class="content-book-detail shadowed card p-3 bg-white rounded">
   <div class="row">
     <div class="col-sm-auto">
-      <img [src]="'data:image/jpeg;base64,'+selectedBook.img.pic" height="250">
+      <img class="shadowed" [src]="'data:image/jpeg;base64,'+selectedBook.img.pic" height="250">
     </div>
     <div class="col-sm">
       <h3>{{selectedBook.title}}</h3>
@@ -45,7 +45,7 @@
          style="height: 150px;padding-right: 10px;text-indent: 20px">{{selectedBook.description}}</div>
   </div>
 
-  <div class="card overflow-auto shadow-sm scrollbar-custom-style p-3" style="height: 300px">
+  <div class="card overflow-auto shadowed scrollbar-custom-style p-3" style="height: 300px">
     <div class="row" *ngFor="let rating of selectedBook.ratings; index as i">
       <div class="col-sm-auto text-center first-col m-auto">
         <img class="rounded-circle mr-2 " src="../../../assets/images/no-photo-profile.png" height="40" width="40">
@@ -66,7 +66,7 @@
         <blockquote class="blockquote-footer text-justify">{{rating.description}}</blockquote>
       </div>
       <div class="col-sm-auto m-auto">
-        <button class="btn btn-sm btn-danger mr-2" (click)="deleteBookDialog(i)">Delete</button>
+        <button class="btn btn-sm btn-danger mr-2 shadowed" (click)="deleteBookDialog(i)">Delete</button>
       </div>
     </div>
   </div>
