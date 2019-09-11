@@ -33,7 +33,6 @@ export class AuthGuard implements CanActivate {
           }
         } else {
           this.notEnabledUserDialog(this.decoded.sub);
-          console.log("cartof");
           return false;
         }
       } else {
@@ -45,6 +44,8 @@ export class AuthGuard implements CanActivate {
   }
 
   bannedUserDialog() {
+    localStorage.clear();
+    this.router.navigate(['']);
     this.dialogBannedService.confirm('This account is banned!', 'Please contact your library administrator!')
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }

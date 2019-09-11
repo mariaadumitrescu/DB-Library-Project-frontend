@@ -40,6 +40,7 @@ export class UserService {
         localStorage.setItem('isEnabled', obj.enabled);
         localStorage.setItem('isBanned', obj.banned);
         localStorage.setItem('role', obj.roles[0].name);
+        localStorage.setItem('showBorrowed','false');
         return obj;
       }));
   }

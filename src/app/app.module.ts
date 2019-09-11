@@ -45,8 +45,13 @@ import {BookGridComponent} from './pages/grid-books/book-grid-icon/book-grid-ico
 import {DialogBannedService} from './services/dialog-banned/dialog-banned.service';
 import {DialogBannedComponent} from './services/dialog-banned/dialog-banned.component';
 import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import {DialogEditProfileComponent} from './services/dialog-edit-profile/dialog-edit-profile.component';
+import {DialogEditProfileService} from './services/dialog-edit-profile/dialog-edit-profile.service';
+import {ImageCropperModule} from 'ngx-image-cropper';
+
 
 
 @NgModule({
@@ -75,6 +80,9 @@ import {ToastrModule} from 'ngx-toastr';
     BorrowedBooksComponent,
     DialogBannedComponent,
     BorrowListComponent,
+    DialogEditProfileComponent,
+    NotFoundPageComponent
+
 
   ],
   imports: [
@@ -92,7 +100,8 @@ import {ToastrModule} from 'ngx-toastr';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(),
+    ImageCropperModule
   ],
   providers: [BookService,
     ForbiddenService,
@@ -102,11 +111,12 @@ import {ToastrModule} from 'ngx-toastr';
     AuthenticationService,
     UserBookService,
     DialogBannedService,
+    DialogEditProfileService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ DialogConfirmComponent,DialogBannedComponent ],
+  entryComponents: [ DialogConfirmComponent,DialogBannedComponent,DialogEditProfileComponent ],
 })
 export class AppModule {
 }

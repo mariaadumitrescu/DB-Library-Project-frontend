@@ -600,6 +600,7 @@ body{
   height: auto;
   white-space: pre-wrap;
   background-color: #fcfcfc;
+  text-align: justify;
 }
 .comment-header{
   display: flex;
