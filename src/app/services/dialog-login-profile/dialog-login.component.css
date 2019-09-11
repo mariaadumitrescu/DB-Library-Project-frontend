@@ -1,14 +1,13 @@
-.register{
+.login{
   background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-  margin-top: 3%;
   padding: 3%;
 }
-.register-left{
+.login-left{
   text-align: center;
   color: #fff;
   margin-top: 4%;
 }
-.register-left input{
+.login-left input{
   border: none;
   border-radius: 1.5rem;
   padding: 2%;
@@ -20,12 +19,12 @@
   margin-bottom: 3%;
   cursor: pointer;
 }
-.register-right{
+.login-right{
   background: #f8f9fa;
   border-top-left-radius: 10% 50%;
   border-bottom-left-radius: 10% 50%;
 }
-.register-left img{
+.login-left img{
   margin-top: 15%;
   margin-bottom: 5%;
   width: 50%;
@@ -40,18 +39,18 @@
   0% { transform: translateY(0); }
   100% { transform: translateY(-20px); }
 }
-.register-left p{
+.login-left p{
   font-weight: lighter;
   padding: 12%;
   margin-top: -9%;
 }
-.register .register-form{
+.login .login-form{
   padding: 10%;
   margin-top: 10%;
 }
-.btnRegister{
+.btnLogin{
   float: right;
-  margin-top: 5%;
+  margin-top: 10%;
   border: none;
   border-radius: 1.5rem;
   padding: 2%;
@@ -61,7 +60,7 @@
   width: 50%;
   cursor: pointer;
 }
-.register .nav-tabs{
+.login .nav-tabs{
   margin-top: 3%;
   border: none;
   background: #0062cc;
@@ -69,7 +68,7 @@
   width: 28%;
   float: right;
 }
-.register .nav-tabs .nav-link{
+.login .nav-tabs .nav-link{
   padding: 2%;
   height: 34px;
   font-weight: 600;
@@ -77,17 +76,17 @@
   border-top-right-radius: 1.5rem;
   border-bottom-right-radius: 1.5rem;
 }
-.register .nav-tabs .nav-link:hover{
+.login .nav-tabs .nav-link:hover{
   border: none;
 }
-.register .nav-tabs .nav-link.active{
+.login .nav-tabs .nav-link.active{
   width: 100px;
   color: #0062cc;
   border: 2px solid #0062cc;
   border-top-left-radius: 1.5rem;
   border-bottom-left-radius: 1.5rem;
 }
-.register-heading{
+.login-heading{
   text-align: center;
   margin-top: 8%;
   margin-bottom: -15%;
@@ -106,7 +105,7 @@
   margin-right: 20%;
 }
 
-.btnRegister{
+.btnLogin{
   width: 60%;
   margin-left: 20%;
   margin-right: 20%;
@@ -115,4 +114,3 @@
 .invalid-feedback {
   display: block;
 }
-
