@@ -5,6 +5,7 @@ import * as jwt_decode from 'jwt-decode';
 import {ConfirmationDialogService} from '../services/dialog-confirm/dialog-confirm.service';
 import {Book} from '../models/book';
 import {DialogBannedService} from '../services/dialog-banned/dialog-banned.service';
+import {DialogActivateAccountService} from '../services/dialog-activate-account/dialog-activate-account.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -14,7 +15,10 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService, private dialogBannedService: DialogBannedService, private confirmationDialogService: ConfirmationDialogService) {
+    private authenticationService: AuthenticationService,
+    private dialogBannedService: DialogBannedService,
+    private confirmationDialogService: ConfirmationDialogService,
+    private activateAccountService: DialogActivateAccountService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -51,13 +55,10 @@ export class AuthGuard implements CanActivate {
   }
 
   notEnabledUserDialog(email: string) {
-    this.confirmationDialogService.confirm('This account was not activated!', 'Please check your email for confirmation link',
-      'Resend email', 'Logout').then(value => {
-
-      if (value) {
-        this.authenticationService.resendVerification(email).subscribe(t => console.log(t));
-      }
+    this.activateAccountService.confirm('This account is not activated', 'Please activate your account').
+    catch(() => {
       this.authenticationService.logout();
+      console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)')
     });
   }
 

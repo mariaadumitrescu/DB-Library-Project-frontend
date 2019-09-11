@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import {User} from '../models/user';
 import {environment} from '../../environments/environment.prod';
-import {UserService} from './user.service';
 import {Router} from '@angular/router';
 
-@Injectable({ providedIn: 'root' })
+declare var $: any;
+
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient,private router :Router) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -25,11 +26,11 @@ export class AuthenticationService {
   getToken(): string {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const token = currentUser && currentUser.token;
-    return token ? token : "";
+    return token ? token : '';
   }
 
   login(email: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/authenticate`, { email, password })
+    return this.http.post<any>(`${environment.apiUrl}/authenticate`, {email, password})
       .pipe(map(token => {
         localStorage.setItem('currentUser', JSON.stringify(token));
         this.currentUserSubject.next(token);
@@ -40,11 +41,18 @@ export class AuthenticationService {
   logout() {
     this.router.navigate(['']);
     localStorage.clear();
+    $(function() {
+      $('#background').ripples({
+          dropRadius: 20,
+          perturbance: 0.002,
+          resolution: 256
+        }
+      );
+    });
     this.currentUserSubject.next(null);
-
   }
 
-  resendVerification(email:string) {
+  resendVerification(email: string) {
     return this.http.post(`${environment.apiUrl}/resendVerificationLink`, email) as Observable<any>;
   }
 }
