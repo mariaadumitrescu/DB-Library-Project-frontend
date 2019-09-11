@@ -26,7 +26,7 @@ export class UserService {
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
       },
       params: {email: email}
-    }) as Observable<any>
+    }) as Observable<any>;
   }
 
   setLocalStorage(email: string) {
@@ -40,6 +40,7 @@ export class UserService {
         localStorage.setItem('isEnabled', obj.enabled);
         localStorage.setItem('isBanned', obj.banned);
         localStorage.setItem('role', obj.roles[0].name);
+        localStorage.setItem('showBorrowed', 'false');
         return obj;
       }));
   }
@@ -72,7 +73,7 @@ export class UserService {
     }) as Observable<any>;
   }
 
-  clearPenalties(user: User){
+  clearPenalties(user: User) {
     return this.http.post('http://localhost:8080/clearPenalties', user, {
       headers: {
         'Content-Type': 'application/json',
@@ -88,6 +89,47 @@ export class UserService {
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
       }
     }) as Observable<any>;
-
   }
+
+  forgotPassword(email: string) {
+    return this.http.post('http://localhost:8080/forgotpassword', {email: email}, {}) as Observable<any>;
+  }
+
+  resetPassword(email: string, password: string, code: string) {
+    return this.http.post('http://localhost:8080/resetpassword', {email: email, password: password}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params: {
+        random: code
+      }
+    }) as Observable<any>;
+  }
+
+  findVerificationTokenByEmail(email: string) {
+    return this.http.get('http://localhost:8080/findVerificationTokenByEmail', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params: {
+        email: email
+      }
+    }) as Observable<any>;
+  }
+
+  registerConfirm(activationToken: string) {
+    return this.http.get('http://localhost:8080/registerConfirm', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      },
+      params: {
+        token: activationToken
+      }
+    }) as Observable<any>;
+  }
+
+
 }

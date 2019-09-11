@@ -1,17 +1,15 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
-import {UploadImageService} from '../../services/uploadImage.service';
 import {BookService} from '../../services/book.service';
 import {Book} from '../../models/book';
-import {ImageResult, ResizeOptions} from 'ng2-imageupload';
 import {Author} from '../../models/author';
 import {Genre} from '../../models/genre';
-import {AuthorService} from '../../services/author.service';
-import {GenreService} from '../../services/genre.service';
 import {Image} from '../../models/image';
 import {Rating} from '../../models/rating';
 import {UserService} from '../../services/user.service';
 import {AuthenticationService} from '../../services/autentication.service';
 import * as jwt_decode from 'jwt-decode';
+import {ImageCroppedEvent} from 'ngx-image-cropper';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-upload-book',
@@ -33,32 +31,41 @@ export class UploadBookComponent implements OnChanges {
   private uploadedImage: Image;
   private tempAuthors = new Set<string>();
   private tempGenres = new Set<string>();
-  private imageWasSelected: boolean;
-  private imageResult: ImageResult;
-
-  private resizeOptions: ResizeOptions = {resizeMaxHeight: 1024, resizeMaxWidth: 1024};
   private selectedFile: any;
   private imgURL: string;
-  private btnValue: string = 'Select image ( * required )';
+  private byteBlob: string;
+
 
   @ViewChild('f', {static: false}) formValues;
   author: any;
   genre: any;
 
   constructor(
-    private imageUploadService: UploadImageService,
-    private bookUploadService: BookService, private userService: UserService, private authenticationService: AuthenticationService) {
+    private bookUploadService: BookService, private userService: UserService, private authenticationService: AuthenticationService, private toastr: ToastrService) {
   }
 
-  selected(imageResult: ImageResult) {
-    fetch(imageResult.resized.dataURL).then(res => res.blob()).then(() => {
-      let splitBlob = imageResult.resized.dataURL.split(',');
-      this.imageResult = imageResult;
-      this.selectedFile = splitBlob[1];
-      this.imgURL = imageResult.resized.dataURL;
-      this.btnValue = 'Choose another image';
-      this.imageWasSelected = true;
-    });
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+    this.selectedFile = event
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.selectedFile = event;
+    this.croppedImage = event.base64;
+    this.imgURL = event.base64;
+  }
+
+  imageLoaded() {
+  }
+
+  cropperReady() {
+  }
+
+  loadImageFailed() {
+    // show message
   }
 
   async uploadBook() {
@@ -70,8 +77,12 @@ export class UploadBookComponent implements OnChanges {
     for (let genre of this.tempGenres) {
       genresForUpload.push(new Genre(genre));
     }
-    if (this.imageWasSelected) {
-      this.uploadedImage = new Image(this.imageResult.file.name, this.imageResult.file.type, this.selectedFile);
+    if (this.croppedImage) {
+      await fetch(this.selectedFile.base64).then(res => res.blob()).then(() => {
+        let splitBlob = this.selectedFile.base64.split(',');
+        this.byteBlob = splitBlob[1];
+      });
+      this.uploadedImage = new Image(this.selectedFile.file.name, this.selectedFile.file.type, this.byteBlob);
     }
     this.book = new Book(this.isbn, this.title, [], this.publishingHouse, this.year, [], this.uploadedImage, [], this.description, this.stock);
     for (let i = 0; i < authorsForUpload.length; i++) {
@@ -80,26 +91,34 @@ export class UploadBookComponent implements OnChanges {
     for (let i = 0; i < genresForUpload.length; i++) {
       this.book.genres.push(genresForUpload[i]);
     }
-    await this.bookUploadService.addBook(this.book).toPromise();
+
+    this.bookUploadService.addBook(this.book)
+    .subscribe(
+      data => {
+        this.showUploadSuccess();
+      },
+      error => {
+        this.showUploadError(error);
+    });
+
     this.reset();
     this.formValues.resetForm();
     this.added.emit(true);
   }
 
   reset() {
-    this.imageWasSelected = false;
     this.title = null;
     this.isbn = null;
     this.publishingHouse = null;
     this.year = null;
     this.imgURL = null;
-    this.btnValue = 'Select image ( * required )';
     this.tempAuthors = new Set<string>();
     this.tempGenres = new Set<string>();
     this.book = null;
     this.editedBook = null;
     this.description = null;
     this.stock = null;
+    this.selectedFile = null;
   }
 
   addAuthor(event: any) {
@@ -136,7 +155,6 @@ export class UploadBookComponent implements OnChanges {
       this.stock = this.editedBook.stock;
       this.averageStars = this.editedBook.averageStars;
       this.uploadedImage = this.editedBook.img;
-      this.btnValue = 'Choose another image';
       for (let author of this.editedBook.authors) {
         this.tempAuthors.add(author.name);
       }
@@ -160,8 +178,12 @@ export class UploadBookComponent implements OnChanges {
     for (let genre of this.tempGenres) {
       genresForUpload.push(new Genre(genre));
     }
-    if (this.imageWasSelected) {
-      this.uploadedImage = new Image(this.imageResult.file.name, this.imageResult.file.type, this.selectedFile);
+    if (this.croppedImage) {
+      await fetch(this.selectedFile.base64).then(res => res.blob()).then(() => {
+        let splitBlob = this.selectedFile.base64.split(',');
+        this.byteBlob = splitBlob[1];
+      });
+      this.uploadedImage = new Image(this.selectedFile.file.name, this.selectedFile.file.type, this.byteBlob);
     }
     this.book = this.editedBook;
     let token = this.authenticationService.getToken();
@@ -187,9 +209,35 @@ export class UploadBookComponent implements OnChanges {
     for (let i = 0; i < genresForUpload.length; i++) {
       this.book.genres.push(genresForUpload[i]);
     }
-    await this.bookUploadService.addBook(this.book).toPromise();
+
+    this.bookUploadService.addBook(this.book)
+    .subscribe(
+      data => {
+        this.showEditSuccess();
+      },
+      error => {
+        this.showEditError(error);
+    });
+
     this.reset();
     this.formValues.resetForm();
     this.added.emit(false);
   }
+
+  showEditSuccess() {
+    this.toastr.success('Your edit was successful', 'Great!');
+  }
+
+  showEditError(error:string) {
+    this.toastr.error(error, 'Error!');
+  }
+
+  showUploadSuccess() {
+    this.toastr.success('You successfully added a new book', 'Great!');
+  }
+
+  showUploadError(error:string) {
+    this.toastr.error(error, 'Error!');
+  }
+
 }

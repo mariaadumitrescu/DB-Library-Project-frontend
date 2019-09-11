@@ -1,16 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../user.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Registration} from '../../models/registration';
-import {UserService} from '../../services/user.service';
+import {DialogLoginService} from '../dialog-login-profile/dialog-login.service';
 
+declare var $: any;
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css']
+  selector: 'app-dialog-confirm',
+  templateUrl: './dialog-register.component.html',
+  styleUrls: ['./dialog-register.component.css']
 })
-export class RegisterPageComponent implements OnInit {
+export class DialogRegisterComponent implements OnInit {
+
+  @Input() title: string;
+  @Input() message: string;
   registerForm: FormGroup;
   loading = false;
   submitted = false;
@@ -20,13 +26,14 @@ export class RegisterPageComponent implements OnInit {
   password: string;
 
 
-  constructor(
-    private userService: UserService,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
+  constructor(private activeModal: NgbActiveModal,
+              private userService: UserService,
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,
+              private dialogLoginService: DialogLoginService) {
   }
+
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -39,10 +46,6 @@ export class RegisterPageComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
-
-  sendToLogin() {
-    this.router.navigate(['/login']);
   }
 
   // convenience getter for easy access to form fields
@@ -64,11 +67,28 @@ export class RegisterPageComponent implements OnInit {
     const registration = new Registration(this.f.userFirstName.value, this.f.userLastName.value, this.f.userPassword.value, this.f.userEmail.value);
 
     this.userService.registerUser(registration).subscribe(value => {
-      this.sendToLogin();
+      this.dismiss();
+      this.goToLogin();
     }, error => {
       this.error = error;
       this.loading = false;
     });
   }
-}
 
+  public decline() {
+    this.activeModal.close(false);
+  }
+
+  public dismiss() {
+    this.activeModal.dismiss();
+  }
+
+  public accept() {
+    this.activeModal.close(true);
+  }
+
+  goToLogin() {
+    this.decline();
+  }
+
+}

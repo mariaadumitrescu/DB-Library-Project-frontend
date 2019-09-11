@@ -38,9 +38,10 @@ export class AuthenticationService {
   }
 
   logout() {
+    this.router.navigate(['']);
     localStorage.clear();
     this.currentUserSubject.next(null);
-    this.router.navigate(['']);
+
   }
 
   resendVerification(email:string) {

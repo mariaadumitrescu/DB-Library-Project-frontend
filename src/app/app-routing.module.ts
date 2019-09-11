@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {GridBooksComponent} from './pages/grid-books/grid-books.component';
 import { BookService } from './services/book.service';
-import {LoginComponent} from './login/login.component';
-import {RegisterPageComponent} from './pages/register-page/register-page.component';
-
 import {AdminDashboardBooksTableComponent} from './admin-dashboard-books-table/admin-dashboard-books-table.component';
 import {AuthGuard} from './helpers/auth.gurad';
 import {ForbiddenComponent} from './pages/forbidden/forbidden.component';
@@ -14,16 +11,15 @@ import {BorrowedBooksComponent} from './pages/borrowed-books/borrowed-books.comp
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import {paths} from './app-paths';
 import {PathResolveServiceService} from './services/path-resolve-service.service';
+import {AdminGuard} from './helpers/admin.guard';
 
 const routes: Routes = [
   { path: paths.gridBooks, component: GridBooksComponent, canActivate: [AuthGuard] },
-  { path: paths.login, component: LoginComponent },
-  { path: paths.register, component: RegisterPageComponent },
   { path: paths.bookPage, component: BookPageComponent, canActivate: [AuthGuard]},
   { path: paths.forbidden, component: ForbiddenComponent },
   { path: '', component: HomeComponent },
-  { path: paths.adminTable, component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard]},
-  { path: paths.borrowedBooks, component: BorrowedBooksComponent},
+  { path: paths.adminTable, component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard,AdminGuard]},
+  { path: paths.borrowedBooks, component: BorrowedBooksComponent, canActivate: [AuthGuard]},
 
   {path: '**', resolve: { path: PathResolveServiceService },component: NotFoundPageComponent}
 ];

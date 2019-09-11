@@ -1,12 +1,14 @@
-<div class="col-auto container shadow card p-3 m-2 bg-white rounded">
-  <div class="border roundedFrame">
+<div class="col-auto container shadowed card p-3 m-2 bg-white rounded">
+  <div class="border roundedFrame shadowed">
     <form name="form" #f="ngForm" novalidate>
 
       <div class="row">
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <input name="title" type="text" class="form-control" required aria-describedby="titleBookHelp"
-                   placeholder="Title" [ngClass]="{ 'is-invalid': bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)}" [(ngModel)]="title" #bookTitle="ngModel"/>
+                   placeholder="Title"
+                   [ngClass]="{ 'is-invalid': bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)}"
+                   [(ngModel)]="title" #bookTitle="ngModel"/>
           </div>
           <div class="input-group input-group-sm mb-1">
             <div *ngIf="bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)" class="invalid-feedback">
@@ -20,7 +22,9 @@
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <input name="isbn" type="text" class="form-control" required aria-describedby="isbnBookHelp"
-                   placeholder="ISBN" [ngClass]="{ 'is-invalid': bookIsbn.invalid && (bookIsbn.dirty || bookIsbn.touched)}" [(ngModel)]="isbn" #bookIsbn="ngModel"/>
+                   placeholder="ISBN"
+                   [ngClass]="{ 'is-invalid': bookIsbn.invalid && (bookIsbn.dirty || bookIsbn.touched)}"
+                   [(ngModel)]="isbn" #bookIsbn="ngModel"/>
           </div>
 
           <div class="input-group input-group-sm mb-1">
@@ -91,7 +95,9 @@
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <input id="author" name="author" type="text" class="form-control" aria-describedby="authorBookHelp"
-                   placeholder="Authors" [ngClass]="{ 'is-invalid': tempAuthors.size == 0 && (bookAuthor.dirty || bookAuthor.touched)}" [(ngModel)]="author" #bookAuthor="ngModel"/>
+                   placeholder="Authors"
+                   [ngClass]="{ 'is-invalid': tempAuthors.size == 0 && (bookAuthor.dirty || bookAuthor.touched)}"
+                   [(ngModel)]="author" #bookAuthor="ngModel"/>
           </div>
 
           <div class="input-group input-group-sm mb-1">
@@ -106,7 +112,7 @@
 
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
-            <button class="btn btn-sm btn-primary btn-add" (click)="addAuthor(author)">Add author</button>
+            <button class="btn btn-sm btn-primary btn-add shadowed" (click)="addAuthor(author)">Add author</button>
           </div>
         </div>
 
@@ -116,7 +122,7 @@
           <div class="text-dark d-inline" *ngFor="let author of tempAuthors;">
             <div class="mb-1 d-inline">
               <div class="col-sm d-inline">
-                <button class="btn btn-sm btn-outline-danger" (click)="deleteAuthor(author)">{{author}} x</button>
+                <button class="btn btn-sm btn-outline-danger mb-2 shadowed" (click)="deleteAuthor(author)">{{author}} x</button>
               </div>
             </div>
           </div>
@@ -146,7 +152,7 @@
 
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
-            <button class="btn btn-sm btn-primary btn-add" (click)="addGenre(genre)">Add genre</button>
+            <button class="btn btn-sm btn-primary btn-add shadowed" (click)="addGenre(genre)">Add genre</button>
           </div>
         </div>
 
@@ -157,7 +163,7 @@
           <div class="text-dark d-inline" *ngFor="let genre of tempGenres">
             <div class="mb-1 d-inline">
               <div class="col-sm d-inline">
-                <button class="btn btn-sm btn-outline-danger" (click)="deleteGenre(genre)">{{genre}} x</button>
+                <button class="btn btn-sm btn-outline-danger mb-2 shadowed" (click)="deleteGenre(genre)">{{genre}} x</button>
               </div>
             </div>
           </div>
@@ -170,9 +176,9 @@
 
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
-            <textarea id="description" name="description" type="text" class="form-control" required
-                   aria-describedby="descriptionBookHelp"
-                   placeholder="Description"
+            <textarea id="description" name="description" type="text" class="form-control scrollbar-custom-style" required
+                      aria-describedby="descriptionBookHelp"
+                      placeholder="Description"
                       [ngClass]="{ 'is-invalid': bookDescription.invalid && (bookDescription.dirty || bookDescription.touched)}"
                       [(ngModel)]="description" #bookDescription="ngModel"></textarea>
           </div>
@@ -194,26 +200,44 @@
         <div class="col-sm">
           <div class="input-group input-group-sm mb-1">
             <span
-              class="btn btn-primary btn-sm btn-file "
-              id="btnUpload"> {{btnValue}}
-              <input #fileInput class="btn btn-primary btn-sm " id="bookImage" type="file" imageUpload
-                     (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" height="50px"/>
+              class="btn btn-primary btn-file shadowed"
+              id="btnUpload"> {{selectedFile?'Chose another image':'Select image ( * required )'}}
+              <input #fileInput class="btn btn-primary shadowed" id="bookImage" type="file" imageUpload height="50px"
+                     (change)="fileChangeEvent($event)"/>
               </span>
-            <img [src]="imgURL" height="38" *ngIf="imgURL">
+            <img  [src]="this.imgURL" height="38" *ngIf="imgURL">
           </div>
         </div>
 
         <div class="col-sm">
-          <button id="editBookButton" [disabled]="f.form.invalid || !this.selectedFile" class="btn btn-primary btn-sm"
+          <button id="editBookButton" [disabled]="f.form.invalid || !this.selectedFile" class="btn btn-primary btn-sm shadowed"
                   (click)="editBook()" *ngIf="editedBook">Save
           </button>
-          <button id="addBookButton" [disabled]="f.form.invalid || !this.selectedFile" class="btn btn-primary btn-sm"
+          <button id="addBookButton" [disabled]="f.form.invalid || !this.selectedFile" class="btn btn-primary btn-sm shadowed"
                   (click)="uploadBook()" *ngIf="!editedBook">Add
           </button>
         </div>
-
       </div>
     </form>
+
+    <div class="row" *ngIf="selectedFile">
+      <div class="col-sm">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="false"
+          [aspectRatio]="6/9"
+          [resizeToWidth]="1024"
+          format="jpeg"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </div>
+      <div class="col-sm text-center align-self-center" [style.width.px]="250">
+        <img  [src]="croppedImage" width="250"/>
+      </div>
+    </div>
   </div>
 </div>
 

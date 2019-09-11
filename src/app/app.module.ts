@@ -12,7 +12,6 @@ import { ForbiddenService} from './services/forbidden.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
-import {RegisterPageComponent} from './pages/register-page/register-page.component';
 import {DashboardPageComponent} from './pages/dashboard-page/dashboard-page.component';
 import {GridBooksComponent} from './pages/grid-books/grid-books.component';
 import {UploadImageService} from './services/uploadImage.service';
@@ -26,7 +25,6 @@ import { BooksComponent } from './pages/dashboard-page/books/books.component';
 import { AdminDashboardBooksTableComponent } from './admin-dashboard-books-table/admin-dashboard-books-table.component';
 import {AuthenticationService} from './services/autentication.service';
 import {HomeComponent} from './home/home.component';
-import {LoginComponent} from './login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
@@ -48,15 +46,26 @@ import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.compon
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+<<<<<<< HEAD
 import { PreferredGenresPageComponent } from './pages/preferred-genres-page/preferred-genres-page.component';
 
 
+=======
+import {DialogEditProfileComponent} from './services/dialog-edit-profile/dialog-edit-profile.component';
+import {DialogEditProfileService} from './services/dialog-edit-profile/dialog-edit-profile.service';
+import {ImageCropperModule} from 'ngx-image-cropper';
+import {DialogLoginComponent} from './services/dialog-login-profile/dialog-login.component';
+import {DialogLoginService} from './services/dialog-login-profile/dialog-login.service';
+import {DialogRegisterComponent} from './services/dialog-register-profile/dialog-register.component';
+import {DialogRegisterService} from './services/dialog-register-profile/dialog-register.service';
+import {DialogForgotPasswordComponent} from './services/dialog-forgot-password/dialog-forgot-password.component';
+import {DialogForgotPasswordService} from './services/dialog-forgot-password/dialog-forgot-password.service';
+>>>>>>> de7dbdd946b6d1d3a9d8605547ea0ff008931a0d
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminPageComponent,
-    RegisterPageComponent,
     DashboardPageComponent,
     GridBooksComponent,
     GrdFilterPipe,
@@ -64,10 +73,8 @@ import { PreferredGenresPageComponent } from './pages/preferred-genres-page/pref
     UploadBookComponent,
     BooksComponent,
     HomeComponent,
-    LoginComponent,
     AdminDashboardBooksTableComponent,
     BookGridComponent,
-    RegisterPageComponent,
     ForbiddenComponent,
     DialogConfirmComponent,
     NavbarComponent,
@@ -78,9 +85,17 @@ import { PreferredGenresPageComponent } from './pages/preferred-genres-page/pref
     BorrowedBooksComponent,
     DialogBannedComponent,
     BorrowListComponent,
+<<<<<<< HEAD
     NotFoundPageComponent,
     PreferredGenresPageComponent,
 
+=======
+    DialogEditProfileComponent,
+    NotFoundPageComponent,
+    DialogLoginComponent,
+    DialogRegisterComponent,
+    DialogForgotPasswordComponent
+>>>>>>> de7dbdd946b6d1d3a9d8605547ea0ff008931a0d
 
 
   ],
@@ -99,7 +114,8 @@ import { PreferredGenresPageComponent } from './pages/preferred-genres-page/pref
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(),
+    ImageCropperModule
   ],
   providers: [BookService,
     ForbiddenService,
@@ -109,11 +125,15 @@ import { PreferredGenresPageComponent } from './pages/preferred-genres-page/pref
     AuthenticationService,
     UserBookService,
     DialogBannedService,
+    DialogEditProfileService,
+    DialogLoginService,
+    DialogRegisterService,
+    DialogForgotPasswordService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ DialogConfirmComponent,DialogBannedComponent ],
+  entryComponents: [ DialogConfirmComponent,DialogBannedComponent,DialogEditProfileComponent,DialogLoginComponent, DialogRegisterComponent,DialogForgotPasswordComponent ],
 })
 export class AppModule {
 }

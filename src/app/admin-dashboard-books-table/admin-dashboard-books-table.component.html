@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container-fluid shadow p-3 mb-5 bg-white rounded">
+<div class="container-fluid shadowed p-3  mt-4 bg-white rounded">
   <div class="row">
     <div class="col-lg-5">
       <app-book-details *ngIf="selectedBook&&!switch" [selectedBook]="selectedBook"
@@ -17,22 +17,22 @@
                                (pageChange)="pageGridChanged($event)"></pagination-controls>
         </div>
         <div class="col-auto text-center mr-2">
-          <button id="showPanel" class="btn btn-sm btn-secondary mr-2" (click)="hideAndShow()">Show book panel</button>
-          <button class="btn btn-sm btn-success" (click)="addFlag()">Add book</button>
+          <button id="showPanel" class="btn btn-sm btn-secondary mr-2 shadowed" (click)="hideAndShow()">Show book panel</button>
+          <button class="btn btn-sm btn-success shadowed" (click)="addFlag()">Add book</button>
         </div>
 
       </div>
-      <div class="row mr-2 ml-2 shadow-sm  bg-primary">
-        <div class="col-sm-3 text-center badge-primary">Title</div>
-        <div class="col-sm-3 text-center badge-primary">Authors</div>
-        <div class="col-sm-6 text-center badge-primary">
+      <div class="row mr-2 ml-2 shadowed  bg-blue">
+        <div class="col-sm-3 text-center bg-blue">Title</div>
+        <div class="col-sm-3 text-center bg-blue">Authors</div>
+        <div class="col-sm-6 text-center bg-blue">
           Details / Edit / Delete
         </div>
       </div>
 
       <div
         *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}"
-        class="row m-2 border shadow-sm bg-white rounded">
+        class="row m-2 border shadowed bg-white rounded">
         <div class="col-sm-3 text-center my-auto">
           {{book.title}}
         </div>
@@ -41,9 +41,9 @@
                style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
         </div>
         <div class="col-sm-6 text-center ">
-          <button (click)="showDetails(book)" class="btn btn-sm btn-primary m-2">Details</button>
-          <button (click)="editBook(book)" class="btn btn-sm btn-secondary m-2">Edit</button>
-          <button (click)="deleteBookDialog(book)" class="btn btn-sm btn-danger m-2">Delete</button>
+          <button (click)="showDetails(book)" class="btn btn-sm btn-primary m-2 shadowed">Details</button>
+          <button (click)="editBook(book)" class="btn btn-sm btn-secondary m-2 shadowed">Edit</button>
+          <button (click)="deleteBookDialog(book)" class="btn btn-sm btn-danger m-2 shadowed">Delete</button>
         </div>
       </div>
       <app-upload-book *ngIf="addBookActivated" (added)="eventCaptured($event)" [editedBook]="book"></app-upload-book>
