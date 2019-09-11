@@ -48,6 +48,7 @@ export class DialogForgotPasswordComponent {
       this.loading = false;
       this.accept();
     }, error => {
+      this.loading = false;
       this.toastrService.error(error);
     });
 
