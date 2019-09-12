@@ -50,7 +50,26 @@ export class PreferredGenreService {
         }) as Observable<ResponsePageList<Genre>>;
   }
 
-  
 
+  addGenres(genres: Genre[]) {
+    return this.http.post('http://localhost:8080/addGenres', genres, {
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()}
+    }) as Observable<any>;
+  }
+
+
+  checkIfGenreExist(query: string) {
+    return this.http.get('http://localhost:8080/checkIfGenreExist', {
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()},
+      params: {query: query}
+    }) as Observable<any>;
+  }
+
+  
+  savePreferences(genres : Genre[]) {
+    return this.http.post('http://localhost:8080/preferences', genres, {
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()}
+    }) as Observable<any>;
+  }
 
 }
