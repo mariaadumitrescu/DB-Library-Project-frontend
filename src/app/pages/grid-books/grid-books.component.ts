@@ -3,6 +3,7 @@ import {Book} from '../../models/book';
 import {BookService} from '../../services/book.service';
 import {ResponsePageList} from '../../models/responsePageList';
 import * as CanvasJS from '../../../assets/js/canvasjs.min';
+import { UserPreferencesService } from 'src/app/services/user-preferences.service';
 
 
 @Component({
@@ -25,12 +26,14 @@ export class GridBooksComponent implements OnInit {
   searchedPaginatedBooks: ResponsePageList<Book>;
   books: Book[];
   searchedBooks: Book[];
+  recommendedBooks: Array<Book>;
   value: string;
   private p: any;
   private q: any;
   private flagSearch: boolean;
 
-  constructor(private bookService: BookService,private eRef: ElementRef) {
+  constructor(private bookService: BookService, private userPreferencesService : UserPreferencesService, private eRef: ElementRef) {
+
   }
 
   async initListOfBooks() {
@@ -43,13 +46,32 @@ export class GridBooksComponent implements OnInit {
       this.searchedPaginatedBooks = q;
       this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
+
+  }
+
+  async initPreferredListOfBooks() {
+    await this.userPreferencesService.getAllRecommendedBooks()
+        .subscribe(data => {
+        this.recommendedBooks = data;
+        });
+
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(q => {
+      this.searchedPaginatedBooks = q;
+      this.searchedBooks = this.searchedPaginatedBooks.pageList;
+    });
+
   }
 
 
   ngOnInit(): void {
     this.p =0;
     this.initListOfBooks();
-
+    
+    this.initPreferredListOfBooks();
+    // this.userPreferencesService.getAllRecommendedBooks()
+    //   .subscribe(data => {
+    //     this.recommendedBooks = data;
+    //   });
 
     // let chart = new CanvasJS.Chart("chartContainer", {
     //   animationEnabled: true,

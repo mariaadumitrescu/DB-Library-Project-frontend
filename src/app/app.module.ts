@@ -46,6 +46,9 @@ import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.compon
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+// import { PreferredGenresPageComponent } from './pages/preferred-genres-page/preferred-genres-page.component';
+
+
 import {DialogEditProfileComponent} from './services/dialog-edit-profile/dialog-edit-profile.component';
 import {DialogEditProfileService} from './services/dialog-edit-profile/dialog-edit-profile.service';
 import {ImageCropperModule} from 'ngx-image-cropper';
@@ -55,6 +58,11 @@ import {DialogRegisterComponent} from './services/dialog-register-profile/dialog
 import {DialogRegisterService} from './services/dialog-register-profile/dialog-register.service';
 import {DialogForgotPasswordComponent} from './services/dialog-forgot-password/dialog-forgot-password.component';
 import {DialogForgotPasswordService} from './services/dialog-forgot-password/dialog-forgot-password.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { PreferredGenresPageComponent } from './pages/preferred-genres-page/preferred-genres-page.component';
+
+
 import {DialogActivateAccountComponent} from './services/dialog-activate-account/dialog-activate-account.component';
 import {DialogActivateAccountService} from './services/dialog-activate-account/dialog-activate-account.service';
 
@@ -81,11 +89,14 @@ import {DialogActivateAccountService} from './services/dialog-activate-account/d
     BorrowedBooksComponent,
     DialogBannedComponent,
     BorrowListComponent,
+    NotFoundPageComponent,
+    PreferredGenresPageComponent,
     DialogEditProfileComponent,
     NotFoundPageComponent,
     DialogLoginComponent,
     DialogRegisterComponent,
     DialogForgotPasswordComponent,
+
     DialogActivateAccountComponent
 
 
@@ -106,7 +117,9 @@ import {DialogActivateAccountService} from './services/dialog-activate-account/d
     ModalModule.forRoot(),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
-    ImageCropperModule
+    ImageCropperModule,
+    DragDropModule,
+    DropDownsModule
   ],
   providers: [BookService,
     ForbiddenService,

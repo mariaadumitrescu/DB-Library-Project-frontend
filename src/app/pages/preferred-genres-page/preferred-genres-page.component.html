@@ -1,0 +1,26 @@
+<!-- <div class="menu">
+  <div>
+  <kendo-multiselect [data]="listItems"
+  [textField]="'name'"
+  [valueField]="'id'"
+  [placeholder]="'Select favorite genre...'" >
+  </kendo-multiselect >
+  </div>
+</div> -->
+
+<!-- <div>
+    Selected Values: {{selectedValues | json}}
+</div> -->
+
+<div class="example-wrapper">
+  <p>Preferred genres:</p>
+  <kendo-multiselect
+    [data]="listItems"
+    [textField]="'name'"
+    [valueField]="'id'"
+    [(ngModel)]="selectedValues"
+    [placeholder]="'Select favorite genre...'" >
+  >
+  </kendo-multiselect>
+  <button type="button" (click)="savePreferences()">Next</button>
+</div>
