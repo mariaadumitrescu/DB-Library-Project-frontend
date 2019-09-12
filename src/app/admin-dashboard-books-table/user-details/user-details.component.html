@@ -1,57 +1,63 @@
 <div class="content-book-detail shadowed card p-3 bg-white rounded">
   <div class="row">
     <div class="col-sm-auto">
-      <img class="shadowed" *ngIf="selectedUser.img; else noPhoto" [src]="'data:image/jpeg;base64,'+selectedUser.img.pic" height="250">
+      <img class="shadowed rounded-circle" *ngIf="selectedUser.img; else noPhoto"
+           [src]="'data:image/jpeg;base64,'+selectedUser.img.pic" height="250">
       <ng-template #noPhoto>
-        <img class="shadowed" src="../../../assets/images/no-profile-picture.jpg" height="250">
+        <img class="shadowed rounded-circle" src="../../../assets/images/no-profile-picture.jpg" height="250">
       </ng-template>
     </div>
     <div class="col-sm">
       <h3>{{selectedUser.firstName + " " + selectedUser.lastName}}</h3>
       <div>
-        <label for="email" style="white-space: pre">Email: </label>
+        <label class="font-weight-bold" for="email" style="white-space: pre">Email: </label>
         <div id="email" class="d-inline-flex" style="white-space:pre">{{selectedUser.email}}</div>
       </div>
       <div>
-        <label for="enabled" style="white-space: pre">IsEnabled: </label>
+        <label class="font-weight-bold" for="enabled" style="white-space: pre">Confirmed account: </label>
         <div id="enabled" class="d-inline-flex" style="white-space:pre">{{selectedUser.enabled}}</div>
       </div>
       <div>
-        <label for="admin" style="white-space: pre">IsAdmin: </label>
+        <label class="font-weight-bold" for="admin" style="white-space: pre">Has admin role: </label>
         <div id="admin" class="d-inline-flex" style="white-space:pre">{{selectedUser.admin}}</div>
       </div>
       <div>
-        <label for="banned" style="white-space: pre">IsBanned: </label>
+        <label class="font-weight-bold" for="banned" style="white-space: pre">Banned account: </label>
         <div id="banned" class="d-inline-flex" style="white-space:pre">{{selectedUser.banned}}</div>
       </div>
-      <div>
-        <label for="role" style="white-space: pre">Role: </label>
-        <div id="role" class="d-inline-flex" style="white-space:pre">{{selectedUser.roles[0].name}}</div>
+      <div *ngIf="selectedUser.banned && selectedUser.banUntil != null">
+        <label class="font-weight-bold" for="role" style="white-space: pre">Banned until: </label>
+        <div id="role" class="d-inline-flex" style="white-space:pre">{{selectedUser.banUntil}}</div>
       </div>
       <div>
-        <label for="permission" style="white-space: pre">Permissions: </label>
+        <label class="font-weight-bold" for="permission" style="white-space: pre">Permissions: </label>
         <div id="permission" class="d-inline-flex" style="white-space:pre">{{selectedUser.roles[0].description}}</div>
       </div>
 
       <div>
-        <label for="penalty" style="white-space: pre">Penalties: </label>
+        <label class="font-weight-bold" for="penalty" style="white-space: pre">Penalties: </label>
         <div id="penalty" *ngFor="let penalty of selectedUser.penalties; let isLast=last" class="d-inline-flex"
              style="white-space:pre">{{penalty['penaltyAddedDate']}}{{isLast ? '' : ', '}}</div>
       </div>
     </div>
   </div>
-  <div *ngIf="selectedUser.email!='librarymaster0@gmail.com'" class="row">
+  <div *ngIf="!selectedUser.admin" class="row">
     <div class="col-sm-auto mt-2 d-flex d-inline-flex">
-      <button *ngIf="!selectedUser.enabled" id="enable" class="btn btn-primary btn-sm mr-2 shadowed" (click)="activate()">Enable</button>
-      <button id="banButton" class="btn btn-primary btn-sm mr-2 shadowed" (click)="banOrUnBan()">Ban</button>
+      <button *ngIf="!selectedUser.enabled" id="enable" class="btn btn-primary btn-sm mr-2 shadowed"
+              (click)="activate()">Enable
+      </button>
+      <button [innerHTML]="selectedUser.banned?'Remove ban':'Permanently ban'" id="banButton"
+              class="btn btn-primary btn-sm mr-2 shadowed" (click)="banOrUnBan()">Ban
+      </button>
 
-      <form class="form-inline">
+      <form *ngIf="!selectedUser.banned" class="form-inline">
         <div class="form-group">
           <div class="input-group input-group-sm">
-            <input class="form-control datePicker" placeholder="Ban until..."
-                   name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelected()" >
+            <input class="form-control datePicker shadowed" placeholder="Ban until..."
+                   name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelected()">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary btn-sm calendar shadowed" (click)="d.toggle()" type="button"></button>
+              <button class="btn btn-outline-secondary btn-sm calendar shadowed" (click)="d.toggle()"
+                      type="button"></button>
             </div>
           </div>
         </div>
