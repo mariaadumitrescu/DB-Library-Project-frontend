@@ -1,6 +1,20 @@
 .register{
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+  background: linear-gradient(to bottom right, #0018A8, #0077EA, #57FBDB);
+  background-size: 600% 100%;
+  animation: gradientBG 7s linear infinite;
   padding: 3%;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .register-left{
   text-align: center;
@@ -27,7 +41,7 @@
 .register-left img{
   margin-top: 15%;
   margin-bottom: 5%;
-  width: 50%;
+  width: 80%;
   -webkit-animation: mover 2s infinite  alternate;
   animation: mover 1s infinite  alternate;
 }

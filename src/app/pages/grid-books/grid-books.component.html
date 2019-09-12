@@ -8,11 +8,9 @@
 
       <div class="position-fixed container bg-white" *ngIf=" value != '' && value && flagSearch && searchedPaginatedBooks.nrOfElements > 0">
         <table>
-          <tr
-            *ngFor="let book of searchedBooks | paginate: { id: 'searchPagination', itemsPerPage: 5, currentPage: q, totalItems: searchedPaginatedBooks.nrOfElements}">
+          <tr class="btn-link" [routerLink]="['../book-page']" [queryParams]="{'bookId': book.id}" *ngFor="let book of searchedBooks | paginate: { id: 'searchPagination', itemsPerPage: 5, currentPage: q, totalItems: searchedPaginatedBooks.nrOfElements}">
             <td style="width: 10%;">{{book.title}}</td>
           </tr>
-          <!--          <pagination-controls id="searchPagination" (pageChange)="pageSearchChanged($event)"></pagination-controls>-->
         </table>
       </div>
     </div>
@@ -55,6 +53,9 @@
   <div class="shadowed mb-3" id="chartContainer" style="height: 370px; width: 100%;"></div>
 
   <div class="shadowed mb-3" id="chartContainerPie" style="height: 370px; width: 100%;"></div>
+
+<!--  <div class="shadowed mb-3" id="chartContainer" style="height: 370px; width: 100%;"></div>-->
+<!--  <div class="shadowed mb-3" id="chartContainerPie" style="height: 370px; width: 100%;"></div>-->
 </div>
 
 

@@ -63,6 +63,9 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { PreferredGenresPageComponent } from './pages/preferred-genres-page/preferred-genres-page.component';
 
 
+import {DialogActivateAccountComponent} from './services/dialog-activate-account/dialog-activate-account.component';
+import {DialogActivateAccountService} from './services/dialog-activate-account/dialog-activate-account.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,6 +96,9 @@ import { PreferredGenresPageComponent } from './pages/preferred-genres-page/pref
     DialogLoginComponent,
     DialogRegisterComponent,
     DialogForgotPasswordComponent,
+
+    DialogActivateAccountComponent
+
 
   ],
   imports: [
@@ -127,11 +133,12 @@ import { PreferredGenresPageComponent } from './pages/preferred-genres-page/pref
     DialogLoginService,
     DialogRegisterService,
     DialogForgotPasswordService,
+    DialogActivateAccountService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ DialogConfirmComponent,DialogBannedComponent,DialogEditProfileComponent,DialogLoginComponent, DialogRegisterComponent,DialogForgotPasswordComponent ],
+  entryComponents: [ DialogConfirmComponent,DialogBannedComponent,DialogEditProfileComponent,DialogLoginComponent, DialogRegisterComponent,DialogForgotPasswordComponent,DialogActivateAccountComponent ],
 })
 export class AppModule {
 }
