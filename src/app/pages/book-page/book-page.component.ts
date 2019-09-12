@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,6 +12,7 @@ import { User } from 'src/app/models/user';
 import { empty } from 'rxjs';
 import { ResponsePageList } from 'src/app/models/responsePageList';
 import { FullUser } from 'src/app/models/fullUser';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -33,11 +34,13 @@ export class BookPageComponent implements OnInit {
   paginatedRatings: ResponsePageList<Rating>;
   ratings: any;
   private p: any;
-
+  private loading: boolean;
+  @Output() bookBorrowed: EventEmitter<boolean> = new EventEmitter<boolean>();
+  
   constructor(private route: ActivatedRoute, private router:Router,
      private bookService: BookService, private ratingService: RatingService,
      private authenticationService: AuthenticationService, private userBookService: UserBookService,
-     private userService: UserService) {
+     private userService: UserService, private toastrService:ToastrService) {
     //this.id = this.router.getCurrentNavigation().extras.state;
     this.route.queryParams.subscribe(params => {
       this.id = params['bookId'];
@@ -85,6 +88,38 @@ export class BookPageComponent implements OnInit {
       this.paginatedRatings = p;
       this.ratings = this.paginatedRatings.pageList;
     });
+  }
+  async borrow() {
+    this.loading = true;
+    const token = this.authenticationService.getToken();
+    this.decoded = jwt_decode(token);
+    let currentUser = await this.userService.getUserByEmail(this.decoded.sub).toPromise();
+    console.log(currentUser);
+
+    //get current date and add maximum-period days
+    let today = new Date();
+    const maximumBorrowedDays = 10;
+
+    today.setDate(today.getDate() + maximumBorrowedDays);
+
+    this.userBookService.addUserBook(currentUser, this.book, today.toISOString().slice(0, 10)).subscribe(
+      value => {
+        this.showSuccess();
+        this.bookBorrowed.emit(true);
+        this.loading = false;
+
+      },error => {
+        this.showError(error);
+        this.loading = false;
+      }
+    );
+  }
+  showSuccess() {
+    this.toastrService.success('The book with title: '+this.book.title+' was borrowed with success!', 'Enjoy!');
+  }
+
+  showError(error:string) {
+    this.toastrService.error(error, 'Error!');
   }
   
 }
