@@ -1,5 +1,10 @@
 <div class="modal-header">
-  <h5 class="modal-title">{{ title }}</h5>
+  <div *ngIf="!expiration; else permanentlyBanned">
+    <h5 class="modal-title">{{"This account is permanently banned! "}}</h5>
+  </div>
+  <ng-template #permanentlyBanned>
+    <h5 class="modal-title">{{"This account is banned until: " + expiration }}</h5>
+  </ng-template>
   <button type="button" class="close" aria-label="Close" (click)="dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
