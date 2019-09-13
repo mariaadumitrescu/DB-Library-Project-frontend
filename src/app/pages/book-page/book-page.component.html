@@ -31,6 +31,29 @@
 <div class="book-description" *ngIf="book">
   <pre id="book-desc-id">{{book.description}}</pre>
 </div>
+<div class="books-header">
+    <hr class="style1">
+    <h5 id="hh5">Books from the same genre</h5>
+</div>
+
+<div class="suggested-books"  *ngIf="paginatedBooks">  
+    <div *ngFor="let book of suggestedBooks | paginate: { id: 'bookPagination',itemsPerPage: 4, currentPage: 0,totalItems: paginatedBooks.nrOfElements}">
+      <div class="card text-center card-suggested">
+         <img class="shadowed" [src]="'data:image/jpeg;base64,'+book.img.pic" height="187.5" width="122" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)">
+         <div  id="cb" class="card-body d-flex flex-column">
+          <div class="d-flex d-flex flex-row justify-content-center">
+            <h6 class="bookTitle">{{book.title}}</h6>
+          </div>
+          <div class="d-flex flex-row justify-content-center autrs">
+            <div *ngFor="let author of book.authors; let isLast=last">
+              <div class="bookAuthor">{{author.name}}{{isLast ? '' : ', '}}</div>
+            </div>
+          </div>
+         </div>
+         
+      </div>
+    </div>
+</div>
 <body *ngIf="book">
   <div class="row bootstrap snippets">
       <!-- <div class="col-md-6 col-md-offset-2 col-sm-12"> -->

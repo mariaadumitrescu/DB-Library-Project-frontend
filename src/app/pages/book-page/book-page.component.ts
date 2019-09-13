@@ -32,8 +32,11 @@ export class BookPageComponent implements OnInit {
   ratingValue: any;
   descriptionValue: any;
   paginatedRatings: ResponsePageList<Rating>;
+  paginatedBooks: ResponsePageList<Book>;
   ratings: any;
+  suggestedBooks: any;
   private p: any;
+  private pg: any;
   private loading: boolean;
   @Output() bookBorrowed: EventEmitter<boolean> = new EventEmitter<boolean>();
   
@@ -61,10 +64,14 @@ export class BookPageComponent implements OnInit {
       });
     this.descriptionValue = '';
     this.initListOfBooks();
+    this.initListOfRatings();
+    
+  }
+  gotoDynamic(id: number) {
+    this.router.navigate(['/book-page'], {queryParams: {bookId: id}});
   }
 
   printValue(){
-    console.log(this.ratingValue);
     let today = new Date();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -75,13 +82,13 @@ export class BookPageComponent implements OnInit {
       });
     });
   }
-  initListOfBooks() {
+  initListOfRatings() {
     this.ratingService.getPaginatedRatings('id', 'ASC', '0', '3', this.id).subscribe(p => {
       this.paginatedRatings = p;
       this.ratings = this.paginatedRatings.pageList;
     });
   }
-  pageGridChanged(event) {
+  pageRatingChanged(event) {
     this.p = event;
     this.ratingService.getPaginatedRatings('id', 'ASC', (this.p - 1).toString(), '3', this.id).subscribe(p => {
 
@@ -89,12 +96,17 @@ export class BookPageComponent implements OnInit {
       this.ratings = this.paginatedRatings.pageList;
     });
   }
+  initListOfBooks() {
+    this.bookService.getSameGenreBooks('id', 'ASC', '0', '4', this.id).subscribe(p => {
+      this.paginatedBooks = p;
+      this.suggestedBooks = this.paginatedBooks.pageList;
+    });
+  }
   async borrow() {
     this.loading = true;
     const token = this.authenticationService.getToken();
     this.decoded = jwt_decode(token);
     let currentUser = await this.userService.getUserByEmail(this.decoded.sub).toPromise();
-    console.log(currentUser);
 
     //get current date and add maximum-period days
     let today = new Date();

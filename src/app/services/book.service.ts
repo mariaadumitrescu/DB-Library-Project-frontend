@@ -57,6 +57,18 @@ export class BookService {
             }
           }) as Observable<ResponsePageList<Book>>;
   }
+  getSameGenreBooks(orderBy: string, direction: string, page: string, size: string, id: string) {
+    return this.http.get('http://localhost:8080/sameGenreBooks', {
+          headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()},
+          params: {
+            orderBy: orderBy,
+            direction: direction,
+            page: page,
+            size: size,
+            id: id
+          }
+        }) as Observable<ResponsePageList<Book>>;
+}
 
   addBook(book: Book) {
     return this.http.post('http://localhost:8080/addBook', book, {
