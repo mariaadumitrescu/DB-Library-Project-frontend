@@ -31,7 +31,7 @@ export class GridBooksComponent implements OnInit {
   private books: Book[];
   private searchedBooks: Book[];
   private preferredBooks: Book[];
-  private value: string;
+  private value: string;  
   private p: any;
   private q: any;
   private r: any;
@@ -50,6 +50,7 @@ export class GridBooksComponent implements OnInit {
     this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(p => {
       this.paginatedPaginatedBooks = p;
       this.books = this.paginatedPaginatedBooks.pageList;
+  
     });
 
     this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(q => {

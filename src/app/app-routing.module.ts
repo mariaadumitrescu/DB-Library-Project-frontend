@@ -12,6 +12,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import {paths} from './app-paths';
 import {PathResolveServiceService} from './services/path-resolve-service.service';
 import {AdminGuard} from './helpers/admin.guard';
+import { PreferredGenresPageComponent } from './pages/preferred-genres-page/preferred-genres-page.component';
 
 const routes: Routes = [
   { path: paths.gridBooks, component: GridBooksComponent, canActivate: [AuthGuard] },
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: paths.adminTable, component: AdminDashboardBooksTableComponent, canActivate: [AuthGuard,AdminGuard]},
   { path: paths.borrowedBooks, component: BorrowedBooksComponent, canActivate: [AuthGuard]},
-
+  {path: paths.preferredGenres, component:PreferredGenresPageComponent},
   {path: '**', resolve: { path: PathResolveServiceService },component: NotFoundPageComponent}
 ];
 

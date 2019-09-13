@@ -10,6 +10,8 @@ import * as jwt_decode from "jwt-decode";
 import { UserBookService } from 'src/app/services/userBook.service';
 import { User } from 'src/app/models/user';
 import { empty } from 'rxjs';
+import { ResponsePageList } from 'src/app/models/responsePageList';
+import { FullUser } from 'src/app/models/fullUser';
 
 
 @Component({
@@ -25,7 +27,12 @@ export class BookPageComponent implements OnInit {
   title: any;
   rating: Rating;
   decoded: any;
-  currentUser: User;
+  currentUser: FullUser;
+  ratingValue: any;
+  descriptionValue: any;
+  paginatedRatings: ResponsePageList<Rating>;
+  ratings: any;
+  private p: any;
 
   constructor(private route: ActivatedRoute, private router:Router,
      private bookService: BookService, private ratingService: RatingService,
@@ -41,10 +48,6 @@ export class BookPageComponent implements OnInit {
     //this.id = history.state;
     this.bookService.getBookById(this.id).subscribe(p=> {
       this.book = p;
-      this.authors = this.book.authors;
-      this.averageStars = this.book.averageStars;
-      this.title = this.book.title;
-      // console.log(this.book);
     });
 
     const token = this.authenticationService.getToken();
@@ -52,21 +55,36 @@ export class BookPageComponent implements OnInit {
     this.userService.getUserByEmail(this.decoded.sub).toPromise()
       .then(t =>{
         this.currentUser = t;
-        console.log(this.currentUser.firstName);
       });
+    this.descriptionValue = '';
+    this.initListOfBooks();
   }
 
-  printValue(rating: number){
-    console.log(rating);
-    
-    this.rating.user = this.currentUser;
-    var today = new Date();
-    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    this.rating.date = today;
-    this.rating.value = rating;
-    this.rating.description = '';
-    this.ratingService.addRatings(this.rating, this.id);
+  printValue(){
+    console.log(this.ratingValue);
+    let today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    this.rating = new Rating(this.ratingValue, this.descriptionValue, this.currentUser, new Date());
+    this.ratingService.addRatings(this.rating, this.id).subscribe(t=>{
+      this.bookService.getBookById(this.id).subscribe(p=> {
+        this.book = p;
+      });
+    });
+  }
+  initListOfBooks() {
+    this.ratingService.getPaginatedRatings('id', 'ASC', '0', '3', this.id).subscribe(p => {
+      this.paginatedRatings = p;
+      this.ratings = this.paginatedRatings.pageList;
+    });
+  }
+  pageGridChanged(event) {
+    this.p = event;
+    this.ratingService.getPaginatedRatings('id', 'ASC', (this.p - 1).toString(), '3', this.id).subscribe(p => {
+
+      this.paginatedRatings = p;
+      this.ratings = this.paginatedRatings.pageList;
+    });
   }
   
 }

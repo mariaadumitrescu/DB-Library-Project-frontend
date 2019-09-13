@@ -3,5 +3,6 @@ export const paths = {
     bookPage: 'book-page',
     forbidden: 'forbidden',
     adminTable: 'admin-table',
-    borrowedBooks: 'borrowed-books'
+    borrowedBooks: 'borrowed-books',
+    preferredGenres: "preferred-genres"
   }

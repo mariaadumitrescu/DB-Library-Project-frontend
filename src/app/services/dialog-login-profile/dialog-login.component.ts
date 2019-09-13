@@ -80,7 +80,14 @@ export class DialogLoginComponent implements OnInit {
             //clear old penalties
             this.userService.clearPenalties(user);
             this.userService.checkForPenalties(user).subscribe(p => console.log(p));
-            this.router.navigate(['/grid-books']);
+            
+            debugger;
+            if (user.preferences.length === 0) {
+              this.router.navigate(['/preferred-genres']);
+            } else {
+              this.router.navigate(['/grid-books']);
+            }
+      
             this.accept();
           });
         },
