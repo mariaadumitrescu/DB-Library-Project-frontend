@@ -3,7 +3,10 @@ import {Book} from '../../models/book';
 import {BookService} from '../../services/book.service';
 import {ResponsePageList} from '../../models/responsePageList';
 import * as CanvasJS from '../../../assets/js/canvasjs.min';
-import { UserPreferencesService } from 'src/app/services/user-preferences.service';
+import {FullUser} from '../../models/fullUser';
+import {UserService} from '../../services/user.service';
+import {AuthenticationService} from '../../services/autentication.service';
+import * as jwt_decode from 'jwt-decode';
 
 
 @Component({
@@ -15,31 +18,39 @@ export class GridBooksComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickOut(event) {
-    if(this.eRef.nativeElement.contains(event.target)) {
+    if (this.eRef.nativeElement.contains(event.target)) {
       this.value = null;
     }
   }
 
   formData: FormData;
 
-  paginatedBooks: ResponsePageList<Book>;
-  searchedPaginatedBooks: ResponsePageList<Book>;
-  books: Book[];
-  searchedBooks: Book[];
-  recommendedBooks: Array<Book>;
-  value: string;
+  private paginatedPaginatedBooks: ResponsePageList<Book>;
+  private searchedPaginatedBooks: ResponsePageList<Book>;
+  private preferredPaginatedBooks: ResponsePageList<Book>;
+  private books: Book[];
+  private searchedBooks: Book[];
+  private preferredBooks: Book[];
+  private value: string;  
   private p: any;
   private q: any;
+  private r: any;
   private flagSearch: boolean;
+  private currentUser: FullUser;
 
-  constructor(private bookService: BookService, private userPreferencesService : UserPreferencesService, private eRef: ElementRef) {
 
+  constructor(private bookService: BookService,
+              private eRef: ElementRef,
+              private userService: UserService,
+              private authenticationService: AuthenticationService) {
   }
 
-  async initListOfBooks() {
-    await this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(p => {
-      this.paginatedBooks = p;
-      this.books = this.paginatedBooks.pageList;
+  initListOfBooks() {
+
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(p => {
+      this.paginatedPaginatedBooks = p;
+      this.books = this.paginatedPaginatedBooks.pageList;
+  
     });
 
     this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(q => {
@@ -47,31 +58,23 @@ export class GridBooksComponent implements OnInit {
       this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
 
-  }
-
-  async initPreferredListOfBooks() {
-    await this.userPreferencesService.getAllRecommendedBooks()
-        .subscribe(data => {
-        this.recommendedBooks = data;
-        });
-
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(q => {
-      this.searchedPaginatedBooks = q;
-      this.searchedBooks = this.searchedPaginatedBooks.pageList;
+    this.bookService.getPreferredPaginatedBooks('id', 'ASC', '0', '3', this.currentUser.id.toString()).subscribe(r => {
+      this.preferredPaginatedBooks = r;
+      this.preferredBooks = this.preferredPaginatedBooks.pageList;
     });
 
   }
 
 
-  ngOnInit(): void {
-    this.p =0;
+  async ngOnInit() {
+    this.p = 0;
+    this.q = 0;
+    this.r = 0;
+    const token = this.authenticationService.getToken();
+    let decode = jwt_decode(token);
+    let email = decode['sub'];
+    this.currentUser = await this.userService.getUserByEmail(email).toPromise();
     this.initListOfBooks();
-    
-    this.initPreferredListOfBooks();
-    // this.userPreferencesService.getAllRecommendedBooks()
-    //   .subscribe(data => {
-    //     this.recommendedBooks = data;
-    //   });
 
     // let chart = new CanvasJS.Chart("chartContainer", {
     //   animationEnabled: true,
@@ -131,8 +134,17 @@ export class GridBooksComponent implements OnInit {
     this.p = event;
     this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '3', '').subscribe(p => {
 
-      this.paginatedBooks = p;
-      this.books = this.paginatedBooks.pageList;
+      this.paginatedPaginatedBooks = p;
+      this.books = this.paginatedPaginatedBooks.pageList;
+    });
+  }
+
+  preferredGridChanged(event) {
+    this.r = event;
+    this.bookService.getPreferredPaginatedBooks('id', 'ASC', (this.r - 1).toString(), '3', this.currentUser.id.toString()).subscribe(r => {
+
+      this.preferredPaginatedBooks = r;
+      this.preferredBooks = this.preferredPaginatedBooks.pageList;
     });
   }
 
@@ -146,22 +158,14 @@ export class GridBooksComponent implements OnInit {
 
   }
 
-  pageSearchChanged(event) {
-    this.q = event;
-    this.bookService.getPaginatedBooks('id', 'ASC', (this.q - 1).toString(), '5', this.value).subscribe(q => {
-      this.searchedPaginatedBooks = q;
-      this.searchedBooks = this.searchedPaginatedBooks.pageList;
-    });
-  }
-
   receiveMessage(event) {
     this.formData = event;
   }
 
   bookBorrowed(event: boolean) {
     this.bookService.getPaginatedBooks('id', 'ASC', this.p.toString(), '3', '').subscribe(p => {
-      this.paginatedBooks = p;
-      this.books = this.paginatedBooks.pageList;
+      this.paginatedPaginatedBooks = p;
+      this.books = this.paginatedPaginatedBooks.pageList;
     });
   }
 

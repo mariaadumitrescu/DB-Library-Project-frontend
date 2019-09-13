@@ -13,7 +13,7 @@ import {FullUser} from '../models/fullUser';
 export class AuthGuard implements CanActivate {
 
   private decoded: any;
-  private currentUser: FullUser;
+  private updatedUser: FullUser;
 
   constructor(
     private router: Router,
@@ -25,31 +25,31 @@ export class AuthGuard implements CanActivate {
   }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const token = this.authenticationService.getToken();
-    this.decoded = jwt_decode(token);
-    let email = this.decoded['sub'];
-    this.currentUser = await this.userService.getUserByEmail(email).toPromise();
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
 
-    if (new Date(this.currentUser.banUntil) < new Date()) {
-      this.currentUser.banned =false;
-      this.currentUser.banUntil = null;
-      await this.userService.updateUser(this.currentUser).toPromise();
-      await this.userService.getUserByEmail(email).toPromise();
-    }
+      const token = this.authenticationService.getToken();
+      this.decoded = jwt_decode(token);
+      let email = this.decoded['sub'];
+      this.updatedUser = await this.userService.getUserByEmail(email).toPromise();
+      if (new Date(this.updatedUser.banUntil) < new Date()) {
+        this.updatedUser.banned =false;
+        this.updatedUser.banUntil = null;
+        await this.userService.updateUser(this.updatedUser).toPromise();
+        await this.userService.getUserByEmail(email).toPromise();
+      }
 
-
-    if (this.currentUser) {
       const date = new Date(0).setUTCSeconds(this.decoded.exp);
       if (date.valueOf() > new Date().valueOf()) {
-        if (this.currentUser.enabled) {
-          if (!this.currentUser.banned) {
+        if (this.updatedUser.enabled) {
+          if (!this.updatedUser.banned) {
             return true;
           } else {
             this.bannedUserDialog();
             return false;
           }
         } else {
-          this.notEnabledUserDialog(this.decoded.sub);
+          this.notEnabledUserDialog();
           return false;
         }
       } else {
@@ -66,7 +66,7 @@ export class AuthGuard implements CanActivate {
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
-  notEnabledUserDialog(email: string) {
+  notEnabledUserDialog() {
     this.activateAccountService.confirm('This account is not activated', 'Please activate your account').catch(() => {
       this.authenticationService.logout();
       console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)');

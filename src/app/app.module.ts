@@ -65,6 +65,7 @@ import { PreferredGenresPageComponent } from './pages/preferred-genres-page/pref
 
 import {DialogActivateAccountComponent} from './services/dialog-activate-account/dialog-activate-account.component';
 import {DialogActivateAccountService} from './services/dialog-activate-account/dialog-activate-account.service';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [

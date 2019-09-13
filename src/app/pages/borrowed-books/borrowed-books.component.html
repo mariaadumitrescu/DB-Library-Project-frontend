@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
   <h2 class="display-2 font-italic mt-5 mb-5 text-center">Welcome back!</h2>
-  <div class="d-flex row text-center justify-content-center" *ngIf="currentUser">
+  <div class="d-flex row text-center justify-content-b" *ngIf="currentUser">
     <div class="d-flex flex-column flex-sm-fill align-items-center">
       <img *ngIf="currentUser.img; else anotherImage" class="rounded-circle mb-3 imgShadow"
            [src]="'data:image/jpeg;base64,'+currentUser.img.pic" width="300" height="300">
@@ -19,14 +19,52 @@
       <div class="d-flex flex-row">
         <button [innerHTML]="showBorrowed?'Hide borrowed list':'Show borrowed list'"
                 class="btn btn-primary btn-sm mt-2 mr-2 shadowed" (click)="showBorrowedBooks()"></button>
+        <button [innerHTML]="!showGenreModule?'Show edit preferred genres':'Hide edit preferred genres'"
+                class="btn btn-secondary btn-sm mt-2 mr-2 shadowed" (click)="showGenreEditModule()"></button>
         <button class="btn btn-danger btn-sm mt-2 shadowed" (click)="editAccount()">Edit account</button>
       </div>
     </div>
     <div class="d-flex flex-sm-column  flex-sm-fill" *ngIf="showBorrowed">
       <app-borrow-list [currentUser]="currentUser"></app-borrow-list>
     </div>
+    <div class="d-flex flex-sm-row  flex-sm-fill text-left" *ngIf="showGenreModule">
+      <div class="example-container">
+        <h5>Available genres</h5>
+
+        <div style="height: 305px"
+             cdkDropList
+             #todoList="cdkDropList"
+             [cdkDropListData]="available"
+             [cdkDropListConnectedTo]="[doneList]"
+             class="example-list  overflow-auto scrollbar-custom-style shadowed"
+             (cdkDropListDropped)="drop($event)">
+          <div class="card border border-info card-body m-2 border-primary shadowed" *ngFor="let item of available" cdkDrag>{{item}}</div>
+        </div>
+      </div>
+
+      <div class="example-container">
+        <h5>Preferred genres</h5>
+
+        <div style="height: 305px"
+             cdkDropList
+             #doneList="cdkDropList"
+             [cdkDropListData]="selected"
+             [cdkDropListConnectedTo]="[todoList]"
+             class="example-list  overflow-auto scrollbar-custom-style shadowed"
+             (cdkDropListDropped)="drop($event)">
+          <div class="card border border-secondary card-body m-2 border-success shadowed" *ngFor="let item of selected" cdkDrag>{{item}}</div>
+        </div>
+        <div class="text-right">
+          <button class="btn btn-success btn-sm mt-2 shadowed align-self-center" (click)="updatePreferredGenres()">Update preferred genres</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
+
+
 
 
 
