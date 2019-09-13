@@ -103,7 +103,6 @@ export class BorrowedBooksComponent implements OnInit, OnDestroy {
     await this.userService.getUserByEmail(this.currentUser.email).toPromise().then(user => {
       this.currentUser = user;
       this.toastrService.success('Preferred genres list was updated');
-      console.log(this.currentUser);
     });
   }
 }

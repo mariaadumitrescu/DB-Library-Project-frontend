@@ -43,7 +43,11 @@ export class AuthGuard implements CanActivate {
       if (date.valueOf() > new Date().valueOf()) {
         if (this.updatedUser.enabled) {
           if (!this.updatedUser.banned) {
-            return true;
+            if(this.updatedUser.skipped){
+              return true;
+            }else {
+              await this.router.navigate(['/preferred-genres']);
+            }
           } else {
             this.bannedUserDialog();
             return false;
