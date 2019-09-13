@@ -58,7 +58,7 @@ export class GridBooksComponent implements OnInit {
       this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
 
-    this.bookService.getPreferredPaginatedBooks('id', 'ASC', '0', '3', this.currentUser.id.toString()).toPromise().then(r => {
+    this.bookService.getPreferredPaginatedBooks('averageStars', 'DESC', '0', '3', this.currentUser.id.toString()).toPromise().then(r => {
       this.preferredPaginatedBooks = r;
       this.preferredBooks = this.preferredPaginatedBooks.pageList;
     });
@@ -143,7 +143,7 @@ export class GridBooksComponent implements OnInit {
 
   preferredGridChanged(event) {
     this.r = event;
-    this.bookService.getPreferredPaginatedBooks('id', 'ASC', (this.r - 1).toString(), '3', this.currentUser.id.toString()).subscribe(r => {
+    this.bookService.getPreferredPaginatedBooks('averageStars', 'DESC', (this.r - 1).toString(), '3', this.currentUser.id.toString()).subscribe(r => {
 
       this.preferredPaginatedBooks = r;
       this.preferredBooks = this.preferredPaginatedBooks.pageList;
