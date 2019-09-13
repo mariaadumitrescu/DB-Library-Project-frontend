@@ -6,7 +6,7 @@
     <div class="col-sm">
       <h3>{{selectedBook.title}}</h3>
       <div class="rating d-flex align-items-center mr-2 ">
-        <div class="mr-2">{{selectedBook.averageStars.toFixed(1)}}</div>
+        <div class="mr-2 font-weight-bold">{{selectedBook.averageStars.toFixed(1)}}</div>
         <ng-template #t let-fill="fill">
         <span class="star" [class.full]="fill === 100">
           <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
@@ -14,28 +14,28 @@
         </ng-template>
         <ngb-rating class="mb-1 mr-1" [(rate)]="selectedBook.averageStars" [starTemplate]="t" [readonly]="true"
                     max="5"></ngb-rating>
-        <div class="d-inline-flex">ISBN: {{selectedBook.isbn}}</div>
+        <div class="d-inline-flex font-weight-bold">ISBN: {{selectedBook.isbn}}</div>
       </div>
       <div>
-        <label for="authors" style="white-space: pre">Authors: </label>
+        <label class="font-weight-bold" for="authors" style="white-space: pre">Authors: </label>
         <div id="authors" *ngFor="let author of selectedBook.authors; let isLast=last" class="d-inline-flex"
              style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
       </div>
       <div>
-        <label for="genres" style="white-space: pre">Genres: </label>
+        <label class="font-weight-bold" for="genres" style="white-space: pre">Genres: </label>
         <div id="genres" *ngFor="let genre of selectedBook.genres; let isLast=last" class="d-inline-flex"
              style="white-space:pre">{{genre.name}}{{isLast ? '' : ', '}}</div>
       </div>
       <div>
-        <label for="publishingHouse" style="white-space: pre">Publishing house: </label>
+        <label class="font-weight-bold" for="publishingHouse" style="white-space: pre">Publishing house: </label>
         <div id="publishingHouse" class="d-inline-flex" style="white-space:pre">{{selectedBook.publishingHouse}}</div>
       </div>
       <div>
-        <label for="publishingYear" style="white-space: pre">Publishing year: </label>
+        <label class="font-weight-bold" for="publishingYear" style="white-space: pre">Publishing year: </label>
         <div id="publishingYear" class="d-inline-flex" style="white-space:pre">{{selectedBook.year}}</div>
       </div>
       <div>
-        <label for="stock" style="white-space: pre">Stock: </label>
+        <label class="font-weight-bold" for="stock" style="white-space: pre">Stock: </label>
         <div id="stock" class="d-inline-flex" style="white-space:pre">{{selectedBook.stock}}</div>
       </div>
     </div>
