@@ -28,9 +28,9 @@ export class GridBooksComponent implements OnInit {
   private paginatedPaginatedBooks: ResponsePageList<Book>;
   private searchedPaginatedBooks: ResponsePageList<Book>;
   private preferredPaginatedBooks: ResponsePageList<Book>;
-  private books: Book[];
-  private searchedBooks: Book[];
-  private preferredBooks: Book[];
+  private books: Book[] = [];
+  private searchedBooks: Book[] = [];
+  private preferredBooks: Book[] = [];
   private value: string;
   private p: any;
   private q: any;
