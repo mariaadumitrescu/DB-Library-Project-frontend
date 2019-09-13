@@ -4,6 +4,7 @@ import {Book} from '../models/book';
 import {interval, Observable} from 'rxjs';
 import {ResponsePageList} from '../models/responsePageList';
 import {AuthenticationService} from './autentication.service';
+import { Page } from '../models/Page';
 
 
 @Injectable()
@@ -79,6 +80,19 @@ export class BookService {
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
       }
     });
+  }
+
+  findPreferredBooks(orderBy: string, direction: string, page: string, size: string, query: string){
+    return this.http.get('http://localhost:8080/preferredBooks', {
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()},
+      params: {
+        orderBy: orderBy,
+        direction: direction,
+        page: page,
+        size: size,
+        query: query
+      }
+    }) as Observable<Page<Book>>;
   }
 
 }

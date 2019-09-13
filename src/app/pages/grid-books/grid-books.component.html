@@ -20,7 +20,7 @@
   </div>
 
     <div *ngIf="paginatedBooks" class="container-widget justify-content-around mt-3">
-      <div *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
+      <div *ngFor="let book of books | paginate: { id: 'gridPagination1',itemsPerPage: 3, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
         <div>
           <book-grid-icon (bookBorrowed)="bookBorrowed($event)" class="widget" [book]="book"></book-grid-icon>
         </div>
@@ -30,15 +30,15 @@
       {{formData}}
     </div>
   <div class="text-center">
-    <pagination-controls  id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
+    <pagination-controls  id="gridPagination1" (pageChange)="pageGridChangedOnPaginate($event)"></pagination-controls>
 
   </div>
 
   <!-- <div>{{recommendedBooks | json}}</div> -->
   <div class="recommend"> <p>Books we recommend based on your favorite genres:</p></div>
   <br>
-  <div *ngIf="paginatedBooks" class="container-widget justify-content-around mt-3">
-      <div *ngFor="let book of recommendedBooks | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedBooks.nrOfElements}">
+  <div *ngIf="recommendedBooks" class="container-widget justify-content-around mt-3">
+      <div *ngFor="let book of recommendedBooks | paginate: { id: 'gridPagination2',itemsPerPage: 3, currentPage: currentRecommendPage,totalItems: recommendedBooksSearch.totalElements}">
         <div>
           <book-grid-icon (bookBorrowed)="bookBorrowed($event)" class="widget" [book]="book"></book-grid-icon>
         </div>
@@ -48,7 +48,7 @@
       {{formData}}
     </div>
   <div class="text-center">
-  <pagination-controls  id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
+  <pagination-controls  id="gridPagination2" (pageChange)="pageGridChangedOnRecommend($event)"></pagination-controls>
 
   </div>
 

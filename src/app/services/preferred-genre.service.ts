@@ -65,11 +65,13 @@ export class PreferredGenreService {
     }) as Observable<any>;
   }
 
-  
+
   savePreferences(genres : Genre[]) {
     return this.http.post('http://localhost:8080/preferences', genres, {
       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.authenticationService.getToken()}
     }) as Observable<any>;
   }
+
+
 
 }

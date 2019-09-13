@@ -4,6 +4,7 @@ import {BookService} from '../../services/book.service';
 import {ResponsePageList} from '../../models/responsePageList';
 import * as CanvasJS from '../../../assets/js/canvasjs.min';
 import { UserPreferencesService } from 'src/app/services/user-preferences.service';
+import { Page } from 'src/app/models/Page';
 
 
 @Component({
@@ -19,10 +20,12 @@ export class GridBooksComponent implements OnInit {
   searchedPaginatedBooks: ResponsePageList<Book>;
   books: Book[];
   searchedBooks: Book[];
+  recommendedBooksSearch: Page<Book>;
   recommendedBooks: Array<Book>;
   value: string;
   private p: any;
   private q: any;
+  private currentRecommendPage: number;
   private flagSearch: boolean;
 
   constructor(private bookService: BookService, private userPreferencesService : UserPreferencesService) {
@@ -42,16 +45,11 @@ export class GridBooksComponent implements OnInit {
   }
 
   async initPreferredListOfBooks() {
-    await this.userPreferencesService.getAllRecommendedBooks()
-        .subscribe(data => {
-        this.recommendedBooks = data;
-        });
-
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(q => {
-      this.searchedPaginatedBooks = q;
-      this.searchedBooks = this.searchedPaginatedBooks.pageList;
-    });
-
+    await this.bookService.findPreferredBooks('id', 'ASC', '0', '3', '')
+      .subscribe(q => {
+        this.recommendedBooksSearch = q;
+        this.recommendedBooks = q.content;
+      });
   }
 
 
@@ -119,13 +117,24 @@ export class GridBooksComponent implements OnInit {
 
   }
 
-  pageGridChanged(event) {
+  pageGridChangedOnPaginate(event) {
     this.p = event;
     this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '3', '').subscribe(p => {
 
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
     });
+  }
+
+  pageGridChangedOnRecommend(event) {
+    this.currentRecommendPage = event;
+
+    this.bookService.findPreferredBooks('id', 'ASC', (this.currentRecommendPage - 1).toString(), '3', '')
+      .subscribe(q => {
+        this.recommendedBooksSearch = q;
+        this.recommendedBooks = q.content;
+      });
+
   }
 
   inputSearchChanged() {
