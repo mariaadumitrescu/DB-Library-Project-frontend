@@ -31,7 +31,7 @@ export class GridBooksComponent implements OnInit {
   private books: Book[];
   private searchedBooks: Book[];
   private preferredBooks: Book[];
-  private value: string;  
+  private value: string;
   private p: any;
   private q: any;
   private r: any;
@@ -47,18 +47,18 @@ export class GridBooksComponent implements OnInit {
 
   initListOfBooks() {
 
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').toPromise().then(p => {
       this.paginatedPaginatedBooks = p;
       this.books = this.paginatedPaginatedBooks.pageList;
-  
+
     });
 
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').subscribe(q => {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').toPromise().then(q => {
       this.searchedPaginatedBooks = q;
       this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
 
-    this.bookService.getPreferredPaginatedBooks('id', 'ASC', '0', '3', this.currentUser.id.toString()).subscribe(r => {
+    this.bookService.getPreferredPaginatedBooks('id', 'ASC', '0', '3', this.currentUser.id.toString()).toPromise().then(r => {
       this.preferredPaginatedBooks = r;
       this.preferredBooks = this.preferredPaginatedBooks.pageList;
     });
@@ -73,8 +73,10 @@ export class GridBooksComponent implements OnInit {
     const token = this.authenticationService.getToken();
     let decode = jwt_decode(token);
     let email = decode['sub'];
-    this.currentUser = await this.userService.getUserByEmail(email).toPromise();
-    this.initListOfBooks();
+    await this.userService.getUserByEmail(email).toPromise().then(user=> {
+      this.currentUser = user;
+      this.initListOfBooks();
+    });
 
     // let chart = new CanvasJS.Chart("chartContainer", {
     //   animationEnabled: true,

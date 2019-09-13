@@ -59,13 +59,12 @@ import {DialogRegisterService} from './services/dialog-register-profile/dialog-r
 import {DialogForgotPasswordComponent} from './services/dialog-forgot-password/dialog-forgot-password.component';
 import {DialogForgotPasswordService} from './services/dialog-forgot-password/dialog-forgot-password.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { PreferredGenresPageComponent } from './pages/preferred-genres-page/preferred-genres-page.component';
 
 
 import {DialogActivateAccountComponent} from './services/dialog-activate-account/dialog-activate-account.component';
 import {DialogActivateAccountService} from './services/dialog-activate-account/dialog-activate-account.service';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import {DropDownsModule} from '@progress/kendo-angular-dropdowns';
 
 @NgModule({
   declarations: [
