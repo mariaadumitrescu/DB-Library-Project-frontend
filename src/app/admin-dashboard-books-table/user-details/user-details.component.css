@@ -10,3 +10,14 @@ button.calendar, button.calendar:active {
   width: 100px!important;
 }
 
+pagination-controls ::ng-deep .ngx-pagination .current{
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background-color: #0077EA;
+}
+
+pagination-controls /deep/ ul {
+  padding-inline-start: 0px!important;
+  margin-block-start:0px!important;
+  margin-left: 0px!important;
+}
+

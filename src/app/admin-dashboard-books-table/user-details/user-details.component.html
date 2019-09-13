@@ -66,5 +66,52 @@
 
     </div>
   </div>
+
+
+  <div class="container-user-dashboard" *ngIf="nrOfElements">
+    <div class="row align-items-center mt-3">
+      <div class="col-auto text-center mr-2">
+      </div>
+    </div>
+    <div class="row mr-2 ml-2 bg-blue shadowed">
+      <div class="col-sm-3 text-center bg-blue">Title</div>
+      <div class="col-sm-3 text-center bg-blue">Authors</div>
+      <div class="col-sm-3 text-center bg-blue">Return date</div>
+      <div class="col-sm-3 text-center bg-blue">
+        Return / View
+      </div>
+    </div>
+
+
+    <div
+      [ngClass]="{'border-danger': borrow.generatedPenalty == true,'border-success': borrow.generatedPenalty == false }"
+      *ngFor="let borrow of borrows | paginate: { id: 'userListGridPagination',itemsPerPage: 5, currentPage: p,totalItems: nrOfElements}"
+      class="row m-2 border  rounded shadowed">
+      <div class="col-sm text-center my-auto">
+        {{borrow.book.title}}
+      </div>
+      <div class="col-sm text-center my-auto">
+        <div class="d-flex flex-row justify-content-center">
+          <div id="authors" *ngFor="let author of borrow.book.authors; let isLast=last" class="d-flex d-inline-flex"
+               style="white-space:pre">{{author.name}}{{isLast ? '' : ', '}}</div>
+        </div>
+      </div>
+      <div class="col-sm text-center my-auto">
+        {{borrow.return_date}}
+      </div>
+      <div class="col-sm text-center ">
+        <button [disabled]="borrow.generatedPenalty==true && !currentUser.admin" class="btn btn-success m-2 shadowed"
+                (click)="returnBorrowBook(borrow)">
+          Return
+        </button>
+      </div>
+    </div>
+    <div class="text-center ml-0">
+      <pagination-controls id="userListGridPagination"
+                           (pageChange)="pageGridChanged($event)"></pagination-controls>
+    </div>
+  </div>
+
+
 </div>
 
