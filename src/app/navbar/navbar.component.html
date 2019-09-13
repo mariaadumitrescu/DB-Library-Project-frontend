@@ -9,12 +9,23 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar16" [ngClass]="{ 'show': navbarOpen }">
         <ul class="navbar-nav ml-auto">
-  
+
           <li class="nav-item mt-3 mb-3"><a routerLink="/grid-books" class="btn-small btn-modified apply-font-dancing-script">
             <i class="fa fa-home"></i> Home</a></li>
-          <li *ngIf="fullUser" class="nav-item mt-3 mb-3"><a class="btn-small btn-modified apply-font-dancing-script">My Books</a></li>
-  
-  
+
+          <li class="nav-item mt-3 mb-3" ngbDropdown>
+            <a class="btn-small btn-modified apply-font-dancing-script" ngbDropdownToggle
+               id="navbarDropdown3">
+              Top books
+            </a>
+            <div ngbDropdownMenu aria-labelledby="navbarDropdown4"
+                 class="dropdown-menu dropdown-menu-right mt-3 apply-font-dancing-script">
+              <a class="dropdown-item apply-font-dancing-script " routerLink="/top-rated" routerLinkActive="active">Top rated</a>
+              <a class="dropdown-item apply-font-dancing-script " routerLink="/top-borrowed" routerLinkActive="active">Top borrowed</a>
+            </div>
+          </li>
+
+
           <li *ngIf="fullUser" class="nav-item mt-3 mb-3" ngbDropdown>
             <a class="btn-small btn-modified apply-font-dancing-script" ngbDropdownToggle
                id="navbarDropdown2">
@@ -40,4 +51,3 @@
       </div>
     </div>
   </nav>
-  

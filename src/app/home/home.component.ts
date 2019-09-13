@@ -77,7 +77,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
-      debugger;
       this.router.navigate(['/grid-books']);
     }
 
