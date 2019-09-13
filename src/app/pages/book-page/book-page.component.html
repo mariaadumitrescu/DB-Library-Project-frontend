@@ -16,7 +16,7 @@
           <p>{{book.averageStars | number:'1.2-2'}}</p>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     </div>
-    <button [disabled]="book.stock==0" [ngClass]="{'btn-danger': book.stock==0}" [innerHTML]="book.stock==0?'Out of stock':'BORROW ME!'" class="button"></button>
+    <button [disabled]="book.stock==0" [ngClass]="{'btn-danger': book.stock==0}" [innerHTML]="book.stock==0?'Out of stock':'BORROW ME!'" class="button" (click)="borrow()"></button>
     <p id="stoc">In stock: {{book.stock}}</p>
   </div>
   <div class="cover-image">
@@ -30,6 +30,29 @@
 </div>
 <div class="book-description" *ngIf="book">
   <pre id="book-desc-id">{{book.description}}</pre>
+</div>
+<div class="books-header">
+    <hr class="style1">
+    <h5 id="hh5">Books from the same genre</h5>
+</div>
+
+<div class="suggested-books"  *ngIf="paginatedBooks">  
+    <div *ngFor="let book of suggestedBooks | paginate: { id: 'bookPagination',itemsPerPage: 4, currentPage: 0,totalItems: paginatedBooks.nrOfElements}">
+      <div class="card text-center card-suggested">
+         <img class="shadowed" [src]="'data:image/jpeg;base64,'+book.img.pic" height="187.5" width="122" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)">
+         <div  id="cb" class="card-body d-flex flex-column">
+          <div class="d-flex d-flex flex-row justify-content-center">
+            <h6 class="bookTitle">{{book.title}}</h6>
+          </div>
+          <div class="d-flex flex-row justify-content-center autrs">
+            <div *ngFor="let author of book.authors; let isLast=last">
+              <div class="bookAuthor">{{author.name}}{{isLast ? '' : ', '}}</div>
+            </div>
+          </div>
+         </div>
+         
+      </div>
+    </div>
 </div>
 <body *ngIf="book">
   <div class="row bootstrap snippets">
@@ -70,9 +93,7 @@
                     <hr>
                     <ul class="media-list " *ngFor="let comment of ratings | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedRatings.nrOfElements}">
                         <li class="media">
-                            <a href="#" class="pull-left">
-                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
-                            </a>
+                            <img [src]="'data:image/jpeg;base64,'+comment.user.img.pic" alt="" class="img-circle">
                             <div class="media-body">
                               <div class="comment-header">
                                 <span class="text-muted pull-right">
