@@ -8,6 +8,9 @@ import * as jwt_decode from 'jwt-decode';
 import {UserService} from '../user.service';
 import {ToastrService} from 'ngx-toastr';
 import {ImageCroppedEvent} from 'ngx-image-cropper';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Genre} from '../../models/genre';
+import {GenreService} from '../genre.service';
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -28,15 +31,22 @@ export class DialogEditProfileComponent implements OnInit {
   private byteBlob: string;
   private imageChangedEvent: any = '';
   private croppedImage: any = '';
-
+  private todo = [];
+  private done = [];
 
   constructor(private activeModal: NgbActiveModal,
               private authenticationService: AuthenticationService,
               private userService: UserService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private genreService: GenreService) {
   }
 
   async ngOnInit() {
+    let setGenre = new Set<string>();
+    let list: Array<Genre> = await this.genreService.getAllUnique().toPromise();
+    list.forEach(genre => setGenre.add(genre.name));
+    setGenre.forEach(genre => this.todo.push(genre));
+
     let token = this.authenticationService.getToken();
     let decode = jwt_decode(token);
     let email = decode['sub'];
@@ -46,6 +56,19 @@ export class DialogEditProfileComponent implements OnInit {
     this.selectedFile = this.user.img;
     this.imgURL = 'data:image/jpeg;base64,' + this.user.img.pic;
     this.btnValue = 'Choose another image';
+  }
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
+    console.log(this.done);
   }
 
   public dismiss() {

@@ -5,6 +5,7 @@ import {UserService} from '../user.service';
 import {ToastrService} from 'ngx-toastr';
 import {AuthenticationService} from '../autentication.service';
 import * as jwt_decode from 'jwt-decode';
+import {Router} from '@angular/router';
 
 declare var $: any;
 
@@ -25,7 +26,8 @@ export class DialogActivateAccountComponent {
   constructor(private activeModal: NgbActiveModal,
               private userService: UserService,
               private toastrService: ToastrService,
-              private authenticationService: AuthenticationService
+              private authenticationService: AuthenticationService,
+              private router: Router
   ) {
   }
 
@@ -33,11 +35,16 @@ export class DialogActivateAccountComponent {
     this.activeModal.dismiss();
   }
 
+  public accept() {
+    this.activeModal.close(true);
+  }
+
   activateAccount() {
     this.loading = true;
     this.userService.registerConfirm(this.code).subscribe(() => {
       this.toastrService.success('User activated!');
-      this.dismiss();
+      this.accept();
+      this.router.navigate(['/grid-books']);
     }, error => {
       this.loading = false;
       this.toastrService.error(error);

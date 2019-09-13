@@ -57,6 +57,7 @@ import {DialogForgotPasswordComponent} from './services/dialog-forgot-password/d
 import {DialogForgotPasswordService} from './services/dialog-forgot-password/dialog-forgot-password.service';
 import {DialogActivateAccountComponent} from './services/dialog-activate-account/dialog-activate-account.component';
 import {DialogActivateAccountService} from './services/dialog-activate-account/dialog-activate-account.service';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import {DialogActivateAccountService} from './services/dialog-activate-account/d
     ModalModule.forRoot(),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
-    ImageCropperModule
+    ImageCropperModule,
+    DragDropModule
   ],
   providers: [BookService,
     ForbiddenService,

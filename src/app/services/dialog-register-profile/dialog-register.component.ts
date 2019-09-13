@@ -5,6 +5,7 @@ import {UserService} from '../user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Registration} from '../../models/registration';
 import {DialogLoginService} from '../dialog-login-profile/dialog-login.service';
+import {ToastrService} from 'ngx-toastr';
 
 declare var $: any;
 
@@ -30,8 +31,7 @@ export class DialogRegisterComponent implements OnInit {
               private userService: UserService,
               private formBuilder: FormBuilder,
               private route: ActivatedRoute,
-              private router: Router,
-              private dialogLoginService: DialogLoginService) {
+              private toastrService: ToastrService) {
   }
 
 
@@ -68,6 +68,7 @@ export class DialogRegisterComponent implements OnInit {
 
     this.userService.registerUser(registration).subscribe(value => {
       this.dismiss();
+      this.toastrService.success('Your code was send! Please check your email and activate this account!');
       this.goToLogin();
     }, error => {
       this.error = error;

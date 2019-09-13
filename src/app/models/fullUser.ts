@@ -13,4 +13,5 @@ export class FullUser {
   admin: boolean;
   banned: boolean;
   banUntil: Date;
+  genres: any[];
 }
