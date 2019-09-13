@@ -6,6 +6,7 @@ import * as jwt_decode from 'jwt-decode';
 import {UserService} from '../../../services/user.service';
 import {UserBookService} from '../../../services/userBook.service';
 import {ToastrService} from 'ngx-toastr';
+import {FullUser} from '../../../models/fullUser';
 
 @Component({
   selector: 'book-grid-icon',
@@ -15,6 +16,7 @@ import {ToastrService} from 'ngx-toastr';
 export class BookGridComponent implements OnInit {
 
   @Input() book: Book;
+  @Input() user: FullUser;
   @Output() bookBorrowed: EventEmitter<boolean> = new EventEmitter<boolean>();
   decoded: any;
   private loading: boolean;

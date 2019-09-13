@@ -24,7 +24,7 @@
     <div
       *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedPaginatedBooks.nrOfElements}">
       <div>
-        <book-grid-icon (bookBorrowed)="bookBorrowed($event)" class="widget" [book]="book"></book-grid-icon>
+        <book-grid-icon (bookBorrowed)="bookBorrowed($event)" class="widget" [user]="currentUser" [book]="book"></book-grid-icon>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@
     <div
       *ngFor="let book of preferredBooks | paginate: { id: 'preferredPagination',itemsPerPage: 3, currentPage: r,totalItems: preferredPaginatedBooks.nrOfElements}">
       <div>
-        <book-grid-icon (bookBorrowed)="bookBorrowed($event)" class="widget" [book]="book"></book-grid-icon>
+        <book-grid-icon (bookBorrowed)="bookBorrowed($event)" class="widget" [user]="currentUser" [book]="book"></book-grid-icon>
       </div>
     </div>
   </div>

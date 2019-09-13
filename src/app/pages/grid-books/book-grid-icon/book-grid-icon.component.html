@@ -40,8 +40,8 @@
     <div class="mt-auto d-flex flex-row justify-content-center">
       <button class="btn btn-primary mr-2 shadowed" [routerLink]="['book-page']" (click)="gotoDynamic(book.id)">View details
       </button>
-      <button [disabled]="book.stock==0||loading" [ngClass]="{'btn-danger': book.stock==0}"
-              [innerHTML]="book.stock==0?'Out of stock':'Borrow'" class="btn btn-success shadowed" (click)="borrow()">
+      <button [disabled]="book.stock==0||loading||user.penalties.length>1" [ngClass]="{'btn-danger': book.stock==0||user.penalties.length>1}"
+              [innerHTML]="book.stock==0?'Out of stock':(user.penalties.length>1?'Blocked':'Borrow')" class="btn btn-success shadowed" (click)="borrow()">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Borrow
       </button>
