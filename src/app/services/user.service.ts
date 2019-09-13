@@ -92,11 +92,11 @@ export class UserService {
   }
 
   forgotPassword(email: string) {
-    return this.http.post('http://localhost:8080/forgotpassword', {email: email}, {}) as Observable<any>;
+    return this.http.post('http://localhost:8080/forgotPassword', {email: email}, {}) as Observable<any>;
   }
 
   resetPassword(email: string, password: string, code: string) {
-    return this.http.post('http://localhost:8080/resetpassword', {email: email, password: password}, {
+    return this.http.post('http://localhost:8080/resetPassword', {email: email, password: password}, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.authenticationService.getToken()
@@ -129,6 +129,10 @@ export class UserService {
         token: activationToken
       }
     }) as Observable<any>;
+  }
+
+  resendVerification(email:string) {
+    return this.http.post(`${environment.apiUrl}/resendVerificationLink`, email) as Observable<any>;
   }
 
 

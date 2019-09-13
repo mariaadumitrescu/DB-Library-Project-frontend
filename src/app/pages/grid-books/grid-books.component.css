@@ -94,6 +94,17 @@ table {
   z-index: 2;
 }
 
+.btn-link{
+  color:black;
+  cursor: pointer;
+}
+
+tr:hover{
+  background-color: #0077EA;
+  text-decoration: none;
+  color: white;
+}
+
 
 
 
