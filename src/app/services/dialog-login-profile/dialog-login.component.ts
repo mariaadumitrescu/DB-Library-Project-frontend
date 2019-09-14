@@ -77,10 +77,9 @@ export class DialogLoginComponent implements OnInit {
         data => {
           this.userService.setLocalStorage(this.f.username.value).subscribe(user => {
             this.user = user;
-            //clear old penalties
-            this.userService.clearPenalties(user);
-            this.userService.checkForPenalties(user).subscribe(p => console.log(p));
-            this.router.navigate(['/grid-books']);
+            this.userService.checkForPenalties(user).toPromise().then();
+            this.userService.clearPenalties(user).toPromise().then();
+            this.router.navigate(['/grid-books']).then();
             this.accept();
           });
         },

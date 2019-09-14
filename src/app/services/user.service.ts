@@ -37,9 +37,6 @@ export class UserService {
       params: {email: email}
     })
       .pipe(map(obj => {
-        localStorage.setItem('isEnabled', obj.enabled);
-        localStorage.setItem('isBanned', obj.banned);
-        localStorage.setItem('role', obj.roles[0].name);
         localStorage.setItem('showBorrowed', 'false');
         return obj;
       }));
@@ -73,7 +70,7 @@ export class UserService {
     }) as Observable<any>;
   }
 
-  clearPenalties(user: User) {
+  clearPenalties(user: FullUser) {
     return this.http.post('http://localhost:8080/clearPenalties', user, {
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +79,28 @@ export class UserService {
     }) as Observable<any>;
   }
 
-  checkForPenalties(user: User) {
+  addOnePenalty(user: FullUser) {
+    return this.http.post('http://localhost:8080/addPenalty', user, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      }
+    }) as Observable<any>;
+  }
+
+  removeOnePenalty(user: FullUser, id) {
+    return this.http.post('http://localhost:8080/removePenalty', user, {
+      params: {
+        penaltyId: id
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      }
+    }) as Observable<any>;
+  }
+
+  checkForPenalties(user: FullUser) {
     return this.http.post('http://localhost:8080/checkForPenalties', user, {
       headers: {
         'Content-Type': 'application/json',
@@ -131,7 +149,7 @@ export class UserService {
     }) as Observable<any>;
   }
 
-  resendVerification(email:string) {
+  resendVerification(email: string) {
     return this.http.post(`${environment.apiUrl}/resendVerificationLink`, email) as Observable<any>;
   }
 

@@ -89,6 +89,9 @@ export class UserDetailsComponent implements OnChanges, OnInit {
         this.toastrService.error(error);
       });
     });
+  }
+
+  async removeOnePenalty(user: FullUser) {
 
   }
 
@@ -140,5 +143,15 @@ export class UserDetailsComponent implements OnChanges, OnInit {
     }, reason => {
       this.toastrService.error(reason);
     });
+  }
+
+  async addPenalty() {
+    await this.userService.addOnePenalty(this.selectedUser).toPromise().then(() => this.toastrService.success('Penalty added with success!'));
+    await this.userService.getUserByEmail(this.selectedUser.email).toPromise().then(user => this.selectedUser = user);
+  }
+
+  async removePenalty(selectedUser: FullUser, id: any) {
+    await this.userService.removeOnePenalty(this.selectedUser,id).toPromise().then(() => this.toastrService.success('Penalty removed with success!'));
+    await this.userService.getUserByEmail(this.selectedUser.email).toPromise().then(user => this.selectedUser = user);
   }
 }

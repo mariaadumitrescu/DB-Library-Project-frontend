@@ -36,8 +36,9 @@
 
       <div>
         <label class="font-weight-bold" for="penalty" style="white-space: pre">Penalties: </label>
-        <div id="penalty" *ngFor="let penalty of selectedUser.penalties; let isLast=last" class="d-inline-flex"
-             style="white-space:pre">{{penalty['penaltyAddedDate']}}{{isLast ? '' : ', '}}</div>
+        <div id="penalty" *ngFor="let penalty of selectedUser.penalties; let isLast=last" class="d-inline-flex">
+          <button (click)="removePenalty(selectedUser, penalty.id)" class="btn btn-danger btn-sm mr-1 mt-1">{{"Delete " + penalty['penaltyAddedDate']}}</button>
+        </div>
       </div>
     </div>
   </div>
@@ -48,6 +49,10 @@
       </button>
       <button [innerHTML]="selectedUser.banned?'Remove ban':'Permanently ban'" id="banButton"
               class="btn btn-primary btn-sm mr-2 shadowed" (click)="banOrUnBan()">Ban
+      </button>
+
+      <button id="addPenalty"
+              class="btn btn-primary btn-sm mr-2 shadowed" (click)="addPenalty()">Add penalty
       </button>
 
       <form *ngIf="!selectedUser.banned" class="form-inline">
