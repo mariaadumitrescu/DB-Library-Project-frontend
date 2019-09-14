@@ -7,6 +7,8 @@ import {FullUser} from '../../models/fullUser';
 import {UserService} from '../../services/user.service';
 import {AuthenticationService} from '../../services/autentication.service';
 import * as jwt_decode from 'jwt-decode';
+import {Genre} from '../../models/genre';
+import {GenreService} from '../../services/genre.service';
 
 
 @Component({
@@ -37,17 +39,22 @@ export class GridBooksComponent implements OnInit {
   private r: any;
   private flagSearch: boolean;
   private currentUser: FullUser;
+  private genres: Genre[];
+  private uniqueGenres = new Set<string>();
+  private genreValue = '';
+  allGenres: string = 'All genres';
 
 
   constructor(private bookService: BookService,
               private eRef: ElementRef,
               private userService: UserService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private genreService: GenreService) {
   }
 
   initListOfBooks() {
 
-    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').toPromise().then(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', this.genreValue).toPromise().then(p => {
       this.paginatedPaginatedBooks = p;
       this.books = this.paginatedPaginatedBooks.pageList;
 
@@ -73,10 +80,14 @@ export class GridBooksComponent implements OnInit {
     const token = this.authenticationService.getToken();
     let decode = jwt_decode(token);
     let email = decode['sub'];
-    await this.userService.getUserByEmail(email).toPromise().then(user=> {
+    await this.userService.getUserByEmail(email).toPromise().then(user => {
       this.currentUser = user;
       this.initListOfBooks();
     });
+
+    await this.genreService.getAllUnique().toPromise().then(genres => this.genres = genres);
+    this.genres.forEach(genre => this.uniqueGenres.add(genre.name));
+
 
     // let chart = new CanvasJS.Chart("chartContainer", {
     //   animationEnabled: true,
@@ -134,7 +145,7 @@ export class GridBooksComponent implements OnInit {
 
   pageGridChanged(event) {
     this.p = event;
-    this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '3', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '3', this.genreValue).subscribe(p => {
 
       this.paginatedPaginatedBooks = p;
       this.books = this.paginatedPaginatedBooks.pageList;
@@ -172,4 +183,20 @@ export class GridBooksComponent implements OnInit {
   }
 
 
+  genreSelected(genre: string) {
+    if(genre==this.allGenres){
+      this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', '').toPromise().then(p => {
+        this.paginatedPaginatedBooks = p;
+        this.books = this.paginatedPaginatedBooks.pageList;
+      });
+      this.genreValue = '';
+      return;
+    }
+    this.genreValue = genre;
+    this.bookService.getPaginatedBooks('id', 'ASC', '0', '3', this.genreValue).toPromise().then(p => {
+      this.paginatedPaginatedBooks = p;
+      this.books = this.paginatedPaginatedBooks.pageList;
+    });
+
+  }
 }

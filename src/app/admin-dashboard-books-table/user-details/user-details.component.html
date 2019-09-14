@@ -1,4 +1,4 @@
-<div class="content-book-detail shadowed card p-3 bg-white rounded">
+<div class="content-book-detail shadowed card p-3 bg-white rounded sticky-top">
   <div class="row">
     <div class="col-sm-auto">
       <img class="shadowed rounded-circle" *ngIf="selectedUser.img; else noPhoto"
@@ -105,7 +105,7 @@
         {{borrow.return_date}}
       </div>
       <div class="col-sm text-center ">
-        <button [disabled]="borrow.generatedPenalty==true && !currentUser.admin" class="btn btn-success m-2 shadowed"
+        <button [disabled]="borrow.generatedPenalty==true && !currentUser.admin" class="btn btn-success m-2 btn-sm shadowed"
                 (click)="returnBorrowBook(borrow)">
           Return
         </button>

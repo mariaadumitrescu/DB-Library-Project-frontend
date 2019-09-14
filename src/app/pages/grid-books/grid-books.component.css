@@ -10,8 +10,8 @@
 .recommend p{
   font-size: large;
   font-family: "Times New Roman", Times, serif;
-  font-weight: 900	
-} 
+  font-weight: 900
+}
 
 
 .search{
@@ -47,10 +47,40 @@ pagination-controls /deep/ ul.ngx-pagination {
   justify-items: center;
 }
 
+.card{
+  height: 630px;
+  top:92px;
+}
+
+.active{
+  background-color: lightgrey;
+  color: black;
+  border-color: lightgrey;
+}
+
+.card-header{
+  cursor: pointer;
+}
+@media only screen and (max-width: 600px){
+  .card{
+    display: none;
+  }
+}
+
+
 .container-widget {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.list-group-item:hover{
+  background-color: lightgrey;
+  color: black;
+  cursor: pointer;
+}
+
+.container-fluid {
 }
 
 
