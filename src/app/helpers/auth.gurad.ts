@@ -31,13 +31,14 @@ export class AuthGuard implements CanActivate {
       const token = this.authenticationService.getToken();
       this.decoded = jwt_decode(token);
       let email = this.decoded['sub'];
-      this.updatedUser = await this.userService.getUserByEmail(email).toPromise();
+      await this.userService.getUserByEmail(email).toPromise().then(user => this.updatedUser = user);
       if (new Date(this.updatedUser.banUntil) < new Date()) {
         this.updatedUser.banned =false;
         this.updatedUser.banUntil = null;
-        await this.userService.updateUser(this.updatedUser).toPromise();
-        await this.userService.getUserByEmail(email).toPromise();
+        await this.userService.updateUser(this.updatedUser).toPromise().then().catch(reason => console.log(reason));
+        await this.userService.getUserByEmail(email).toPromise().then().catch(reason => console.log(reason));;
       }
+
 
       const date = new Date(0).setUTCSeconds(this.decoded.exp);
       if (date.valueOf() > new Date().valueOf()) {

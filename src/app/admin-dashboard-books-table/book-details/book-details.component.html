@@ -4,7 +4,7 @@
       <img class="shadowed" [src]="'data:image/jpeg;base64,'+selectedBook.img.pic" height="250">
     </div>
     <div class="col-sm">
-      <h3>{{selectedBook.title}}</h3>
+      <h4>{{selectedBook.title}}</h4>
       <div class="rating d-flex align-items-center mr-2 ">
         <div class="mr-2 font-weight-bold">{{selectedBook.averageStars.toFixed(1)}}</div>
         <ng-template #t let-fill="fill">
@@ -45,7 +45,7 @@
          style="height: 150px;padding-right: 10px;text-indent: 20px">{{selectedBook.description}}</div>
   </div>
 
-  <div class="card overflow-auto shadowed scrollbar-custom-style p-3" style="height: 300px">
+  <div class="card overflow-auto shadowed scrollbar-custom-style p-3" style="height: 240px">
     <div class="row" *ngFor="let rating of selectedBook.ratings; index as i">
       <div class="col-sm-auto text-center first-col m-auto">
         <img *ngIf="rating.user.img; else noImg" class="rounded-circle mr-2 "
