@@ -46,7 +46,6 @@ import {BorrowListComponent} from './pages/borrow/borrow-list/borrow-list.compon
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
-// import { PreferredGenresPageComponent } from './pages/preferred-genres-page/preferred-genres-page.component';
 
 
 import {DialogEditProfileComponent} from './services/dialog-edit-profile/dialog-edit-profile.component';
@@ -65,6 +64,10 @@ import { PreferredGenresPageComponent } from './pages/preferred-genres-page/pref
 import {DialogActivateAccountComponent} from './services/dialog-activate-account/dialog-activate-account.component';
 import {DialogActivateAccountService} from './services/dialog-activate-account/dialog-activate-account.service';
 import {DropDownsModule} from '@progress/kendo-angular-dropdowns';
+import {TopRatedBooksComponent} from './pages/top-rated/top-rated.component';
+import { TopBorrowedComponent } from './pages/top-borrowed/top-borrowed.component';
+import { BorrowChartComponent } from './admin-dashboard-books-table/borrow-chart/borrow-chart.component';
+import { BookChartComponent } from './admin-dashboard-books-table/book-chart/book-chart.component';
 
 @NgModule({
   declarations: [
@@ -96,10 +99,11 @@ import {DropDownsModule} from '@progress/kendo-angular-dropdowns';
     DialogLoginComponent,
     DialogRegisterComponent,
     DialogForgotPasswordComponent,
-
-    DialogActivateAccountComponent
-
-
+    DialogActivateAccountComponent,
+    TopRatedBooksComponent,
+    TopBorrowedComponent,
+    BorrowChartComponent,
+    BookChartComponent,
   ],
   imports: [
     BrowserModule,

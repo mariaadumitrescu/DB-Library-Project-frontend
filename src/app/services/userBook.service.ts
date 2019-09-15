@@ -52,6 +52,25 @@ export class UserBookService{
         'id': userBook.id.toString()
       }
     }) as Observable<any>;
-
   }
+
+
+  getDataChart(){
+    return this.http.get('http://localhost:8080/populateChart', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      }
+    }) as Observable<any>;
+  }
+
+  getStatusDataChart(){
+    return this.http.get('http://localhost:8080/populateStatus', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authenticationService.getToken()
+      }
+    }) as Observable<any>;
+  }
+
 }

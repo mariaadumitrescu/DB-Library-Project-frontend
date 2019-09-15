@@ -170,9 +170,9 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     this.addBookActivated = !this.addBookActivated;
     this.showUserTable = !this.showUserTable;
     if(!this.showUserTable){
-      showPanel.innerHTML = 'Show author panel'
+      showPanel.innerHTML = 'Author panel'
     }else {
-      showPanel.innerHTML = 'Show book panel'
+      showPanel.innerHTML = 'Book panel'
     }
   }
 }

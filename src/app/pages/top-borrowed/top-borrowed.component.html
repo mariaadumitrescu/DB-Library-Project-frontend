@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+
+  <div *ngIf="paginatedPaginatedBooks" class="container-widget row justify-content-around mt-3">
+    <book-grid-icon
+      *ngFor="let book of books | paginate: { id: 'gridPagination',itemsPerPage: 8, currentPage: p,totalItems: paginatedPaginatedBooks.nrOfElements}"
+      (bookBorrowed)="bookBorrowed($event)" class="widget col-sm  align-items-center justify-content-center text-center align-content-center align-self-center"
+      [user]="currentUser" [book]="book"></book-grid-icon>
+  </div>
+
+</div>
+<div class="text-center flex-row">
+  <pagination-controls id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
+</div>
+
+
+
+
+
+
+
+
