@@ -20,4 +20,9 @@ pagination-controls ::ng-deep .ngx-pagination .current{
   background-color: #0077EA;
 }
 
+pagination-controls ::ng-deep .ngx-pagination{
+  margin-left: 0;
+  padding-inline-start: 0!important;
+}
+
 

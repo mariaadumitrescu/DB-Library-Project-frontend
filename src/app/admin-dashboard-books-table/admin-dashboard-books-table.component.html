@@ -17,7 +17,9 @@
                                (pageChange)="pageGridChanged($event)"></pagination-controls>
         </div>
         <div class="col-auto text-center mr-2">
-          <button id="showPanel" class="btn btn-sm btn-secondary mr-2 shadowed" (click)="hideAndShow()">Show book panel</button>
+          <button id="showBookStatus" class="btn btn-sm btn-primary mr-2 shadowed" routerLink="/book-status">Status chart</button>
+          <button id="showTrend" class="btn btn-sm btn-primary mr-2 shadowed" routerLink="/borrow-chart">Reading trend</button>
+          <button id="showPanel" class="btn btn-sm btn-secondary mr-2 shadowed" (click)="hideAndShow()">Book panel</button>
           <button class="btn btn-sm btn-success shadowed" (click)="addFlag()">Add book</button>
         </div>
 
