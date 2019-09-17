@@ -1,11 +1,37 @@
-.login{
+.login {
   background: linear-gradient(to bottom right, #0018A8, #0077EA, #57FBDB);
   background-size: 600% 100%;
   animation: gradientBG 7s linear infinite;
+  -webkit-animation: gradientBG 7s linear infinite;
+  -moz-animation: gradientBGMOZ 7s linear infinite;;
   padding: 3%;
 }
 
 @keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@-moz-keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@-webkit-keyframes gradientBG {
   0% {
     background-position: 0% 50%;
   }
