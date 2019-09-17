@@ -44,11 +44,20 @@ export class AdminDashboardBooksTableComponent implements OnInit {
 
   pageGridChanged(event) {
     this.p = event;
-    this.subscriptionPageGridChanged = this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', this.value).subscribe(p => {
-      this.paginatedBooks = p;
-      this.books = this.paginatedBooks.pageList;
-      this.nrOfElements = this.paginatedBooks.nrOfElements;
-    });
+    if(this.value){
+      this.subscriptionPageGridChanged = this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', this.value).subscribe(p => {
+        this.paginatedBooks = p;
+        this.books = this.paginatedBooks.pageList;
+        this.nrOfElements = this.paginatedBooks.nrOfElements;
+      });
+    }else {
+      this.subscriptionPageGridChanged = this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', '').subscribe(p => {
+        this.paginatedBooks = p;
+        this.books = this.paginatedBooks.pageList;
+        this.nrOfElements = this.paginatedBooks.nrOfElements;
+      });
+    }
+
   }
 
   goToLast(page: number) {
