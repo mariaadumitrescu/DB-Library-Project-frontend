@@ -44,7 +44,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
 
   pageGridChanged(event) {
     this.p = event;
-    this.subscriptionPageGridChanged = this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', '').subscribe(p => {
+    this.subscriptionPageGridChanged = this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', this.value).subscribe(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;
@@ -52,7 +52,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   goToLast(page: number) {
-    this.bookService.getPaginatedBooks('id', 'ASC', (page - 1).toString(), '5', '').toPromise().then(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', (page - 1).toString(), '5', this.value).toPromise().then(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;
@@ -111,7 +111,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
       this.addBookActivated = !this.addBookActivated
       this.showUserTable = !this.showUserTable;
     } else {
-      this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p), '5', '').toPromise();
+      this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p), '5', this.value).toPromise();
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;
       this.selectedBook = await this.bookService.getBookById(String(this.book.id)).toPromise();
