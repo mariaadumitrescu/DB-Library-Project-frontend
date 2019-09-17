@@ -44,13 +44,13 @@ export class AdminDashboardBooksTableComponent implements OnInit {
 
   pageGridChanged(event) {
     this.p = event;
-    if(this.value){
+    if (this.value) {
       this.subscriptionPageGridChanged = this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', this.value).subscribe(p => {
         this.paginatedBooks = p;
         this.books = this.paginatedBooks.pageList;
         this.nrOfElements = this.paginatedBooks.nrOfElements;
       });
-    }else {
+    } else {
       this.subscriptionPageGridChanged = this.bookService.getPaginatedBooks('id', 'ASC', (this.p - 1).toString(), '5', '').subscribe(p => {
         this.paginatedBooks = p;
         this.books = this.paginatedBooks.pageList;
@@ -61,12 +61,22 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   goToLast(page: number) {
-    this.bookService.getPaginatedBooks('id', 'ASC', (page - 1).toString(), '5', this.value).toPromise().then(p => {
-      this.paginatedBooks = p;
-      this.books = this.paginatedBooks.pageList;
-      this.nrOfElements = this.paginatedBooks.nrOfElements;
-      this.p = page;
-    });
+    if (this.value) {
+      this.bookService.getPaginatedBooks('id', 'ASC', (page - 1).toString(), '5', this.value).toPromise().then(p => {
+        this.paginatedBooks = p;
+        this.books = this.paginatedBooks.pageList;
+        this.nrOfElements = this.paginatedBooks.nrOfElements;
+        this.p = page;
+      });
+    } else {
+      this.bookService.getPaginatedBooks('id', 'ASC', (page - 1).toString(), '5', '').toPromise().then(p => {
+        this.paginatedBooks = p;
+        this.books = this.paginatedBooks.pageList;
+        this.nrOfElements = this.paginatedBooks.nrOfElements;
+        this.p = page;
+      });
+    }
+
   }
 
   ngOnInit(): void {
@@ -95,10 +105,10 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   async editBook(book: Book) {
-    if(this.addBookActivated){
+    if (this.addBookActivated) {
       this.book = await this.bookService.getBookById(String(book.id)).toPromise();
       this.selectedBook = await this.bookService.getBookById(String(book.id)).toPromise();
-    }else {
+    } else {
       this.changePanelButton();
       this.book = await this.bookService.getBookById(String(book.id)).toPromise();
       this.selectedBook = await this.bookService.getBookById(String(book.id)).toPromise();
@@ -117,23 +127,28 @@ export class AdminDashboardBooksTableComponent implements OnInit {
       } else {
         this.goToLast(this.p);
       }
-      this.addBookActivated = !this.addBookActivated
+      this.addBookActivated = !this.addBookActivated;
       this.showUserTable = !this.showUserTable;
     } else {
-      this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p), '5', this.value).toPromise();
+      if (this.value) {
+        this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p - 1), '5', this.value).toPromise();
+      } else {
+        this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p - 1), '5', '').toPromise();
+      }
+
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;
       this.selectedBook = await this.bookService.getBookById(String(this.book.id)).toPromise();
-      this.addBookActivated = !this.addBookActivated
+      this.addBookActivated = !this.addBookActivated;
       this.showUserTable = !this.showUserTable;
     }
   }
 
   addFlag() {
-    if(this.addBookActivated){
+    if (this.addBookActivated) {
       this.p = (this.nrOfElements / 5) + 1;
       this.book = null;
-    }else {
+    } else {
       this.changePanelButton();
       this.p = (this.nrOfElements / 5) + 1;
       this.book = null;
@@ -155,7 +170,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   async showDetails(book: Book) {
     this.selectedBook = await this.bookService.getBookById(book.id.toString()).toPromise();
     this.book = this.selectedBook;
-    this.switch =false;
+    this.switch = false;
   }
 
   async ratingDeleted(event) {
@@ -173,14 +188,14 @@ export class AdminDashboardBooksTableComponent implements OnInit {
     this.switch = event;
   }
 
-  changePanelButton(){
+  changePanelButton() {
     let showPanel = document.getElementById('showPanel');
     this.addBookActivated = !this.addBookActivated;
     this.showUserTable = !this.showUserTable;
-    if(!this.showUserTable){
-      showPanel.innerHTML = 'Author panel'
-    }else {
-      showPanel.innerHTML = 'Book panel'
+    if (!this.showUserTable) {
+      showPanel.innerHTML = 'Author panel';
+    } else {
+      showPanel.innerHTML = 'Book panel';
     }
   }
 }
