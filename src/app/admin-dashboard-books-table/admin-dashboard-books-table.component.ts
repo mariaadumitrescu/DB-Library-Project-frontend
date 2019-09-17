@@ -15,7 +15,6 @@ export class AdminDashboardBooksTableComponent implements OnInit {
 
   private subscriptionInit: Subscription;
   private subscriptionPageGridChanged: Subscription;
-  private subscriptionGoToLast: Subscription;
   private subscriptionInputSearchChanged: Subscription;
   private paginatedBooks: ResponsePageList<Book>;
   private books: Book[];
@@ -53,7 +52,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   goToLast(page: number) {
-    this.subscriptionGoToLast = this.bookService.getPaginatedBooks('id', 'ASC', (page - 1).toString(), '5', '').subscribe(p => {
+    this.bookService.getPaginatedBooks('id', 'ASC', (page - 1).toString(), '5', '').toPromise().then(p => {
       this.paginatedBooks = p;
       this.books = this.paginatedBooks.pageList;
       this.nrOfElements = this.paginatedBooks.nrOfElements;

@@ -82,7 +82,7 @@ export class UploadBookComponent implements OnChanges {
       });
       this.uploadedImage = new Image(this.selectedFile.file.name, this.selectedFile.file.type, this.byteBlob);
     }
-    this.book = new Book(this.isbn, this.title, [], this.publishingHouse, this.year, [], this.uploadedImage, [], this.description, this.stock);
+    this.book = new Book(this.isbn, this.title, [], this.publishingHouse, this.year, [], this.uploadedImage, [], this.description, this.stock, 0);
     for (let i = 0; i < authorsForUpload.length; i++) {
       this.book.authors.push(authorsForUpload[i]);
     }
@@ -91,9 +91,10 @@ export class UploadBookComponent implements OnChanges {
     }
 
     this.bookUploadService.addBook(this.book)
-    .subscribe(
+    .toPromise().then(
       data => {
         this.showUploadSuccess();
+        this.added.emit(true);
       },
       error => {
         this.showUploadError(error);
@@ -101,7 +102,7 @@ export class UploadBookComponent implements OnChanges {
 
     this.reset();
     this.formValues.resetForm();
-    this.added.emit(true);
+
   }
 
   reset() {
@@ -206,6 +207,7 @@ export class UploadBookComponent implements OnChanges {
     .subscribe(
       data => {
         this.showEditSuccess();
+        this.added.emit(false);
       },
       error => {
         this.showEditError(error);
@@ -213,7 +215,6 @@ export class UploadBookComponent implements OnChanges {
 
     this.reset();
     this.formValues.resetForm();
-    this.added.emit(false);
   }
 
   showEditSuccess() {
