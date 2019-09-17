@@ -65,7 +65,7 @@ export class GridBooksComponent implements OnInit {
       this.searchedBooks = this.searchedPaginatedBooks.pageList;
     });
 
-    this.bookService.getPreferredPaginatedBooks('averageStars', 'DESC', '0', '3', this.currentUser.id.toString()).toPromise().then(r => {
+    this.bookService.getPreferredPaginatedBooks('id', 'DESC', '0', '3', this.currentUser.id.toString()).toPromise().then(r => {
       this.preferredPaginatedBooks = r;
       this.preferredBooks = this.preferredPaginatedBooks.pageList;
     });
@@ -104,7 +104,7 @@ export class GridBooksComponent implements OnInit {
 
   preferredGridChanged(event) {
     this.r = event;
-    this.bookService.getPreferredPaginatedBooks('averageStars', 'DESC', (this.r - 1).toString(), '3', this.currentUser.id.toString()).subscribe(r => {
+    this.bookService.getPreferredPaginatedBooks('id', 'DESC', (this.r - 1).toString(), '3', this.currentUser.id.toString()).subscribe(r => {
 
       this.preferredPaginatedBooks = r;
       this.preferredBooks = this.preferredPaginatedBooks.pageList;
@@ -135,7 +135,7 @@ export class GridBooksComponent implements OnInit {
 
   genreSelected(genre: string) {
     if(genre==this.allGenres){
-      this.bookService.getPaginatedBooks('averageStars', 'DESC', '0', '3', '').toPromise().then(p => {
+      this.bookService.getPaginatedBooks('id', 'DESC', '0', '3', '').toPromise().then(p => {
         this.paginatedPaginatedBooks = p;
         this.books = this.paginatedPaginatedBooks.pageList;
       });
@@ -143,7 +143,7 @@ export class GridBooksComponent implements OnInit {
       return;
     }
     this.genreValue = genre;
-    this.bookService.getPaginatedBooks('averageStars', 'DESC', '0', '3', this.genreValue).toPromise().then(p => {
+    this.bookService.getPaginatedBooks('id', 'DESC', '0', '3', this.genreValue).toPromise().then(p => {
       this.paginatedPaginatedBooks = p;
       this.books = this.paginatedPaginatedBooks.pageList;
     });
