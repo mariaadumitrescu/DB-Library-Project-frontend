@@ -135,7 +135,7 @@ export class GridBooksComponent implements OnInit {
 
   genreSelected(genre: string) {
     if(genre==this.allGenres){
-      this.bookService.getPaginatedBooks('id', 'DESC', '0', '3', '').toPromise().then(p => {
+      this.bookService.getPaginatedBooks('averageStars', 'DESC', '0', '3', '').toPromise().then(p => {
         this.paginatedPaginatedBooks = p;
         this.books = this.paginatedPaginatedBooks.pageList;
       });
@@ -143,7 +143,7 @@ export class GridBooksComponent implements OnInit {
       return;
     }
     this.genreValue = genre;
-    this.bookService.getPaginatedBooks('id', 'DESC', '0', '3', this.genreValue).toPromise().then(p => {
+    this.bookService.getPaginatedBooks('averageStars', 'DESC', '0', '3', this.genreValue).toPromise().then(p => {
       this.paginatedPaginatedBooks = p;
       this.books = this.paginatedPaginatedBooks.pageList;
     });
