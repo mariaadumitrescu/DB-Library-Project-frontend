@@ -38,7 +38,7 @@
                 <div class="form-group">
                   <input id="userPassword" type="password" placeholder="Password" formControlName="userPassword"
                          class="form-control"
-                         pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.,$@$!%*?&])[A-Za-z\d.,$@$!%*?&].{8,}"
+                         pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.,$@$!%*?&])[A-Za-z\d.,$@$!%*?&].{7,}"
                          [ngClass]="{ 'is-invalid': submitted && f.userPassword.errors }" [(ngModel)]="password"/>
                   <div *ngIf="submitted && f.userPassword.errors" class="invalid-feedback">
                     <div *ngIf="f.userPassword.errors.required">Password is required</div>
