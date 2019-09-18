@@ -15,6 +15,7 @@
 }
 .display-4 > .mbr-iconfont {
   font-size: 1.6rem;
+  cursor: pointer;
 }
 .display-5 {
   font-family: 'Abril Fatface', display;
@@ -24,6 +25,7 @@
   font-size: 4.96rem;
 }
 .btn {
+  cursor: pointer;
   font-weight: 500;
   border-width: 2px;
   font-style: normal;
