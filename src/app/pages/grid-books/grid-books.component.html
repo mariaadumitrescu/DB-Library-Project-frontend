@@ -17,13 +17,11 @@
       <input [ngClass]="{'form-no-bottom':value&&searchedPaginatedBooks.nrOfElements > 0}" [(ngModel)]="value"
              class="form-control shadow-none" type="text" placeholder="Search" aria-label="Search"
              (ngModelChange)="inputSearchChanged()">
-      <div class="position-fixed container bg-white"
-           *ngIf=" value != '' && value && flagSearch && searchedPaginatedBooks.nrOfElements > 0">
-
-        <table>
+      <div *ngIf=" value != '' && value && flagSearch && searchedPaginatedBooks.nrOfElements > 0">
+        <table class="bg-white position-absolute zIndex" style="width: 97.7%">
           <tr class="btn-link" [routerLink]="['../book-page']" [queryParams]="{'bookId': book.id}"
               *ngFor="let book of searchedBooks | paginate: { id: 'searchPagination', itemsPerPage: 5, currentPage: q, totalItems: searchedPaginatedBooks.nrOfElements}">
-            <td style="width: 10%;">{{book.title}}</td>
+            <td style="width: 100%">{{book.title}}</td>
           </tr>
         </table>
       </div>
