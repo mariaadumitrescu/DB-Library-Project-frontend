@@ -80,7 +80,7 @@ export class AdminDashboardBooksTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.p = 0;
+    this.p = 1;
     this.initListOfBooks();
   }
 
@@ -131,9 +131,9 @@ export class AdminDashboardBooksTableComponent implements OnInit {
       this.showUserTable = !this.showUserTable;
     } else {
       if (this.value) {
-        this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p - 1), '5', this.value).toPromise();
+        this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p-1), '5', this.value).toPromise();
       } else {
-        this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p - 1), '5', '').toPromise();
+        this.paginatedBooks = await this.bookService.getPaginatedBooks('id', 'ASC', String(this.p-1), '5', '').toPromise();
       }
 
       this.books = this.paginatedBooks.pageList;
