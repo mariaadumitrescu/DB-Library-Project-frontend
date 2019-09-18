@@ -663,6 +663,6 @@ hr.style1{
 .card-suggested{
   padding: 10px;
   width: 147px;
-  height: 212px;
+  height: auto;
 }
 

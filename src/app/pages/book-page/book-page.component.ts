@@ -67,8 +67,15 @@ export class BookPageComponent implements OnInit {
     this.initListOfRatings();
     
   }
-  gotoDynamic(id: number) {
+  changeBook(id: string) {
+    this.id = id;
     this.router.navigate(['/book-page'], {queryParams: {bookId: id}});
+    this.bookService.getBookById(id).toPromise().then(p=>{
+      this.book = p;
+    });
+    this.initListOfBooks();
+    this.initListOfRatings();
+    
   }
 
   printValue(){
