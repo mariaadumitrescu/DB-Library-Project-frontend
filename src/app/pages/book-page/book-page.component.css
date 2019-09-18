@@ -663,6 +663,7 @@ hr.style1{
 .card-suggested{
   padding: 10px;
   width: 147px;
+  min-height: 300px;
   height: auto;
 }
 .bookAuthor{
