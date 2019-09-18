@@ -39,7 +39,7 @@ export class BookPageComponent implements OnInit {
   private pg: any;
   private loading: boolean;
   @Output() bookBorrowed: EventEmitter<boolean> = new EventEmitter<boolean>();
-  
+
   constructor(private route: ActivatedRoute, private router:Router,
      private bookService: BookService, private ratingService: RatingService,
      private authenticationService: AuthenticationService, private userBookService: UserBookService,
@@ -65,7 +65,7 @@ export class BookPageComponent implements OnInit {
     this.descriptionValue = '';
     this.initListOfBooks();
     this.initListOfRatings();
-    
+
   }
   changeBook(id: string) {
     this.id = id;
@@ -75,7 +75,7 @@ export class BookPageComponent implements OnInit {
     });
     this.initListOfBooks();
     this.initListOfRatings();
-    
+
   }
 
   printValue(){
@@ -86,7 +86,9 @@ export class BookPageComponent implements OnInit {
     this.ratingService.addRatings(this.rating, this.id).subscribe(t=>{
       this.bookService.getBookById(this.id).subscribe(p=> {
         this.book = p;
+        this.initListOfRatings()
       });
+      this.initListOfRatings();
     });
   }
   initListOfRatings() {
@@ -95,7 +97,7 @@ export class BookPageComponent implements OnInit {
       this.ratings = this.paginatedRatings.pageList;
     });
   }
-  pageRatingChanged(event) {
+  pageGridChanged(event) {
     this.p = event;
     this.ratingService.getPaginatedRatings('id', 'ASC', (this.p - 1).toString(), '3', this.id).subscribe(p => {
 
@@ -140,5 +142,5 @@ export class BookPageComponent implements OnInit {
   showError(error:string) {
     this.toastrService.error(error, 'Error!');
   }
-  
+
 }

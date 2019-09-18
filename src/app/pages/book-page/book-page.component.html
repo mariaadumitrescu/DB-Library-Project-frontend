@@ -6,7 +6,7 @@
       <div *ngFor="let author of book.authors ; let isLast=last ">
           {{author.name}}{{isLast ? '' : '      , '}}
       </div>
-      
+
     </div>
 
     <div class = "rating">
@@ -15,7 +15,7 @@
         </div>
           <p>{{book.averageStars | number:'1.2-2'}}</p>
     </div>
-    <button [disabled]="book.stock==0" [ngClass]="{'btn-danger': book.stock==0}" [innerHTML]="book.stock==0?'Out of stock':'BORROW ME!'" class="button" (click)="borrow()"></button>
+    <button [disabled]="book.stock==0" [ngClass]="{'btn-danger': book.stock==0||currentUser.penalties.length>1}" [innerHTML]="book.stock==0?'Out of stock':(currentUser.penalties.length>1?'Blocked':'Borrow')" class="button"  (click)="borrow()"></button>
     <p id="stoc">In stock: {{book.stock}}</p>
   </div>
   <div class="cover-image">
@@ -31,10 +31,10 @@
   <pre id="book-desc-id">{{book.description}}</pre>
 </div>
 <div class="books-header">
-    <h5 id="hh5">Books from the same genre</h5>
+    <h5 class="mt-2" id="hh5">Books from the same genre</h5>
 </div>
 
-<div class="suggested-books"  *ngIf="paginatedBooks">  
+<div class="suggested-books"  *ngIf="suggestedBooks">
     <div *ngFor="let book of suggestedBooks | paginate: { id: 'bookPagination',itemsPerPage: 4, currentPage: 0,totalItems: paginatedBooks.nrOfElements}">
       <div class="card text-center card-suggested">
          <img class="shadowed" [src]="'data:image/jpeg;base64,'+book.img.pic" height="187.5" width="122" [routerLink]="['/book-page']" [queryParams]="{bookId: book.id}" (click)="changeBook(book.id)">
@@ -48,14 +48,14 @@
             </div>
           </div>
          </div>
-         
+
       </div>
     </div>
 </div>
 <body *ngIf="book">
   <div class="row bootstrap snippets">
       <!-- <div class="col-md-6 col-md-offset-2 col-sm-12"> -->
-          
+
           <div class="comment-wrapper">
               <div class="card">
                   <div class="card-body">
@@ -76,7 +76,7 @@
                           <label for="star1" title="text">1 star</label>
                         </div>
                     </div>
-                      
+
                       <textarea class="form-control" [(ngModel)]="descriptionValue" placeholder="write the review..." rows="3"></textarea>
                       <br>
                       <button type="button" class="btn btn-info pull-right"
@@ -89,7 +89,7 @@
               <div class="panel panel-info">
                 <div id="comment-content" class="panel-body scrollbar-custom-style" *ngIf="paginatedRatings">
                     <hr>
-                    <ul class="media-list " *ngFor="let comment of ratings | paginate: { id: 'gridPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedRatings.nrOfElements}">
+                    <ul class="media-list " *ngFor="let comment of ratings | paginate: { id: 'reviewPagination',itemsPerPage: 3, currentPage: p,totalItems: paginatedRatings.nrOfElements}">
                         <li class="media">
                             <img [src]="'data:image/jpeg;base64,'+comment.user.img.pic" alt="" class="img-circle">
                             <div class="media-body">
@@ -111,13 +111,13 @@
                                 </p>
                             </div>
                         </li>
-                        
+
                     </ul>
                     <div class="text-center">
-                      <pagination-controls  id="gridPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
+                      <pagination-controls  id="reviewPagination" (pageChange)="pageGridChanged($event)"></pagination-controls>
                     </div>
                 </div>
               </div>
           </div>
-  </div> 
+  </div>
 </body>
