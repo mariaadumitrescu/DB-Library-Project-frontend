@@ -110,8 +110,6 @@ pagination-controls ::ng-deep .ngx-pagination .current{
 
 
 table {
-  margin-left: -15px;
-  margin-right: 15px;
   border: 1px solid #dee2e6;
   border-collapse: separate;
   border-bottom-right-radius: 5px;
