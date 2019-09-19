@@ -132,13 +132,13 @@ export class UserDetailsComponent implements OnChanges, OnInit {
   }
 
   onDateSelected() {
-    this.banUntil = new Date(this.model.year, this.model.month, this.model.day, 12, 0, 0);
+    this.banUntil = new Date(this.model.year, this.model.month-1, this.model.day, 12, 0, 0);
     this.selectedUser.banUntil = this.banUntil;
     this.selectedUser.banned = true;
     this.userService.updateUser(this.selectedUser).toPromise().then(() => {
       this.toastrService.success('The user was banned until: ' + this.selectedUser.banUntil);
       console.log(this.banUntil.toLocaleString());
-      this.model = null;
+      //this.model = null;
       this.userService.getUserByEmail(this.selectedUser.email).subscribe(user => this.selectedUser = user);
     }, reason => {
       this.toastrService.error(reason);
